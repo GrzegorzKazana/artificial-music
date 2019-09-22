@@ -23,7 +23,7 @@ def to_delta_time(messages):
     return messages_detlta_time
 
 
-def total_decode(encoded_numpy):
+def total_decode(encoded_numpy, msecs_per_frame):
     """
     takes in
     [[one_hot_encoded_note, velocities], ...] (n_of_frames x (one_hot_encoded_note + velocities))
@@ -41,7 +41,7 @@ def total_decode(encoded_numpy):
                                 velocity=vel, time=0))
 
     for i in range(1, len(encoded_numpy)):
-        prev_frame = encoded_numpy[i-1]
+        prev_frame = encoded_numpy[i - 1]
         curr_frame = encoded_numpy[i]
         diff = curr_frame - prev_frame
         diff_notes = diff[:NUM_NOTES]
@@ -49,13 +49,13 @@ def total_decode(encoded_numpy):
         notes_off = np.argwhere(diff_notes == -1).flatten()
 
         for note in notes_on:
-            time = i * MSECS_PER_FRAME
+            time = i * msecs_per_frame
             vel = int(curr_frame[NUM_NOTES + note] *
                       128) if curr_frame.shape[0] > 128 else 127
             messages.append(Message(
                 'note_on', note=note, velocity=vel, time=time))
         for note in notes_off:
-            time = i * MSECS_PER_FRAME
+            time = i * msecs_per_frame
             messages.append(Message('note_on', note=note,
                                     velocity=0, time=time))
     return messages
@@ -73,12 +73,16 @@ def messages_to_midifile(messages):
     return outfile
 
 
-def np2mid(encoded_numpy):
+def np2mid(encoded_numpy, **kwargs):
     """
     takes in encoded numpy, returns MidiFile instance
     """
+    msecs_per_frame = kwargs.get('resolution', 100)
+
+    print(f'decoding track with {msecs_per_frame} resolution')
+
     return flow(
-        total_decode,
+        lambda x: total_decode(x, msecs_per_frame),
         to_delta_time,
         messages_to_midifile
     )(encoded_numpy)

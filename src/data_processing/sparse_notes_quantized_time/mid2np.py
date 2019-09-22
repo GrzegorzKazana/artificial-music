@@ -64,12 +64,12 @@ def to_raw_numpy(messages):
     return np.array([encode_message(msg) for msg in messages], dtype=np.float32)
 
 
-def msecs_to_frames(raw_numpy):
+def msecs_to_frames(raw_numpy, msecs_per_frame):
     """
     processes time data from msecs to frame time,
     assumes time stamp is in last column
     """
-    raw_numpy[:, -1] //= MSECS_PER_FRAME
+    raw_numpy[:, -1] //= msecs_per_frame
     return raw_numpy
 
 
@@ -83,7 +83,7 @@ def snip_track(raw_numpy):
     return raw_numpy
 
 
-def transform(raw_numpy):
+def transform(raw_numpy, skip_velocity):
     """
     transforms 
     [[note, velocity, time], ...]   (n_of_notes x 3)
@@ -91,7 +91,8 @@ def transform(raw_numpy):
     [[one_hot_encoded_note, velocities], ...] (n_of_frames x (one_hot_encoded_note + velocities))
     """
     n_of_frames = int(raw_numpy[-1, -1])
-    encoded = np.zeros((n_of_frames, NUM_NOTES + NUM_VELOCITY))
+    encoding_dimention = NUM_NOTES if skip_velocity else NUM_NOTES + NUM_VELOCITY
+    encoded = np.zeros((n_of_frames, encoding_dimention))
     for note, velocity, time in raw_numpy:
         note_int = int(note)
         time_int = int(time)
@@ -99,21 +100,29 @@ def transform(raw_numpy):
             encoded[time_int:, note_int] = 0
         else:
             encoded[time_int:, note_int] = 1
-            encoded[time_int:, NUM_NOTES + note_int] = velocity / 128
+            if not skip_velocity:
+                encoded[time_int:, NUM_NOTES + note_int] = velocity / 128
 
     return encoded
 
 
-def mid2np(messages):
+def mid2np(messages, **kwargs):
     """
     takes in list of midi messages, returns encoded track in numpy format
     """
+    msecs_per_frame = kwargs.get('resolution', 100)
+    skip_velocity = kwargs.get('skip_velocities', False)
+
+    skip_info = ', skipping velocity info' if skip_velocity else ''
+    print(
+        f'encoding {len(messages)} messages with {msecs_per_frame} resolution {skip_info}')
+
     return flow(
         note_off_to_zero_vel,
         secs_to_msecs,
         to_absolute_time,
         filter_meta,
         to_raw_numpy,
-        msecs_to_frames,
-        transform,
+        lambda x: msecs_to_frames(x, msecs_per_frame),
+        lambda x: transform(x, skip_velocity),
     )(messages)
