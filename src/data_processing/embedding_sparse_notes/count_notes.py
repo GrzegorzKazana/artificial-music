@@ -77,7 +77,8 @@ def transform_counter_num_to_notes(counter):
 
 
 def create_counters(npz_tracks):
-    track_blob = concat_tracks(npz_tracks)
+    tracks = [t.tocsr() for t in npz_tracks]
+    track_blob = concat_tracks(tracks)
     track_blob = remove_subsequent_notes(track_blob)
     counter = count_note_occurences(track_blob)
 

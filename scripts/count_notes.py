@@ -7,16 +7,17 @@ sys.path.append(os.path.join(os.path.dirname(
 
 from scipy import sparse
 
+from helpers import get_valid_files_in_dir
 from src.data_processing.embedding_sparse_notes.count_notes import create_counters
 
 
 @click.command()
 @click.option('-s', '--src', required=True)
 def main(src, **kwargs):
-    files_in_folder = os.listdir(src)
+    files_in_folder = get_valid_files_in_dir(src)
     file_paths = [os.path.join(src, f) for f in files_in_folder]
 
-    tracks = [sparse.load_npz(fp).tocsr() for fp in file_paths]
+    tracks = [sparse.load_npz(fp) for fp in file_paths]
     counter, counter_notes = create_counters(tracks)
 
     output_dir = os.path.join(src, 'meta')
