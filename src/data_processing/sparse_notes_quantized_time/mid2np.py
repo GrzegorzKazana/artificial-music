@@ -39,7 +39,10 @@ def note_off_to_zero_vel(messages):
     """
     changes note_off events to note_on events with 0 velocity
     """
-    return map(lambda msg: msg.copy(type='note_on', velocity=0) if msg.type == 'note_off' else msg, messages)
+    def note_off_to_note_on(msg):
+        return Message('note_on', velocity=0, note=msg.note, time=msg.time)
+
+    return map(lambda msg: note_off_to_note_on(msg) if msg.type == 'note_off' else msg, messages)
 
 
 def secs_to_msecs(messages):
