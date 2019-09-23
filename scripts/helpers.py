@@ -28,3 +28,7 @@ def parse_file_paths(src_path, dst_path, to_numpy):
         output_paths = output_file_paths
 
     return input_paths, output_paths
+
+
+def option_kwargs_to_string(options_dict):
+    return '_'.join([f'{k}={v}' for k, v in options_dict.items()])
