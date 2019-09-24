@@ -10,6 +10,8 @@ from scipy import sparse
 from helpers import get_valid_files_in_dir, option_kwargs_to_string
 from src.data_processing.embedding_sparse_notes.count_notes import create_counters
 from src.data_processing.embedding_sparse_notes.create_dict import create_dict
+from src.data_processing.embedding_sparse_notes.dictify_dataset import dictify_dataset
+from src.data_processing.common.rw_np_mid import save_numpy_midi
 
 
 @click.command()
@@ -25,6 +27,9 @@ def main(src, **kwargs):
     counter, counter_notes = create_counters(tracks)
     embedding_dict = create_dict(counter_notes, **clean_kwargs)
 
+    dicted_dataset, dicted_dataset_subsequents_removed = dictify_dataset(
+        tracks, embedding_dict)
+
     output_dir = os.path.join(src, 'meta')
     os.makedirs(output_dir, exist_ok=True)
 
@@ -38,6 +43,11 @@ def main(src, **kwargs):
 
     with open(os.path.join(output_dir, f'_embedding_dict_{options_str}.json'), 'w') as f:
         json.dump(embedding_dict, f, indent=4)
+
+    save_numpy_midi(os.path.join(
+        output_dir, f'_dicted_dataset_{options_str}.npy'), dicted_dataset)
+    save_numpy_midi(os.path.join(
+        output_dir, f'_dicted_dataset_subsequents_removed_{options_str}.npy'), dicted_dataset_subsequents_removed)
 
 
 if __name__ == '__main__':

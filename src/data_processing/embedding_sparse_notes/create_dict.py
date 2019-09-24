@@ -1,8 +1,6 @@
 import numpy as np
 
-# special tokens
-UNKNOWN_FRAME = '<UNKNOWN>'
-TRACK_END = '<TRACK_END>'
+from .common import UNKNOWN_FRAME, TRACK_END
 
 
 def ignore_rarest_in_counter(counter, ignore_ratio):
