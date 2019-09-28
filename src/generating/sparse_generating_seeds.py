@@ -1,6 +1,8 @@
 import numpy as np
 import random
 
+from .common import create_noise_adder
+
 # helpers
 scales = {
     "natural_minor": [0, 2, 3, 5, 7, 8, 10, 12],
@@ -21,15 +23,6 @@ def get_random_notes_from_random_scale(base_note, n_notes=1):
     scale = get_random_scale()
     two_octave_scale = scale + [-x for x in scale]
     return [base_note + random.choice(two_octave_scale) for _ in range(n_notes)]
-
-
-def create_noise_adder(noise_gen, noise_scale=0.5, **nkwargs):
-    def inner(seed_gen, **kwargs):
-        return lambda length, batch_size: np.clip((
-            noise_scale * noise_gen(length, batch_size, **nkwargs)
-            + seed_gen(length, batch_size, **kwargs)), 0, 1
-        )
-    return inner
 
 
 # seeds
