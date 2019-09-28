@@ -1,9 +1,14 @@
 # TODO
 
+- Train model
+- Test diffrent generation strategies
+
 # IN PROGRESS
 
-Train embedding
+- Write first model for benchmarking
+- Write data loading scripts
 
 # COMPLETED
 
-Import/reuse old code
+- Train embedding
+- Import/reuse old code
