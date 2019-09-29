@@ -18,3 +18,7 @@ def debug(messages):
             print(msg)
         print(len(messages))
     return messages
+
+
+def unzip(l):
+    return zip(*l)

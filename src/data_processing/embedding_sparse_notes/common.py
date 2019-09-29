@@ -7,6 +7,7 @@ TRACK_END = '<TRACK_END>'
 
 notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 midi_notes = {i: f'{notes[i % 12]}{(i // 12) - 1}' for i in range(128)}
+reverse_midi_notes = {v: k for k, v in midi_notes.items()}
 
 
 def remove_subsequent_notes(npz_track):
@@ -71,3 +72,16 @@ def hash_frame(npz_note):
     maps one frame (1 x 128) to string of index of all non zero elements
     """
     return ','.join([str(n) for n in npz_note.nonzero()[1]])
+
+
+def unhash_named_frame(hashed_frame):
+    """
+    i.e. 'C6,D#6' -> np.array (1 x 128)
+    """
+    note_names = hashed_frame.split(',')
+    notes = [reverse_midi_notes[name] for name in note_names]
+    res = np.zeros((1, 128))
+    for note_idx in notes:
+        res[0, note_idx] = 1
+
+    return res
