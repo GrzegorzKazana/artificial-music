@@ -14,5 +14,8 @@ tensorflow = "*"
 mido = "*"
 matplotlib = "*"
 
+[scripts]
+test = "bash ./scripts/run_tests.sh"
+
 [requires]
 python_version = "3.7"

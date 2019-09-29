@@ -19,7 +19,6 @@ class MockKeyedVectors:
         res = self.words_vectors[self.counter % len(self.words_vectors)][0]
         similarity = self.counter / 10
         self.counter += 1
-        print(f'{res}, {similarity}')
         return [(res, similarity), ]
 
 

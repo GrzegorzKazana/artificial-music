@@ -1,3 +1,4 @@
 /datasets
-*.sh
 *.pyc
+download_pretrained.sh
+upload_dataset.sh
