@@ -14,7 +14,7 @@ def ignore_rarest_in_counter(counter, ignore_ratio):
 
     accumulated_occurences = np.cumsum(np.array(list(counter.values())))
     max_accounted_index = np.max(np.argwhere(
-        accumulated_occurences < accounted_occurences))
+        accumulated_occurences < accounted_occurences)) + 1
 
     return dict(list(counter.items())[:max_accounted_index])
 

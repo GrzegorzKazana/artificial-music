@@ -13,7 +13,7 @@ def pipe(val, *functions):
     """
     pipes value through binary functions
     """
-    return flow(functions)(val)
+    return flow(*functions)(val)
 
 
 def debug(messages):
@@ -28,4 +28,4 @@ def debug(messages):
 
 
 def unzip(l):
-    return zip(*l)
+    return tuple(zip(*l))

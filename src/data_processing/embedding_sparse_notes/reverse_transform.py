@@ -21,7 +21,7 @@ def handle_special_tokens(words):
     words_end_idx = words.index(
         TRACK_END) if TRACK_END in words else len(words)
     words_ended = words[:words_end_idx] + \
-        ['' for _ in range(len(words - words_end_idx))]
+        ['' for _ in range(len(words) - words_end_idx)]
 
     # UNKNOWN_FRAME handling - repeating previous frame
     words_known = [w if w != UNKNOWN_FRAME else (words_ended[i - 1] if i != 0 else '')

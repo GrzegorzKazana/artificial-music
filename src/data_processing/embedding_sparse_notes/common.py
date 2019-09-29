@@ -51,14 +51,14 @@ def concat_tracks(npz_tracks):
 
 def map_note_num_to_name(note_num):
     """
-    i.e. 72 -> 'C6'
+    i.e. 72 -> 'C5'
     """
     return midi_notes[note_num]
 
 
 def map_hashed_frame_to_names(frame_hash):
     """
-    i.e. '72,75' -> 'C6,D#6'
+    i.e. '72,75' -> 'C5,D#5'
     """
     if frame_hash == '':
         return ''
