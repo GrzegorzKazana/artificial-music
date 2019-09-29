@@ -9,6 +9,13 @@ def flow(*functions):
     return inner
 
 
+def pipe(val, *functions):
+    """
+    pipes value through binary functions
+    """
+    return flow(functions)(val)
+
+
 def debug(messages):
     if 'numpy' in str(type(messages)):
         print(messages.shape)

@@ -10,7 +10,7 @@ def recurrent_generate(model, seed, seq_length, window_size, is_binary=False):
     """
     x = seed
     accum = [seed]
-    for i in range(seq_length - window_size):
+    for _ in range(seq_length - window_size):
         res = model.predict(x)
         next_timestep = res[:, -1, :].round() if is_binary else res[:, -1, :]
         x = np.concatenate([x, next_timestep], axis=1)[:, -window_size, :]
