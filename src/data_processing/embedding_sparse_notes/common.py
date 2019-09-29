@@ -78,9 +78,13 @@ def unhash_named_frame(hashed_frame):
     """
     i.e. 'C6,D#6' -> np.array (1 x 128)
     """
+    res = np.zeros((1, 128))
+
+    if hashed_frame == '':
+        return res
+
     note_names = hashed_frame.split(',')
     notes = [reverse_midi_notes[name] for name in note_names]
-    res = np.zeros((1, 128))
     for note_idx in notes:
         res[0, note_idx] = 1
 
