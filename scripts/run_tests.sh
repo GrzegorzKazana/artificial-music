@@ -6,3 +6,4 @@ python -m unittest src/data_processing/embedding_sparse_notes/tests/test_create_
 python -m unittest src/data_processing/embedding_sparse_notes/tests/test_dictify.py
 python -m unittest src/data_processing/embedding_sparse_notes/tests/test_reverse_transform.py
 python -m unittest src/data_processing/transpose_np_track/tests/test_transpose.py
+python -m unittest src/generating/tests/test_generating.py
