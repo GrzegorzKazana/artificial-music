@@ -13,19 +13,29 @@ def np2dicted(track, word_vectors):
     words, similarities = unzip(
         [word_vectors.similar_by_vector(frame, topn=1)[0] for frame in track])
 
-    return words, similarities
+    return list(words), list(similarities)
 
 
 def handle_special_tokens(words):
     # TRACK_END handling - silencing frames after
     words_end_idx = words.index(
         TRACK_END) if TRACK_END in words else len(words)
+
     words_ended = words[:words_end_idx] + \
         ['' for _ in range(len(words) - words_end_idx)]
 
     # UNKNOWN_FRAME handling - repeating previous frame
     words_known = [w if w != UNKNOWN_FRAME else (words_ended[i - 1] if i != 0 else '')
                    for i, w in enumerate(words_ended)]
+
+    words_known = []
+    last_non_unknown = ''
+    for i, w in enumerate(words_ended):
+        if w != UNKNOWN_FRAME:
+            words_known.append(w)
+            last_non_unknown = w
+        else:
+            words_known.append(last_non_unknown)
 
     return words_known
 

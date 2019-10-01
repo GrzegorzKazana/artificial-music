@@ -46,11 +46,13 @@ class GeneratingAndPlottingCallback(K.callbacks.Callback):
         t = datetime.now().isoformat().split('.')[0]
         seed = self.seed_generator()
         sample = self.sample_generator(self.model, seed)
+        print(sample)
+        print(np.array(sample).shape)
 
         _, axs = plt.subplots(nrows=4, ncols=4, figsize=(30, 10),
                               subplot_kw={'xticks': [], 'yticks': []})
         for ax, x_ in zip(axs.flat, sample):
-            ax.imshow(x_.T[::-1, :])
+            ax.imshow(x_.toarray().T[::-1, :])
         plt.tight_layout()
         res = plt.gcf()
         plt.show()
