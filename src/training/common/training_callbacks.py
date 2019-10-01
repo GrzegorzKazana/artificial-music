@@ -4,6 +4,7 @@ from datetime import datetime
 import numpy as np
 from tensorflow import keras as K
 import matplotlib.pyplot as plt
+from gensim.models.callbacks import CallbackAny2Vec
 
 
 def default(val):
@@ -13,13 +14,16 @@ def default(val):
 
 
 class ModelAndLogSavingCallback(K.callbacks.Callback):
-    def __init__(self, model, output_path):
+    def __init__(self, model, output_path=''):
         super().__init__()
         self.output_path = output_path
         self.logs = []
         self.model = model
 
     def on_epoch_end(self, epoch, logs={}):
+        if self.output_path == '':
+            return
+
         t = datetime.now().isoformat().split('.')[0]
         K.models.save_model(self.model, self.output_path + f'md{t}.h5')
 
@@ -55,3 +59,16 @@ class GeneratingAndPlottingCallback(K.callbacks.Callback):
             res.save_fig(os.path.join(self.output_path, f'{t}.png'))
 
         return
+
+
+class GensimLossPrinter(CallbackAny2Vec):
+    def __init__(self):
+        self.prev_loss = float("inf")
+        self.i = 0
+
+    def on_epoch_end(self, model):
+        current_loss = model.get_latest_training_loss()
+        print(str(self.i) + " model loss delta:",
+              current_loss - self.prev_loss)
+        self.prev_loss = current_loss
+        self.i += 1
