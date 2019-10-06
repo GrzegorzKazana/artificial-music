@@ -6,10 +6,10 @@
 # IN PROGRESS
 
 - Write first model for benchmarking
-- Write data loading scripts
 
 # COMPLETED
 
+- Created separate branch for google colab notebooks
 - Write code decoding generated embedded samples (embedded -> npz -> mid)
 - Wrote tests for some data processing scripts
 - Write generation strategies
