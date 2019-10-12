@@ -6,8 +6,8 @@ from .common import create_noise_adder
 # seeds
 
 
-def random_noise_seed(length, input_size, batch_size=16):
-    return np.random.random((batch_size, length, input_size)) * 0.5
+def random_noise_seed(length, input_size, scaler=0.5, batch_size=16):
+    return np.random.random((batch_size, length, input_size)) * scaler
 
 
 def zero_seed(length, input_size, word_vectors, batch_size=16):
