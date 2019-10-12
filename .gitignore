@@ -1,4 +1,5 @@
 /datasets
+/pretrained_models
 *.pyc
 download_pretrained.sh
 upload_dataset.sh

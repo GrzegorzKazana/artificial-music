@@ -1,12 +1,12 @@
 {
     "class_name": "Sequential",
     "config": {
-        "name": "sequential",
+        "name": "sequential_2",
         "layers": [
             {
-                "class_name": "LSTM",
+                "class_name": "CuDNNLSTM",
                 "config": {
-                    "name": "lstm",
+                    "name": "cu_dnnlstm_2",
                     "trainable": true,
                     "batch_input_shape": [
                         null,
@@ -18,12 +18,8 @@
                     "return_state": false,
                     "go_backwards": false,
                     "stateful": false,
-                    "unroll": false,
                     "time_major": false,
                     "units": 128,
-                    "activation": "tanh",
-                    "recurrent_activation": "hard_sigmoid",
-                    "use_bias": true,
                     "kernel_initializer": {
                         "class_name": "GlorotUniform",
                         "config": {
@@ -52,16 +48,13 @@
                     "activity_regularizer": null,
                     "kernel_constraint": null,
                     "recurrent_constraint": null,
-                    "bias_constraint": null,
-                    "dropout": 0.0,
-                    "recurrent_dropout": 0.0,
-                    "implementation": 1
+                    "bias_constraint": null
                 }
             },
             {
                 "class_name": "Dense",
                 "config": {
-                    "name": "dense",
+                    "name": "dense_2",
                     "trainable": true,
                     "dtype": "float32",
                     "units": 16,
