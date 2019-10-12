@@ -20,6 +20,12 @@ class ModelAndLogSavingCallback(K.callbacks.Callback):
         self.logs = []
         self.model = model
 
+        if output_path != '':
+            model_json = model.to_json()
+            with open(os.path.join(self.output_path, 'model.json'), 'w+') as fo:
+                json.dump(json.loads(model_json), fo,
+                          default=default, indent=4)
+
     def on_epoch_end(self, epoch, logs={}):
         self.logs.append(logs)
 
@@ -28,8 +34,8 @@ class ModelAndLogSavingCallback(K.callbacks.Callback):
 
         t = datetime.now().isoformat().split('.')[0]
         epoch_count = len(self.logs)
-        K.models.save_model(self.model, self.output_path +
-                            f'md_e{epoch_count}_t{t}.h5')
+        K.models.save_model(self.model, os.path.join(self.output_path,
+                                                     f'md_e{epoch_count}_t{t}.h5'))
 
         with open(os.path.join(self.output_path, 'log.json'), 'w+') as fo:
             json.dump(self.logs, fo, default=default, indent=4)
