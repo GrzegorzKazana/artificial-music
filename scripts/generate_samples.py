@@ -48,7 +48,8 @@ seed_gens = [
 @click.option('-l', '--seq_length', default=400)
 @click.option('-i', '--input_size', default=16)
 @click.option('-s', '--window_size', default=100)
-def main(srcmodel, srcwords, seed_length, seq_length, input_size, window_size, **kwargs):
+@click.option('-b', '--batch_size', default=1)
+def main(srcmodel, srcwords, seed_length, seq_length, input_size, window_size, batch_size, **kwargs):
     model_name = os.path.basename(srcmodel)
 
     gen_time = datetime.now().isoformat().split('.')[0]
@@ -59,20 +60,33 @@ def main(srcmodel, srcwords, seed_length, seq_length, input_size, window_size, *
     output_dir = os.path.join(os.path.dirname(srcmodel), 'samples')
     os.makedirs(output_dir, exist_ok=True)
 
-    for gen_name, gen in seed_gens:
-        seed = gen(seed_length, input_size, wv, 1)
+    output_dir = os.path.join(output_dir, gen_time)
+    os.makedirs(output_dir, exist_ok=True)
+
+    _, axs = plt.subplots(nrows=len(seed_gens), ncols=batch_size, figsize=(50, 15),
+                          subplot_kw={'xticks': [], 'yticks': []})
+
+    for j, (gen_name, gen) in enumerate(seed_gens):
+        seed = gen(seed_length, input_size, wv, batch_size)
         samples = recurrent_generate(
             model, seed, seq_length, window_size)
         sparse_samples = [np2sparse(sample, wv)[0]
                           for sample in samples]
+
+        axs.flat[j * batch_size].set(xlabel=f'{model_name}_{gen_name}')
+
         for i, sample in enumerate(sparse_samples):
             name = f'{model_name}_{gen_name}_{gen_time}_{i}'
             mid = np2mid(sample.toarray())
             mid.save(os.path.join(output_dir, f'{name}.mid'))
-            fig = plt.figure()
-            plt.imshow(sample.toarray().T[::-1, :])
-            fig.savefig(os.path.join(output_dir, f'{name}.png'), dpi=fig.dpi)
-            plt.close()
+            axs.flat[i * len(seed_gens) +
+                     j].imshow(sample.toarray().T[::-1, :])
+
+    plt.tight_layout()
+    fig = plt.gcf()
+    plot_name = f'{model_name}_{gen_time}_{i}'
+    fig.savefig(os.path.join(output_dir, f'{plot_name}.png'), dpi=fig.dpi)
+    plt.close()
 
 
 if __name__ == '__main__':
