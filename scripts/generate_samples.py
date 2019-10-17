@@ -17,7 +17,7 @@ from src.generating.generating import recurrent_generate
 from src.data_processing.embedding_sparse_notes.reverse_transform import np2sparse
 from src.data_processing.sparse_notes_quantized_time.np2mid import np2mid
 
-seed_gens = [
+seed_gens = sorted([
     ('random_noise_seed', lambda length, input_size, wv, batch_size: seed_generators['random_noise_seed'](
         length, input_size, scaler=2.0, batch_size=batch_size)),
     ('zero_seed', lambda length, input_size, wv, batch_size: seed_generators['zero_seed'](
@@ -38,14 +38,14 @@ seed_gens = [
         length, input_size, word_vectors=wv, batch_size=batch_size)),
     ('multi_note_harmonic_seed_noise', lambda length, input_size, wv, batch_size: seed_generators['multi_note_harmonic_seed_noise'](
         length, input_size, word_vectors=wv, batch_size=batch_size)),
-]
+], key=lambda x: x[0])
 
 
 @click.command()
 @click.option('-m', '--srcmodel', required=True)
 @click.option('-w', '--srcwords', required=True)
 @click.option('-l', '--seed_length', default=50)
-@click.option('-l', '--seq_length', default=400)
+@click.option('-q', '--seq_length', default=400)
 @click.option('-i', '--input_size', default=16)
 @click.option('-s', '--window_size', default=100)
 @click.option('-b', '--batch_size', default=1)
@@ -79,8 +79,7 @@ def main(srcmodel, srcwords, seed_length, seq_length, input_size, window_size, b
             name = f'{model_name}_{gen_name}_{gen_time}_{i}'
             mid = np2mid(sample.toarray())
             mid.save(os.path.join(output_dir, f'{name}.mid'))
-            axs.flat[i * len(seed_gens) +
-                     j].imshow(sample.toarray().T[::-1, :])
+            axs.flat[j * batch_size + i].imshow(sample.toarray().T[::-1, :])
 
     plt.tight_layout()
     fig = plt.gcf()

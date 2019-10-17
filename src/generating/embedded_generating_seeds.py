@@ -68,7 +68,7 @@ def multi_note_harmonic_seed(length, input_size, word_vectors, batch_size=16, nu
     return res
 
 
-random_noise_adder = create_noise_adder(random_noise_seed)
+random_noise_adder = create_noise_adder(random_noise_seed, noise_scale=2)
 
 # refer to artifacts/embedded_seed_generators.json
 seed_generators = {
