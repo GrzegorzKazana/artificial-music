@@ -61,13 +61,6 @@ def mid2np(track, wv, embedding_dict):
     """
     takes in midi track and word vectors embedding, returns encoded track in numpy format
     """
-    # msecs_per_frame = kwargs.get('resolution', 100)
-    # skip_velocity = kwargs.get('skip_velocities', False)
-
-    # skip_info = ', skipping velocity info' if skip_velocity else ''
-    # print(
-    #     f'encoding {len(messages)} messages with {msecs_per_frame} resolution {skip_info}')
-
     track_tempo = get_track_tempo(track)
 
     return flow(
