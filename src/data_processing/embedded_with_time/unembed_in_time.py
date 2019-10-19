@@ -1,8 +1,8 @@
 import mido
 import numpy as np
 
-from ..sparse_notes_quantized_time.config import DEFAULT_BPM
-from ..sparse_notes_quantized_time.mid2np import note_off_to_zero_vel, secs_to_msecs, filter_meta, to_raw_numpy
+from ..sparse_notes_quantized_time.config import DEFAULT_BPM, NUM_NOTES, MSECS_PER_FRAME
+from ..sparse_notes_quantized_time.mid2np import note_off_to_zero_vel, secs_to_msecs, filter_meta, msecs_to_frames, transform
 from ..common.helpers import flow, debug
 from ..embedding_sparse_notes.common import map_note_num_to_name, UNKNOWN_FRAME, reverse_midi_notes
 
@@ -41,6 +41,7 @@ def from_embedded_with_time(np_track, wv):
 def duration_to_note_offs(np_track):
     """
     [[note, vel, d_time, duration], ...] -> [[note, vel, time], ...]
+    time in output notes is absolute
     """
     acc_time = 0
     notes_abs_time = []
@@ -56,19 +57,58 @@ def duration_to_note_offs(np_track):
 
     notes_abs_time = sorted(notes_abs_time, key=lambda x: x[-1])
 
-    notes_d_time = []
-    now = 0
-    # to delta time
-    for note, vel, abs_time in notes_abs_time:
-        delta = abs_time - now
-        notes_d_time.append([note, vel, delta])
-        now = abs_time
-
-    return np.array(notes_d_time)
+    return np.array(notes_abs_time)
 
 
-def np2mid(np_track, wv, embedding_dict):
+def to_midi_messages(np_track):
+    return [mido.Message('note_on', note=note, velocity=vel, time=abs_time)
+            for note, vel, abs_time in np_track]
 
+
+def messages_to_midi(messages):
+    outfile = mido.MidiFile()
+    track = mido.MidiTrack()
+    outfile.tracks.append(track)
+    for msg in messages:
+        track.append(msg)
+
+    return outfile
+
+
+def to_sparse_matrix_rep(np_track, ms_per_frame, skip_velocities=True):
     return flow(
+        lambda x: msecs_to_frames(x, ms_per_frame),
+        lambda x: transform(x, skip_velocities),
+    )(np_track)
 
+
+def to_raw_numpy(np_track, wv):
+    """
+    [[note, vel, d_time, duration], ...] -> [[note, vel, abs_time], ...]
+    """
+    return flow(
+        lambda x: from_embedded_with_time(x, wv),
+        duration_to_note_offs,
+    )(np_track)
+
+
+def np2mid(np_track, wv):
+    """
+    [[note, vel, d_time, duration], ...] -> MidiFile
+    """
+    return flow(
+        lambda x: to_raw_numpy(x, wv),
+        to_midi_messages,
+        messages_to_midi
+    )(np_track)
+
+
+def np2sparse(np_track, wv, ms_per_frame=MSECS_PER_FRAME):
+    """
+    [[note, vel, d_time, duration], ...] -> 
+    [[one_hot_encoded_note], ...] (n_of_frames x one_hot_encoded_note)
+    """
+    return flow(
+        lambda x: to_raw_numpy(x, wv),
+        lambda x: to_sparse_matrix_rep(x, ms_per_frame)
     )(np_track)
