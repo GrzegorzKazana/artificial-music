@@ -18,14 +18,31 @@ def calc_notes_duration(track):
     """
     notes_w_durations = []
     for i, (note, vel, dtime) in enumerate(track):
+        if vel == 0:
+            continue
+
         idxs_of_note_offs = np.argwhere(
             (track[i:, 1] == 0) & (track[i:, 0] == note)).reshape(-1)
         assert idxs_of_note_offs.size > 0, 'failed to find note_off'
 
         note_off_idx = idxs_of_note_offs[0]
-        duration = track[i + 1: note_off_idx + 1, -1].sum()
+        duration = track[i + 1: i + note_off_idx + 1, -1].sum()
 
-        notes_w_durations.append([note, vel, dtime, duration])
+        idxs_of_prev_note_on = np.argwhere(
+            (track[:i, 1] != 0)).reshape(-1)
+
+        idx_of_prev_note_on = idxs_of_prev_note_on[-1] if idxs_of_prev_note_on.size > 0 else 0
+
+        idxs_preeceding_note_offs = 1 + idx_of_prev_note_on + np.argwhere(
+            (track[idx_of_prev_note_on + 1: i, 1] == 0)).reshape(-1)
+
+        d_time_preceeding_note_offs = track[idxs_preeceding_note_offs, 2].sum()
+
+        notes_w_durations.append(
+            [note, vel, dtime + d_time_preceeding_note_offs, duration])
+
+    for x in notes_w_durations:
+        print(x)
 
     return np.array(notes_w_durations)
 
@@ -46,6 +63,9 @@ def to_embedded_with_time(raw_numpy, wv, embedding_dict, tempo):
     bpms = tempo / 60 / 1000    # duration of quarter in ms
 
     for note, vel, d_time, duration in raw_numpy:
+        if d_time == 0 and duration == 0:
+            continue
+
         note_code = wv[safe_dict_lookup(map_note_num_to_name(note))]
         vel_code = vel / 127
         d_time_code = d_time * bpms

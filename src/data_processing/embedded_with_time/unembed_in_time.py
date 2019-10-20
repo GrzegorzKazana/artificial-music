@@ -4,7 +4,7 @@ import numpy as np
 from ..sparse_notes_quantized_time.config import DEFAULT_BPM, NUM_NOTES, MSECS_PER_FRAME
 from ..sparse_notes_quantized_time.mid2np import note_off_to_zero_vel, secs_to_msecs, filter_meta, msecs_to_frames, transform
 from ..common.helpers import flow, debug
-from ..embedding_sparse_notes.common import map_note_num_to_name, UNKNOWN_FRAME, reverse_midi_notes
+from ..embedding_sparse_notes.common import map_note_num_to_name, UNKNOWN_FRAME, TRACK_END, reverse_midi_notes
 
 
 def from_embedded_with_time(np_track, wv):
@@ -25,17 +25,24 @@ def from_embedded_with_time(np_track, wv):
         d_time_code = frame[-2]
         duration_code = frame[-1]
 
-        note_name = wv.similar_by_vector(note_code, topn=1)[0][0]
-        # handle special tokens here
-
-        note = reverse_midi_notes[note_name]
+        note_token = wv.similar_by_vector(note_code, topn=1)[0][0]
         vel = int(np.clip(vel_code * 127, 0, 127))
-        d_time = d_time_code / bpms
-        duration = duration_code / bpms
+        d_time = max(d_time_code / bpms, 0)
+        duration = max(duration_code / bpms, 0)
 
-        return [note, vel, d_time, duration]
+        return [note_token, vel, d_time, duration]
 
-    return np.array([decode(f) for f in np_track])
+    res = []
+    for note_token, vel, d_time, duration in map(decode, np_track):
+        if note_token == UNKNOWN_FRAME:
+            continue
+        elif note_token == TRACK_END:
+            break
+        else:
+            res.append([reverse_midi_notes[note_token], vel, d_time, duration])
+            print([reverse_midi_notes[note_token], vel, d_time, duration])
+
+    return np.array(res)
 
 
 def duration_to_note_offs(np_track):
@@ -61,8 +68,15 @@ def duration_to_note_offs(np_track):
 
 
 def to_midi_messages(np_track):
-    return [mido.Message('note_on', note=note, velocity=vel, time=abs_time)
-            for note, vel, abs_time in np_track]
+    track_detlta_time = []
+    now = 0
+    for note, vel, abs_time in np_track:
+        delta = int(abs_time - now)
+        now = abs_time
+        track_detlta_time.append([note, vel, delta])
+
+    return [mido.Message('note_on', note=int(note), velocity=int(vel), time=int(abs_time))
+            for note, vel, abs_time in track_detlta_time]
 
 
 def messages_to_midi(messages):
