@@ -12,6 +12,28 @@ def get_track_tempo(track):
     return mido.tempo2bpm(set_tempo_msgs[0].tempo) if len(set_tempo_msgs) > 0 else DEFAULT_BPM
 
 
+def shift_set_tempo_time_to_next_msg(track):
+    res = []
+    for i, x in enumerate(track):
+        # if i == 0:
+        #     if not x.is_meta:
+        #         res.append(x)
+        #     continue
+
+        if x.type != 'set_tempo':
+            prev_set_tempos = []
+            for j in range(1, i + 1):
+                if track[i - j].type == 'set_tempo':
+                    prev_set_tempos.append(track[i - j].time)
+                else:
+                    break
+
+            res.append(x.copy(time=x.time + sum(prev_set_tempos)))
+            continue
+
+    return res
+
+
 def calc_notes_duration(track):
     """
     [[note, velocity, delta_time], ...] -> [[note, velocity, delta_time, duration], ...]
@@ -40,6 +62,9 @@ def calc_notes_duration(track):
 
         notes_w_durations.append(
             [note, vel, dtime + d_time_preceeding_note_offs, duration])
+
+    for x in notes_w_durations:
+        print(x)
 
     return np.array(notes_w_durations)
 
@@ -83,7 +108,11 @@ def mid2np(track, wv, embedding_dict):
     return flow(
         note_off_to_zero_vel,
         secs_to_msecs,
-        filter_meta,
+        # filter_meta,
+        lambda x: list(
+            filter(lambda n: not n.is_meta or n.type == 'set_tempo', x)),
+        shift_set_tempo_time_to_next_msg,
+        filter_meta,    # filter out program changes
         to_raw_numpy,
         calc_notes_duration,
         lambda x: to_embedded_with_time(x, wv, embedding_dict, track_tempo)
