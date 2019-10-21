@@ -11,8 +11,8 @@ def get_valid_files_in_dir(path):
     return list(filter(is_file_valid, all_files))
 
 
-def parse_file_paths(src_path, dst_path, to_numpy):
-    default_extension = '.npz' if to_numpy else '.mid'
+def parse_file_paths(src_path, dst_path, to_numpy, np_extension=''):
+    default_extension = np_extension or '.npz' if to_numpy else '.mid'
     input_paths = []
     output_paths = []
     if os.path.isfile(src_path):

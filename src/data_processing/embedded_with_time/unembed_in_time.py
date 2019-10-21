@@ -40,7 +40,6 @@ def from_embedded_with_time(np_track, wv):
             break
         else:
             res.append([reverse_midi_notes[note_token], vel, d_time, duration])
-            print([reverse_midi_notes[note_token], vel, d_time, duration])
 
     return np.array(res)
 
