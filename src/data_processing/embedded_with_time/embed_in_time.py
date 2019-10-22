@@ -63,9 +63,6 @@ def calc_notes_duration(track):
         notes_w_durations.append(
             [note, vel, dtime + d_time_preceeding_note_offs, duration])
 
-    for x in notes_w_durations:
-        print(x)
-
     return np.array(notes_w_durations)
 
 

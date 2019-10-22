@@ -33,13 +33,18 @@ def from_embedded_with_time(np_track, wv):
         return [note_token, vel, d_time, duration]
 
     res = []
+    prev_unknown_d_time = 0
     for note_token, vel, d_time, duration in map(decode, np_track):
         if note_token == UNKNOWN_FRAME:
+            if vel != 0:
+                prev_unknown_d_time = d_time
             continue
         elif note_token == TRACK_END:
             break
         else:
-            res.append([reverse_midi_notes[note_token], vel, d_time, duration])
+            res.append([reverse_midi_notes[note_token], vel,
+                        d_time + prev_unknown_d_time, duration])
+            prev_unknown_d_time = 0
 
     return np.array(res)
 
