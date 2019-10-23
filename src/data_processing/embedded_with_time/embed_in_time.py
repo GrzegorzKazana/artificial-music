@@ -9,17 +9,14 @@ from ..embedding_sparse_notes.common import map_note_num_to_name, UNKNOWN_FRAME
 
 def get_track_tempo(track):
     set_tempo_msgs = list(filter(lambda x: x.type == 'set_tempo', track))
-    return mido.tempo2bpm(set_tempo_msgs[0].tempo) if len(set_tempo_msgs) > 0 else DEFAULT_BPM
+    return mido.tempo2bpm(set_tempo_msgs[0].tempo) if len(set_tempo_msgs) > 0 else 500000
 
 
-def shift_set_tempo_time_to_next_msg(track):
+def shift_set_tempo_time_to_next_msg(track, tempo=500000):
     res = []
+    # curr_tempo = tempo
+    tempo_ratio = 1
     for i, x in enumerate(track):
-        # if i == 0:
-        #     if not x.is_meta:
-        #         res.append(x)
-        #     continue
-
         if x.type != 'set_tempo':
             prev_set_tempos = []
             for j in range(1, i + 1):
@@ -28,8 +25,14 @@ def shift_set_tempo_time_to_next_msg(track):
                 else:
                     break
 
-            res.append(x.copy(time=x.time + sum(prev_set_tempos)))
+            res.append(
+                x.copy(time=(x.time * tempo_ratio) + sum(prev_set_tempos)))
             continue
+        # else:
+            # curr_tempo = x.tempo
+            # print(
+            # f'tempo_change: {x.tempo} | orig: {tempo} | ratio: {tempo / curr_tempo}')
+            # tempo_ratio = tempo / curr_tempo
 
     return res
 
@@ -108,9 +111,10 @@ def mid2np(track, wv, embedding_dict):
         # filter_meta,
         lambda x: list(
             filter(lambda n: not n.is_meta or n.type == 'set_tempo', x)),
-        shift_set_tempo_time_to_next_msg,
+        lambda x: shift_set_tempo_time_to_next_msg(x),
         filter_meta,    # filter out program changes
         to_raw_numpy,
         calc_notes_duration,
-        lambda x: to_embedded_with_time(x, wv, embedding_dict, track_tempo)
+        lambda x: to_embedded_with_time(
+            x, wv, embedding_dict, track_tempo)
     )(track)
