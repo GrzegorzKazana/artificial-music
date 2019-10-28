@@ -3,6 +3,7 @@
 # IN PROGRESS
 
 - Test double lstm long seq model
+- create notebook for lstm w/ time
 - Test embedding w/ time
 - Generate dataset embedded w/ time (dont forget transpositions)
 
