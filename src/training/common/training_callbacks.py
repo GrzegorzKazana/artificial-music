@@ -14,7 +14,7 @@ def default(val):
 
 
 class ModelAndLogSavingCallback(K.callbacks.Callback):
-    def __init__(self, model, output_path=''):
+    def __init__(self, model, output_path='', save_log_only=False):
         super().__init__()
         self.output_path = output_path
         self.logs = []
