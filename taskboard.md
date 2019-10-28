@@ -2,6 +2,7 @@
 
 # IN PROGRESS
 
+- Test double lstm long seq model
 - Test embedding w/ time
 - Generate dataset embedded w/ time (dont forget transpositions)
 

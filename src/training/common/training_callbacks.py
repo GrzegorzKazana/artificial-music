@@ -26,6 +26,9 @@ class ModelAndLogSavingCallback(K.callbacks.Callback):
                 json.dump(json.loads(model_json), fo,
                           default=default, indent=4)
 
+            with open(os.path.join(self.output_path, 'log.json'), 'r') as fo:
+                self.logs = json.load(fo)
+
     def on_epoch_end(self, epoch, logs={}):
         self.logs.append(logs)
 
