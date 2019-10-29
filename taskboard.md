@@ -5,10 +5,10 @@
 - Test double lstm long seq model
 - create notebook for lstm w/ time
 - Test embedding w/ time
-- Generate dataset embedded w/ time (dont forget transpositions)
 
 # COMPLETED
 
+- Generate dataset embedded w/ time (dont forget transpositions)
 - Train model
 - Test diffrent generation strategies
 - Write first model for benchmarking

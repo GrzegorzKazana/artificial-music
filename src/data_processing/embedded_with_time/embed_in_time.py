@@ -108,7 +108,6 @@ def mid2np(track, wv, embedding_dict):
     return flow(
         note_off_to_zero_vel,
         secs_to_msecs,
-        # filter_meta,
         lambda x: list(
             filter(lambda n: not n.is_meta or n.type == 'set_tempo', x)),
         lambda x: shift_set_tempo_time_to_next_msg(x),
