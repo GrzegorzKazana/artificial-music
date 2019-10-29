@@ -2,12 +2,13 @@
 
 # IN PROGRESS
 
+- create seed generators for embedding w/ time
 - Test double lstm long seq model
-- create notebook for lstm w/ time
 - Test embedding w/ time
 
 # COMPLETED
 
+- create notebook for lstm w/ time
 - Generate dataset embedded w/ time (dont forget transpositions)
 - Train model
 - Test diffrent generation strategies
