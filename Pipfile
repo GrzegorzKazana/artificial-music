@@ -10,9 +10,10 @@ numpy = "<1.17"
 scipy = "*"
 gensim = "*"
 click = "*"
-tensorflow = "*"
+tensorflow = "==2.0.*"
 mido = "*"
 matplotlib = "*"
+jupyter = "*"
 
 [scripts]
 test = "bash ./scripts/run_tests.sh"
