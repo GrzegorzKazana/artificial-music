@@ -7,7 +7,7 @@ from .common import create_noise_adder
 
 
 def random_noise_seed(length, input_size, scaler=0.5, batch_size=16):
-    return np.random.random((batch_size, length, input_size)) * scaler
+    return np.random.normal(size=(batch_size, length, input_size)) * scaler
 
 
 def zero_seed(length, input_size, word_vectors, batch_size=16):
@@ -68,7 +68,7 @@ def multi_note_harmonic_seed(length, input_size, word_vectors, batch_size=16, nu
     return res
 
 
-random_noise_adder = create_noise_adder(random_noise_seed, noise_scale=2)
+random_noise_adder = create_noise_adder(random_noise_seed)
 
 # refer to artifacts/embedded_seed_generators.json
 seed_generators = {

@@ -124,8 +124,8 @@ def multi_note_simult_harmonic_seed(length, input_size, batch_size=16, num_notes
     return res
 
 
-band_noise_adder = create_noise_adder(band_noise_seed)
-random_noise_adder = create_noise_adder(random_noise_seed)
+band_noise_adder = create_noise_adder(band_noise_seed, clip=(0, 1))
+random_noise_adder = create_noise_adder(random_noise_seed, clip=(0, 1))
 
 # refer to artifacts/sparse_seed_generators.jpg
 seed_generators = {
