@@ -1,7 +1,10 @@
 import numpy as np
 
 
-def recurrent_generate(model, seed, seq_length, window_size, is_binary=False):
+def identity(x): return x
+
+
+def recurrent_generate(model, seed, seq_length, window_size, is_binary=False, transform_output=identity):
     """
     Predicts only next step each iteration,
     and then appends generated step to input,
@@ -11,7 +14,7 @@ def recurrent_generate(model, seed, seq_length, window_size, is_binary=False):
     x = seed
     accum = [seed]
     for _ in range(seq_length - window_size):
-        res = model.predict(x)
+        res = transform_output(model.predict(x))
         next_timestep = res[:, -1:, :].round() if is_binary else res[:, -1:, :]
         x = np.concatenate([x, next_timestep], axis=1)[:, -window_size:, :]
         accum.append(next_timestep)

@@ -26,8 +26,13 @@ class ModelAndLogSavingCallback(K.callbacks.Callback):
                 json.dump(json.loads(model_json), fo,
                           default=default, indent=4)
 
-            with open(os.path.join(self.output_path, 'log.json'), 'r') as fo:
-                self.logs = json.load(fo)
+            if os.path.isfile(os.path.join(self.output_path, 'log.json')):
+                print('restored archived logs')
+                with open(os.path.join(self.output_path, 'log.json'), 'r') as fo:
+                    self.logs = json.load(fo)
+            else:
+                print('failed to restore logs, creating new')
+                self.logs = []
 
     def on_epoch_end(self, epoch, logs={}):
         self.logs.append(logs)
@@ -62,7 +67,8 @@ class GeneratingAndPlottingCallback(K.callbacks.Callback):
         _, axs = plt.subplots(nrows=4, ncols=4, figsize=(30, 10),
                               subplot_kw={'xticks': [], 'yticks': []})
         for ax, x_ in zip(axs.flat, sample):
-            ax.imshow(x_.toarray().T[::-1, :])
+            x_np = x_ if isinstance(x_, np.ndarray) else x_.toarray()
+            ax.imshow(x_np.T[::-1, :])
         plt.tight_layout()
         res = plt.gcf()
         plt.show()

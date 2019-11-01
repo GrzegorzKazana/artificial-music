@@ -32,12 +32,16 @@ def from_embedded_with_time(np_track, wv):
 
         return [note_token, vel, d_time, duration]
 
+    decoded = list(map(decode, np_track))
+
     res = []
     prev_unknown_d_time = 0
-    for note_token, vel, d_time, duration in map(decode, np_track):
+    for note_token, vel, d_time, duration in decoded:
         if note_token == UNKNOWN_FRAME:
             if vel != 0:
                 prev_unknown_d_time = d_time
+            continue
+        elif note_token == TRACK_END and len(res) == 0:
             continue
         elif note_token == TRACK_END:
             break
@@ -104,9 +108,20 @@ def to_raw_numpy(np_track, wv):
     """
     [[note, vel, d_time, duration], ...] -> [[note, vel, abs_time], ...]
     """
+    def debug(name):
+        def inner(x):
+            if x.size == 0:
+                print('np_track', np_track)
+                print(name, x)
+            return x
+
+        return inner
+
     return flow(
         lambda x: from_embedded_with_time(x, wv),
+        debug('from_embedded_with_time'),
         duration_to_note_offs,
+        debug('duration_to_note_offs'),
     )(np_track)
 
 
