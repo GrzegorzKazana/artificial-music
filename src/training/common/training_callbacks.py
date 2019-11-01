@@ -19,6 +19,7 @@ class ModelAndLogSavingCallback(K.callbacks.Callback):
         self.output_path = output_path
         self.logs = []
         self.model = model
+        self.save_log_only = save_log_only
 
         if output_path != '':
             model_json = model.to_json()
@@ -43,7 +44,7 @@ class ModelAndLogSavingCallback(K.callbacks.Callback):
         t = datetime.now().isoformat().split('.')[0]
         epoch_count = len(self.logs)
 
-        if not save_log_only:
+        if not self.save_log_only:
             K.models.save_model(self.model, os.path.join(self.output_path,
                                                          f'md_e{epoch_count}_t{t}.h5'))
 

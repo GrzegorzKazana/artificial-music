@@ -1,6 +1,6 @@
 import os
 
-CORRECT_EXTENSIONS = ['.npz', '.mid']
+CORRECT_EXTENSIONS = ['.npz', '.mid', '.npy']
 
 
 def get_valid_files_in_dir(path):
