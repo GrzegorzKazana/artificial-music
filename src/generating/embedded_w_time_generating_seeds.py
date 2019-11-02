@@ -6,7 +6,7 @@ from math import inf
 
 
 common_note_times = [
-    4, 2, 1.5, 1, 0.75, 0.5, 0.25, 0.333,
+    4, 2, 1.5, 1, 0.75, 0.5,
 ]
 
 
