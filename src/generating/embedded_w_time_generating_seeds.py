@@ -52,7 +52,7 @@ def create_random_noise_adder(noise_scale=0.5, clip=(-inf, inf)):
 
 
 def random_noise_seed(length, input_size, scaler=0.5, batch_size=16):
-    notes = np.random.normal((batch_size, length, input_size)) * scaler
+    notes = np.random.normal(size=(batch_size, length, input_size)) * scaler
     rest = generate_random_rest_vector(length, batch_size)
 
     return zip_notes_with_rest(notes, rest)
