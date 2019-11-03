@@ -17,13 +17,18 @@ from src.data_processing.common.rw_np_mid import save_numpy_midi
 @click.command()
 @click.option('-s', '--src', required=True)
 @click.option('-i', '--ignore_ratio', type=float)
-def main(src, **kwargs):
+@click.option('-l', '--limit_vector', default=0)
+def main(src, limit_vector, **kwargs):
     clean_kwargs = {k: v for k, v in kwargs.items() if v is not None}
 
     files_in_folder = get_valid_files_in_dir(src)
     file_paths = [os.path.join(src, f) for f in files_in_folder]
 
-    tracks = [sparse.load_npz(fp) for fp in file_paths]
+    tracks = [sparse.load_npz(fp).tocsr() for fp in file_paths]
+    if limit_vector:
+        print(f'limiting to {limit_vector}')
+        tracks = [t[:, :limit_vector] for t in tracks]
+
     counter, counter_notes = create_counters(tracks)
     embedding_dict = create_dict(counter_notes, **clean_kwargs)
 

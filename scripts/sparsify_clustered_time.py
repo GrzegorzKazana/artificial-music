@@ -12,6 +12,7 @@ from helpers import parse_file_paths
 from src.data_processing.common.rw_np_mid import read_numpy_midi, save_numpy_midi
 from src.data_processing.sparse_notes_classified_time.mid2np import mid2np, cluster_and_ohe_durations
 from src.data_processing.sparse_notes_classified_time.np2mid import np2mid
+from src.data_processing.transpose_np_track.transpose import transpose
 
 AVAILABLE_DIRECTIONS = [
     'mid2np',
@@ -24,7 +25,8 @@ AVAILABLE_DIRECTIONS = [
 @click.option('-s', '--src', required=True)
 @click.option('-d', '--dst', required=True)
 @click.option('-c', '--dur_dict', default='')
-def main(mode, src, dst, dur_dict, **kwargs):
+@click.option('-t', '--do_transpose', is_flag=True, default=False)
+def main(mode, src, dst, dur_dict, do_transpose, **kwargs):
     clean_kwargs = {k: v for k, v in kwargs.items() if v is not None}
 
     to_numpy = mode == AVAILABLE_DIRECTIONS[0]
@@ -55,8 +57,15 @@ def main(mode, src, dst, dur_dict, **kwargs):
             durations_ohe, np.cumsum(track_lens[:-1]))
 
         for output_p, t, d in zip(output_paths, tracks, durations_ohe_split):
-            track_w_dur = np.concatenate((t, d), axis=-1)
-            save_numpy_midi(os.path.join(output_p), track_w_dur)
+            if do_transpose:
+                for step in range(-12, 13):
+                    transposed_t = transpose(t, step)
+                    track_w_dur = np.concatenate((transposed_t, d), axis=-1)
+                    save_numpy_midi(os.path.join(output_p.replace(
+                        '.npz', f'_{step}.npz')), track_w_dur)
+            else:
+                track_w_dur = np.concatenate((t, d), axis=-1)
+                save_numpy_midi(os.path.join(output_p), track_w_dur)
     else:
         meta_dir = os.path.join(dst, 'meta')
 

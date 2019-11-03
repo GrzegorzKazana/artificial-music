@@ -9,7 +9,6 @@ from src.data_processing.sparse_notes_classified_time.mid2np import COMMON_PPQ
 
 
 def decode_durations(durations_ohe, clustering_dict):
-    print(durations_ohe.shape)
     return np.array([clustering_dict[str(np.argmax(d))]['avg'] for d in durations_ohe])
 
 
