@@ -38,7 +38,7 @@ def create_clustering_dict(db, durations):
         max_ = durations[db.labels_ == l].max()
         std = durations[db.labels_ == l].std()
 
-        d[l] = {
+        d[int(l)] = {
             'avg': avg,
             'count': count,
             'min': min_,
