@@ -32,6 +32,18 @@ def messages_to_midifile(messages, ticks_per_beat):
     return outfile
 
 
+def np2sparse(encoded_numpy, durations_ohe, duration_dict, **kwargs):
+    """
+    takes in encoded numpy, returns MidiFile instance
+    """
+
+    return flow(
+        lambda args: (args[0], decode_durations(args[1], duration_dict)),
+        lambda args: (args[0], quarters_to_ppq(args[1])),
+        lambda args: restore_subsequents_from_count(*args),
+    )((encoded_numpy, durations_ohe))
+
+
 def np2mid(encoded_numpy, durations_ohe, duration_dict, **kwargs):
     """
     takes in encoded numpy, returns MidiFile instance
