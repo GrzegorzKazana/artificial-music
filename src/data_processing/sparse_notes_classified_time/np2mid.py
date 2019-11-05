@@ -12,8 +12,8 @@ def decode_durations(durations_ohe, clustering_dict):
     return np.array([clustering_dict[str(np.argmax(d))]['avg'] for d in durations_ohe])
 
 
-def quarters_to_ppq(durations):
-    return (durations * COMMON_PPQ).astype(np.int32)
+def quarters_to_ppq(durations, ppq=COMMON_PPQ):
+    return (durations * ppq).astype(np.int32)
 
 
 def restore_subsequents_from_count(notes, durations):
@@ -39,7 +39,7 @@ def np2sparse(encoded_numpy, durations_ohe, duration_dict, **kwargs):
 
     return flow(
         lambda args: (args[0], decode_durations(args[1], duration_dict)),
-        lambda args: (args[0], quarters_to_ppq(args[1])),
+        lambda args: (args[0], quarters_to_ppq(args[1], **kwargs)),
         lambda args: restore_subsequents_from_count(*args),
     )((encoded_numpy, durations_ohe))
 
