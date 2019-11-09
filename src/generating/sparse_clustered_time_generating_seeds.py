@@ -94,6 +94,10 @@ def multi_note_simult_harmonic_seed(length, input_size, batch_size=16):
 
 
 seed_generators = {
+    "zero_seed": wrap_seed_generator_w_duration(zero_seed),
+    "random_noise_seed": wrap_seed_generator_w_duration(random_noise_seed),
+    "band_noise_seed": wrap_seed_generator_w_duration(band_noise_seed),
+
     "single_note_seed": wrap_seed_generator_w_duration(single_note_seed),
     "multi_note_seed": wrap_seed_generator_w_duration(multi_note_seed),
     "multi_note_harmonic_seed": wrap_seed_generator_w_duration(multi_note_harmonic_seed),
