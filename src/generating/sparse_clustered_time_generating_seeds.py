@@ -18,8 +18,10 @@ def get_random_duration(length, batch_size, duration_dict, ignore_shortest):
             *[(d, c, a) for d, c, a in zip(durations, dur_count, dur_avg) if a != min(dur_avg)]
         )
 
+    dur_propab = [s / sum(dur_count) for s in dur_count]
+
     for i in range(batch_size * length):
-        dur = np.random.choice(durations, p=dur_count)
+        dur = np.random.choice(durations, p=dur_propab)
         res[i, dur] = 1
 
     return res.reshape((batch_size, length, DEFAULT_DURATION_CLUSTER_SIZE))
