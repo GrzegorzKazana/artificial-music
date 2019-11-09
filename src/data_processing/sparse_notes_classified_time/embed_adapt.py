@@ -1,5 +1,5 @@
 import numpy as np
-from src.data_processing.embedding_sparse_notes.common import hash_frame, unhash_named_frame, UNKNOWN_FRAME, TRACK_END
+from src.data_processing.embedding_sparse_notes.common import hash_frame, map_hashed_frame_to_names, unhash_named_frame, UNKNOWN_FRAME, TRACK_END
 
 
 def decode_note_vector_track(note_vecs, wv):
@@ -19,7 +19,7 @@ def decode_note_vector_track(note_vecs, wv):
 
 
 def encode_note_frame(frame, wv):
-    token = hash_frame(frame)
+    token = map_hashed_frame_to_names(hash_frame(frame))
     return wv[token] if token in wv else wv[UNKNOWN_FRAME]
 
 
