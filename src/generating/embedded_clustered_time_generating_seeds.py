@@ -2,29 +2,7 @@ import numpy as np
 import random
 
 from .common import create_noise_adder
-
-DEFAULT_DURATION_CLUSTER_SIZE = 24
-
-
-def get_random_duration(length, batch_size):
-    res = np.zeros((batch_size * length, DEFAULT_DURATION_CLUSTER_SIZE))
-
-    for i in range(batch_size * length):
-        res[i, np.random.randint(DEFAULT_DURATION_CLUSTER_SIZE)] = 1
-
-    return res.reshape((batch_size, length, DEFAULT_DURATION_CLUSTER_SIZE))
-
-
-def wrap_seed_generator_w_duration(seed_gen):
-    def inner(length, input_size, **kwargs):
-        batch_size = kwargs['batch_size'] or 16
-        seed = seed_gen(length, input_size, **kwargs)
-        dur_length = seed.shape[1]
-        duration = get_random_duration(dur_length, batch_size)
-
-        return np.concatenate((seed, duration), axis=2)
-
-    return inner
+from .sparse_clustered_time_generating_seeds import wrap_seed_generator_w_duration
 
 
 # seeds
@@ -80,13 +58,18 @@ def multi_note_harmonic_seed(length, input_size, word_vectors, batch_size=16):
 random_noise_adder = create_noise_adder(random_noise_seed)
 
 # refer to artifacts/embedded_seed_generators.json
-seed_generators = {
-    "random_noise_seed": wrap_seed_generator_w_duration(random_noise_seed),
-    "zero_seed": wrap_seed_generator_w_duration(zero_seed),
-    "const_frame_seed": wrap_seed_generator_w_duration(const_frame_seed),
-    "multi_note_seed": wrap_seed_generator_w_duration(multi_note_seed),
-    "multi_note_harmonic_seed": wrap_seed_generator_w_duration(multi_note_harmonic_seed),
-    "const_frame_seed_noise": wrap_seed_generator_w_duration(random_noise_adder(const_frame_seed)),
-    "multi_note_seed_noise": wrap_seed_generator_w_duration(random_noise_adder(multi_note_seed)),
-    "multi_note_harmonic_seed_noise": wrap_seed_generator_w_duration(random_noise_adder(multi_note_harmonic_seed)),
-}
+
+
+def get_seed_generators(duration_dict, ignore_shortest=True):
+    wrapper = wrap_seed_generator_w_duration(duration_dict, ignore_shortest)
+
+    return {
+        "random_noise_seed": wrapper(random_noise_seed),
+        "zero_seed": wrapper(zero_seed),
+        "const_frame_seed": wrapper(const_frame_seed),
+        "multi_note_seed": wrapper(multi_note_seed),
+        "multi_note_harmonic_seed": wrapper(multi_note_harmonic_seed),
+        "const_frame_seed_noise": wrapper(random_noise_adder(const_frame_seed)),
+        "multi_note_seed_noise": wrapper(random_noise_adder(multi_note_seed)),
+        "multi_note_harmonic_seed_noise": wrapper(random_noise_adder(multi_note_harmonic_seed)),
+    }
