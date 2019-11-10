@@ -68,16 +68,34 @@ def mid2np(mid, **kwargs):
 
     # take messages from track, so timestamp
     # is not recalculated to seconds
-    msgs = [m for m in mid.tracks[0]]
-    assert len(msgs) > 0
+    messages_of_valid_tracks = [
+        [m for m in track]
+        for track in mid.tracks if len(list(filter(lambda x: x.type in ['note_on', 'note_off'], track))) > 10
+    ]
+
+    def to_sparse(msgs):
+        return flow(
+            note_off_to_zero_vel,
+            to_absolute_time,
+            lambda msgs: [m.copy(time=int(m.time * ppq_ratio)) for m in msgs],
+            filter_meta,
+            to_raw_numpy,
+            lambda x: transform(x, skip_velocity=True),
+        )(msgs)
+
+    def combine_sparses(sparses):
+        largest = sparses[np.argmax([s.shape[0] for s in sparses])]
+        res = np.zeros_like(largest)
+        for sparse in sparses:
+            # pylint: disable=unsupported-assignment-operation
+            res[:sparse.shape[0], :] += sparse
+
+        res = np.clip(res, 0, 1)
+        return res
 
     return flow(
-        note_off_to_zero_vel,
-        to_absolute_time,
-        lambda msgs: [m.copy(time=int(m.time * ppq_ratio)) for m in msgs],
-        filter_meta,
-        to_raw_numpy,
-        lambda x: transform(x, skip_velocity=True),
+        lambda x: [to_sparse(t) for t in x],
+        combine_sparses,
         remove_subsequents_and_count_note_ticks,
         lambda args: (args[0], ppq_to_quarters(args[1]))
-    )(msgs)
+    )(messages_of_valid_tracks)
