@@ -4,3 +4,6 @@
 download_pretrained.sh
 upload_dataset.sh
 *.h5
+
+**/.ipynb_checkpoints/*
+**/__pycache__/*
