@@ -3,6 +3,7 @@ from src.data_processing.embedding_sparse_notes.common import hash_frame, map_ha
 
 
 def decode_note_vector_track(note_vecs, wv, return_similarities=False):
+    unknowns = 0
     res = []
     sims = []
     for note_vec in note_vecs:
@@ -10,14 +11,19 @@ def decode_note_vector_track(note_vecs, wv, return_similarities=False):
         if token == UNKNOWN_FRAME and len(res) == 0:
             res.append(unhash_named_frame(''))
             sims.append(similarity)
+            unknowns += 1
         elif token == UNKNOWN_FRAME:
             res.append(res[-1])
             sims.append(sims[-1])
+            unknowns += 1
         elif token == TRACK_END:
             break
         else:
             res.append(unhash_named_frame(token))
             sims.append(similarity)
+
+    print(
+        f'Encountered {unknowns} unknowns per {note_vecs.shape[0]} ({100 * unknowns // note_vecs.shape[0]}%)')
 
     return np.array(res) if not return_similarities else (np.array(res), np.array(sims))
 
