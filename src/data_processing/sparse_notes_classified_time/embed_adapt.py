@@ -22,9 +22,6 @@ def decode_note_vector_track(note_vecs, wv, return_similarities=False):
             res.append(unhash_named_frame(token))
             sims.append(similarity)
 
-    print(
-        f'Encountered {unknowns} unknowns per {note_vecs.shape[0]} ({100 * unknowns // note_vecs.shape[0]}%)')
-
     return np.array(res) if not return_similarities else (np.array(res), np.array(sims))
 
 
