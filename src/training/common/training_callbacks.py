@@ -77,7 +77,7 @@ class GeneratingAndPlottingCallback(K.callbacks.Callback):
         plt.show()
 
         if self.output_path != '':
-            res.save_fig(os.path.join(self.output_path, f'{t}.png'))
+            res.savefig(os.path.join(self.output_path, f'{t}.png'))
 
         return
 
@@ -109,7 +109,7 @@ class GeneratingOnSameSeedCallback(K.callbacks.Callback):
         plt.show()
 
         if self.output_path != '':
-            res.save_fig(os.path.join(self.output_path, f'{t}.png'))
+            res.savefig(os.path.join(self.output_path, f'{t}.png'))
 
         return
 
