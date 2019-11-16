@@ -82,6 +82,38 @@ class GeneratingAndPlottingCallback(K.callbacks.Callback):
         return
 
 
+class GeneratingOnSameSeedCallback(K.callbacks.Callback):
+    def __init__(self, model, sample_generator, pad_length, output_path=''):
+        super().__init__()
+        self.output_path = output_path
+        self.model = model
+        self.sample_generator = sample_generator
+        self.pad_length = pad_length
+
+    def on_epoch_end(self, epoch, logs={}):
+        t = datetime.now().isoformat().split('.')[0]
+        sample = self.sample_generator(self.model)
+
+        _, axs = plt.subplots(nrows=4, ncols=4, figsize=(30, 10),
+                              subplot_kw={'xticks': [], 'yticks': []})
+        for ax, x_ in zip(axs.flat, sample):
+            x_np = x_ if isinstance(x_, np.ndarray) else x_.toarray()
+
+            x_padded = np.zeros((self.pad_length, x_np.shape[1]))
+            copied_length = min(self.pad_length, x_np.shape[0])
+            x_padded[:copied_length, :] = x_np[:copied_length, :]
+            ax.imshow(x_padded.T[::-1, :])
+
+        plt.tight_layout()
+        res = plt.gcf()
+        plt.show()
+
+        if self.output_path != '':
+            res.save_fig(os.path.join(self.output_path, f'{t}.png'))
+
+        return
+
+
 class GensimLossPrinter(CallbackAny2Vec):
     def __init__(self):
         self.prev_loss = float("inf")
