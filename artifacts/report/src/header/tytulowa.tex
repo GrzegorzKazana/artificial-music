@@ -1,0 +1,55 @@
+\pagestyle{empty}
+{
+    \newgeometry{top=2.5cm,%
+        bottom=2.5cm,%
+        left=3cm,
+        right=2.5cm}
+    \sffamily
+    \rule{0cm}{0cm}
+
+    \begin{center}
+        \includegraphics[width=29mm]{assets/images/eps/polsl}
+    \end{center}
+    \vspace{1cm}
+    \begin{center}
+        \headerfont \polsl
+    \end{center}
+    \begin{center}
+        \headerfont \wydzial
+    \end{center}
+    \vfill
+    \begin{center}
+        \titlefont Praca dyplomowa inżynierska
+    \end{center}
+    \vfill
+
+    \begin{center}
+        \otherfont \tytul\par
+    \end{center}
+
+    \vfill
+
+    \vfill
+
+    \noindent\vbox
+    {
+        \hbox{\otherfont autor: \autor}
+        \vspace{12pt}
+        \hbox{\otherfont kierujący pracą: \promotor}
+        % \vspace{12pt}  % zakomentuj, jezeli nie ma konsultanta
+        % \hbox{\otherfont konsultant: \konsultant} % zakomentuj, jezeli nie ma konsultanta
+    }
+    \vfill
+
+    \begin{center}
+        \otherfont Gliwice,  \miesiac\ \the\year
+    \end{center}
+    \restoregeometry
+}
+
+
+\cleardoublepage
+
+
+\rmfamily
+\normalfont

@@ -1,5 +1,8 @@
 /datasets
 /pretrained_models
+/artifacts/report/*.*
+!/artifacts/report/*.tex
+!/artifacts/report/*.pdf
 *.pyc
 download_pretrained.sh
 upload_dataset.sh

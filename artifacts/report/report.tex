@@ -1,0 +1,49 @@
+% !TEX root = report.tex
+\documentclass[a4paper,twoside,12pt]{book}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% NAGŁÓWEK %%%%%%%%%%%%%%%%%
+
+%%% PREAMBUŁA %%%
+\input{src/header/preambula.tex}
+
+%%% KOLOR %%%
+\usepackage{xcolor} \pagecolor[rgb]{0,0,0} \color[rgb]{1,1,1}
+
+\begin{document}
+
+%%%% STRONA TYTUŁOWA %%%
+\input{src/header/tytulowa.tex}
+
+%%% OŚWIADCZENIE O UDOSTĘPNIANIU PRACY DYPLOMOWEJ %%%%
+\input{src/header/oswiadczenie_o_udostepnieniu.tex}
+
+
+%%% OŚWIADCZENIE PROMOTORA O SPEŁNIENIU WYMAGAŃ FORMALNYCH %%%%
+\input{src/header/osw_promotora_o_zgdnsci.tex}
+
+%%%%%%%%%%%%%%%%%% SPIS TREŚCI %%%%%%%%%%%%%%%%%%%%%%
+\input{src/others/spis_tresci.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% TREŚĆ PRACY %%%%%%%%%%%%%%%%%%%%%%
+
+\input{src/chapters/01_wstep.tex}
+\input{src/chapters/02_analiza_tematu.tex}
+\input{src/chapters/03_wymagania_i_narzedzia.tex}
+\input{src/chapters/04_specyfikacja_zewnetrzna.tex}
+\input{src/chapters/05_specyfikacja_wewnetrzna.tex}
+\input{src/chapters/06_weryfikacja_walidacja.tex}
+\input{src/chapters/07_podsumowanie_wnioski.tex}
+
+%%%%%%%%%%%%%%%%%% TREŚĆ PRACY %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%% BIBLIOGRAFIA %%%%%%%%%%%%%%%%%%%%%%
+\input{src/others/bibliografia.tex}
+
+%%%%%%%%%%%%%%%%%% DODATKI %%%%%%%%%%%%%%%%%%%%%%
+\input{src/appendices/main.tex}
+
+\end{document}

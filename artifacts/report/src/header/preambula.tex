@@ -1,0 +1,114 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage[british,polish]{babel}
+\usepackage{courier}
+\usepackage{etoolbox}
+\usepackage{lmodern}
+\usepackage{graphicx} 
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tikz}
+
+%%%% pgfplots
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+
+%%%%
+\usepackage{mathtools}
+\usepackage{geometry}
+
+%%%% dodatki
+\usepackage[page]{appendix}
+\renewcommand{\appendixtocname}{Dodatki}
+\renewcommand{\appendixpagename}{Dodatki}
+\renewcommand{\appendixname}{Dodatek}
+
+%%%% spacingi
+\usepackage{setspace}
+\onehalfspacing
+\frenchspacing
+
+\usepackage{listings}
+%%%% listingi
+\usepackage{listings}
+\lstset{%
+language=C++,%
+commentstyle=\textit,%
+identifierstyle=\textsf,%
+keywordstyle=\sffamily\bfseries, %\texttt, %
+%captionpos=b,%
+tabsize=3,%
+frame=lines,%
+numbers=left,%
+numberstyle=\tiny,%
+numbersep=5pt,%
+breaklines=true,%
+% morekeywords={aaa,bbb},%
+escapeinside={@*}{*@},%
+}
+
+%%%% zaawansowane formatowanie
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{\nouppercase{\it\rightmark}}
+\fancyhead[RE]{\nouppercase{\it\leftmark}}
+\fancyhead[LE,RO]{\it\thepage}
+
+\fancypagestyle{tylkoNumeryStron}{%
+   \fancyhf{} 
+   \fancyhead[LE,RO]{\it\thepage}
+}
+
+\fancypagestyle{NumeryStronNazwyRozdzialow}{%
+   \fancyhf{} 
+   \fancyhead[LO]{\nouppercase{\it\rightmark}}
+   \fancyhead[RE]{\nouppercase{\it\leftmark}}
+   \fancyhead[LE,RO]{\it\thepage}
+}
+
+
+%%%% stylowanie języków obcych 
+\newcommand{\foreign}[1]{\emph{#1}}
+\newcommand{\eng}[1]{{\selectlanguage{british}\foreign{#1}}}
+
+%%%% coś?
+\newcounter{stronyPozaNumeracja}
+\newcommand{\hcancel}[1]{%
+    \tikz[baseline=(tocancel.base)]{
+        \node[inner sep=0pt,outer sep=0pt] (tocancel) {#1};
+        \draw[red] (tocancel.south west) -- (tocancel.north east);
+    }
+}
+
+%%%% polskie miesiące
+\newcommand{\miesiac}{
+  \ifcase\the\month
+  \or styczeń
+  \or luty
+  \or marzec
+  \or kwiecień
+  \or maj
+  \or czerwiec
+  \or lipiec
+  \or sierpień
+  \or wrzesień
+  \or październik
+  \or listopad
+  \or grudzień
+  \fi}
+
+%%%% Helvetica font macros na str tytuowej:
+\newcommand{\headerfont}{\fontfamily{phv}\fontsize{18}{18}\bfseries\scshape\selectfont}
+\newcommand{\titlefont}{\fontfamily{phv}\fontsize{18}{18}\selectfont}
+\newcommand{\otherfont}{\fontfamily{phv}\fontsize{14}{14}\selectfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\autor}{Grzegorz Kazana}
+\newcommand{\promotor}{dr inż. Grzegorz Baron}
+\newcommand{\konsultant}{dr inż. Imię Nazwisko}
+\newcommand{\tytul}{Tworzenie muzyki za pomocą sztucznych sieci neuronowych}
+\newcommand{\polsl}{Politechnika Śląska}
+\newcommand{\wydzial}{Wydział Automatyki, Elektroniki i Informatyki}
