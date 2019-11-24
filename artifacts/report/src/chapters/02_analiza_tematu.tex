@@ -1,11 +1,94 @@
 \chapter{Analiza tematu}
- {
-\begin{itemize}
-  \item wprowadzenie do dziedziny (state of art)
-  \item sformułowanie problemu
-  \item studia literaturowe / przegląd literatury tematu
-  \item opis znanych rozwiązań (także opisanych naukowo)
-  \item opis algorytmów (obcych)
-  \item osadzenie pracy w kontekście
-\end{itemize}
- }
+{
+  % \begin{itemize}
+  %   \item wprowadzenie do dziedziny (state of art)
+  %   \item sformułowanie problemu
+  %   \item studia literaturowe / przegląd literatury tematu
+  %   \item opis znanych rozwiązań (także opisanych naukowo)
+  %   \item opis algorytmów (obcych)
+  %   \item osadzenie pracy w kontekście
+  % \end{itemize}
+
+  Celem zadania doboru i analizy metod obróbki plików muzycznych jest 
+  przekształcenie danych do postaci użytecznej przez algorytmy uczenia maszynowego.
+  Do istotnych aspektów tego kroku należy między innymi stopień kompresji danych,
+  sposób wyrażania relacji między przykładami, możliwość bezstratnej transformacji odwrotnej. 
+
+  Zadanie generowania muzyki polega na ekstrakcji pewnych cech charakterystycznych
+  przykładowych utworów, np. stylu konkretnego artysty, 
+  i wykorzystaniu ich przy syntezie tworzonych próbek. 
+
+  \section{Wprowadzenie do dziedziny}
+  {
+    Jedną z najbardziej rozpowszechnionych metod uczenia maszynowego jest zastosowanie sieci neuronowych.
+    %%% tu można by cyknąć link do artykułu %%%
+    Zaproponowane w latach czterdziestych i rozwijane w drugiej połowie XX wieku, sztuczne sieci neuronowe
+    czerpią inspirację z sposobu funkcjonowania ludzkiego mózgu zbudowanego z komórek nerwowych - neuronów.
+    Połączenia między komórkami są modelowane poprzez wagi, reprezentujące siłę połączenia, a zjawisko aktywacji
+    komórek w sieci poprzez operację ważonej sumy informacji z połączonych neuronów oraz ich wag.
+    %%% tu też można odwołanie %%%
+    W latach siedemdziesiątych opracowano algorytm uczenia sztucznych sieci z powodzeniem wykorzystywany
+    do dziś - propagację wsteczną. Metoda ta polega na minimalizacji błędu predykcji poprzez regulację
+    wag w oparciu o pochodną funkcji błędu.
+    %%% odnośnik do czegoś z 'Universal approximation theorem'
+    Zastosowania sieci neuronowych są szerokie, co potwierdza twierdzenie stanowiące 
+    o ich możliwości aproksymacji dowolnej funkcji ciągłej w zamkniętym przedziale.
+
+    Mimo tego, że ta metoda uczenia maszynowego jest znana od wielu dekad, dopiero w ostatnich latach
+    przeżywa swoisty renesans spowodowany wzrostem dostępnej mocy obliczeniowej oraz 
+    możliwością zastosowania w procesie uczenia kart graficznych znacząco 
+    przyśpieszających równoległe operacje matematyczne.
+
+
+    Ponieważ dane reprezentujące muzykę mają postać sekwencji rozłożonej w czasie, 
+    konieczne jest wykorzystanie sieci mających możliwość agregacji stanu tj. posiadające pamięć.
+    Sieciami spełniającymi powyższy warunek są modele należące do grupy rekurencyjnych sieci neuronowych.
+    Najprostszym przykładem rekurencyjnej sieci neuronowej jest sieć na której wejście 
+    przekazywany jest również stan wyjść z analizy poprzedniego elementu sekwencji.
+    %%% obrazek RNN ???
+    Niestety, taka architektura jest narażona na wiele problemów, takich jak trudność
+    tworzenia powiązań pomiędzy odległymi elementami sekwencji oraz znikający gradient.
+
+    %%% link do artykułu o lstmach %%%
+    Architekturą rozwiązującą powyższe problemy jest zasugerowana przez XXXXXX architektura
+    Long short-term memory network (LSTM). Kosztem jej większych możliwości jest zwielokrotnienie 
+    ilości parametrów, co może przekładać się na dłuższy czas uczenia.
+    %%% obrazek  lstm ???
+  }
+
+  \section{Założenia}
+  {
+    Na potrzeby pracy została przyjęta następująca definicja muzyki:
+
+    Muzyką nazywamy ciągi dźwięków tworzące kompozycyjną całość. 
+
+    Utwory muzyczne można analizować pod wieloma względami, takimi jak:
+    \begin{itemize}
+        \item rytmiczność - organizacja dźwięków w czasie
+        \item melodyczność - sposób zestawiania następujących dźwięków 
+        \item harmoniczność - spójność i ład występujący między dźwiękami
+        \item dynamika - zróżnicowanie siły dźwięków
+    \end{itemize}
+
+    W kontekście pracy skupiono się na dwóch aspektach wynikających z powyższej 
+    definicji: rytmiczności i tonalności.
+  }
+
+  \section{Przegląd literatury}
+  {
+
+  }
+
+  \section{Odniesienie do istniejących prac}
+  {
+
+  }
+
+  \section{Opis narzędzi}
+
+  % \section{Sformułowanie problemu}
+  % {
+  %   W celu realizacji przedstawionego tematu, konieczna będzie praca w etapach
+  %   doboru i obróbki danych wejściowych, oraz projektu i wykorzystania modelu uczenia maszynowego.
+  % }
+}
