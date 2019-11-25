@@ -76,15 +76,89 @@
 
   \section{Przegląd literatury}
   {
+    %%% 1 https://pdfs.semanticscholar.org/c933/79a401dd159fc0c90eab44c43d07286b227e.pdf?_ga=2.50884521.120758669.1574698982-424907339.1573330492
+    %%% 2 https://pdfs.semanticscholar.org/9632/2047dd7a0f8b3ff30a3d44c219d45e4e8779.pdf
+    %%% 3 https://pdfs.semanticscholar.org/c72b/45d33260d736023aa0c7bd1ef8401a8de677.pdf
+    %%% 4 https://arxiv.org/pdf/1703.10847.pdf
+    %%% 5 https://arxiv.org/pdf/1612.01010.pdf
+    %%% 6 https://arxiv.org/pdf/1712.05274.pdf
+    %%% 7 https://arxiv.org/pdf/1611.09904.pdf
+    %%% 8 https://arxiv.org/pdf/1609.03499.pdf
+    %%% 
+    W podobnej tematyce powstało wiele prac, lecz każda wyróżnia 
+    się innym podejściem do problemu.
 
+    Elementem wspólnym dużej części prac jest wykorzystany format danych wejściowych.
+    W większości studiowanych artykułów, twórcy decydują się na wykorzystanie 
+    danych muzycznych w formacie midi [4,5,6,7], aczkolwiek równie popularnym wyjściem
+    jest skorzystanie z notacji ABC [1,2]. Najrzadsze jest podejście opierające się o
+    wykorzystanie surowych plików audio, np. w formacie wav [8].
+    
+    Jedną z różnic występujących między podejściami jest sposób obróbki i tworzenia
+    wewnętrznej reprezentacji danych, gdyż praktycznie wszyscy autorzy 
+    proponują własne rozwiązanie problemu. 
+    W przypadku danych tekstowych w formacie ABC, częstym elementem jest ograniczenie
+    lub usunięcie meta informacji zawartych w plikach [1,2] oraz pominięcie białych znaków.
+    Konkretne znaki zapisu są albo przedstawione jako wektory kodu 1 z N [2], 
+    lub przekształcane są kolejne wartości liczb naturalnych [1].
+    W pracach korzystających z plików midi, częstym podejściem do problemu reprezentacji wysokości
+    dźwięku jest zastosowanie kodu 1 z N [4], lecz większym zróżnicowaniem cechuje się podejście
+    do reprezentacji danych w wymiarze czasu. Duża część podejść opiera się na restrykcji możliwych
+    wartości rytmicznych do dyskretnego zbioru [5,6], podczas gdy stosowane są również podejścia
+    korzystające z wewnętrznej częstotliwości próbkowania plików midi [7].
+
+    Kluczowym aspektem wszystkich prac jest dobór modelu uczenia maszynowego.
+    Najbardziej popularnym wyborem są rekurencyjne sieci neuronowe [1,2,3,7],
+    ale opisywane są również inne podejścia, na przykład:
+    \begin{itemize}
+      \item modele kontekstowe, takie jak Continous Bag-of-Words [1],
+      \item modele generatywno adwersyjne (Generative Adversial Networks) [1,7],
+      \item modele konwolucyjne [4,8]
+    \end{itemize}
+
+    Aspektem wartym zwrócenia uwagi, są również poczynione założenia i nałożone
+    ograniczenia. Niektóre metody przytoczone przez autorów prac wliczają:
+    \begin{itemize}
+      \item pominięcie elementów polifonicznych utworów [2,5],
+      \item ograniczenie zbioru danych do utworów będących w 
+      ustalonej tonacji i/lub ustalonym metrum [2,6]
+      \item ograniczenie na występujące wartości rytmiczne [5] 
+    \end{itemize}
   }
 
   \section{Odniesienie do istniejących prac}
   {
-
+    % Niniejsza praca w kolejnych rozdziałach przedstawia wady i zalety konkretnych podejść
+    % do problemu doboru i obróbki danych. 
+    Niniejsza praca w kolejnych rozdziałach prezentuje analizę różnych podejść do kolejnych etapów
+    procesu implementacji systemu, którego celem jest generowanie utworów muzycznych. 
+    W rozdziale 3. poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
+    były przeprowadzane eksperymenty. Przedstawiono potencjalne trudności wiążące się z wyborem
+    poszczególnych źródeł danych.
+    W kolejnym rozdziale omówiono różne podejścia do zagadnienia reprezentacji wybranego formatu 
+    danych w postaci numerycznej. Zawiera również opis wad i zalet każdego z podejść.
+    Treścią piątego rozdziału jest przestawienie obranego typu modelu uczenia maszynowego oraz 
+    wybranej architektury, razem z opisem procesu uczenia.
+    Rozdział poświęcony generacji próbek zawiera opis przyjętego podejścia oraz sposobów 
+    wymuszania procesu generacji.
+    Dalsze rozdziały poświęcone są wnioskom i analizie wyników.
   }
 
   \section{Opis narzędzi}
+  {
+    Podczas implementacji korzystano z narzędzi:
+    \begin{itemize}
+      \item Google Colab - usługa będąca środowiskiem obliczeniowym przystosowanym 
+      do uruchamiania skryptów w języku Python, z dostępem do akceleratorów obliczeniowych
+      w postaci kart graficznych i jednostek tensorowych,
+      \item Tensorflow - biblioteka języka Python służąca do wydajnych obliczeń, z dużym wsparciem 
+      dla tworzenia i uczenia głębokich sieci neuronowych. Podczas pracy skorzystano z 
+      wysokopoziomowego interfejsu tf.keras, zawierającego predefiniowane architektury i warstwy sieci,
+      \item Jupyter notebook - środowisko uruchomieniowe języka Python, umożliwiające przejrzystą
+      ilustrację wykonywanych operacji,
+      \item mido - biblioteka ułatwiająca otwieranie i przetwarzania plików w formacie midi.
+    \end{itemize}
+  }
 
   % \section{Sformułowanie problemu}
   % {
