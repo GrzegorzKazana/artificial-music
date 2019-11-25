@@ -1,0 +1,64 @@
+\chapter {Dobór danych} 
+{
+    Jednym z kluczowych aspektów każdego procesu analizy danych i uczenia maszynowego
+    jest odpowiedni dobór danych. Decyzje podjęte na tym etapie pociągają za sobą 
+    konsekwencje w kolejnych etapach procesu. W zależności od postaci danych wejściowych,
+    określany jest konieczny nakład pracy w procesie ich obróbki. 
+    Ponadto, odpowiedni dobór danych ma kolosalny wpływ na otrzymywane wyniki.
+
+    W przypadku danych muzycznych należy zwrócić między innymi na cechy takie jak:
+    \begin{itemize}
+        \item sposób reprezentacji upływu czasu,
+        \item sposób wyrażenia wysokości dźwięku,
+        \item jasne przedstawienie zależności między dźwiękami,
+        \item stopień kompresji,
+        \item złożoność samego formatu oraz możliwość istnienia niepoprawnych reprezentacji.
+    \end{itemize}
+
+    \section{Porównanie formatów danych}
+    {
+        \subsection{Pliki audio}
+        {
+            Najmniej restrykcyjnymi formatami plików audio są formaty będące zapisem
+            amplitudy fali akustycznej. Przykładami plików tego rodzaju są pliki WAV
+            oraz AIFF.
+            Kluczowym parametrem plików audio jest częstotliwość próbkowania. Od niej
+            zależy zakres możliwych do wyrażenia częstotliwości. Typową wartością dla plików
+            %%% link do twierdzenia ???
+            WAV jest 44100Hz, co według twierdzenia Nyquista-Shannona przekłada się na zakres
+            częstotliwości ograniczony wartością 22050Hz, będącą bliską granicy słyszalności
+            ucha ludzkiego. 
+
+            Ponieważ wysokości dźwięków wyrażone są jedynie poprzez sekwencje zmian amplitudy sygnału,
+            ich ekstrakcja wymagałaby wykorzystania transformaty Fouriera.
+
+            Największą zaletą i wadą tego formatu jednocześnie jest jego swoboda. 
+            Postać fali akustycznej pozwala na przedstawienie każdego dźwięku będącego w paśmie
+            przenoszenia, za równo złożonych wieloinstrumentowych kompozycji muzycznych, 
+            prostych melodii, jak i dźwięków nie podlegających pod definicję muzyki. 
+            Prowadzi to do niskiego stopnia kompresji informacji, wymuszającego złożone metody obróbki i skomplikowane
+            modele uczenia.
+
+        }
+
+        \subsection{Notacja ABC}
+        {
+            
+        }
+
+        \subsection{Format midi}
+        {
+            
+        }
+
+        \subsection{Podsumowanie}
+        {
+            
+        }
+    }
+
+    \section{Opis wybranego zbioru danych}
+    {
+
+    }
+}
