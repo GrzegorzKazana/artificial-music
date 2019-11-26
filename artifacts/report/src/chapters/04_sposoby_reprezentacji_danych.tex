@@ -58,19 +58,42 @@
 
     \section{Reprezentacja czasu}
     {
+        Drugim wymiarem danych muzycznych jest czas. Ponownie, wartość oznaczająca upływ czasu
+        mogłaby użyta bezpośrednio, ponownie sprowadzając problem do regresji. Dodatkowo, rozsądnym krokiem
+        byłoby znormalizowanie wartości w impulsach midi do arbitralnie wybranej wartości reprezentującą konkretną
+        wartość rytmiczną. Przykładowym mapowaniem mogłoby być przyjęcie wartości 1 dla ćwierćnut.
+
+        Głównym mankamentem tego rozwiązania jest spowodowane naturą regresji ryzyko niemożliwości wyuczenia 
+        dokładnych wartości rytmicznych, a jedynie oscylowanie między wartościami. W takim przypadku generowana muzyka
+        mogłaby nie sprawiać wrażenia rytmicznej, gdyż dźwięki nie tworzyłyby spójnych taktów. 
+
         \subsection{Próbkowanie}
         {
-
-        }
-
-        \subsection{Czas jako zmienna ciągła}
-        {
-
+            Alternatywną metodą analizy upływu czasu jest próbkowanie. Z przyjętą częstotliwością próbkowania, 
+            określałoby się listę aktualnie wybrzmiewających dźwięków i tworzyło macierz o wymiarach t x n, gdzie n to
+            wymiarowość reprezentacji wysokości dźwięku, a t to ilość pobranych próbek w danym fragmencie utworu.
+            
+            Ponieważ dźwięki zawsze trwają wielokrotność pewnej wartości, potencjalnie łatwiejsze byłoby 
+            odtworzenie rytmicznego charakteru muzyki.
+            Wadą tego podejścia jest konieczność doboru częstotliwości próbkowania. Zbyt niskie wartości 
+            uniemożliwiłyby precyzyjne przestawienie utworu. Natomiast, wraz z wyborem większej częstotliwości próbkowania,
+            te same dźwięki byłyby reprezentowane przez większą ilość wektorów, 
+            co powodowały oddalenie następujących dźwięków w sekwencji i utrudnienie uczenia.
         }
 
         \subsection{Grupowanie długości dźwięków}
         {
-
+            Podejściem łączącym zalety obydwu rozwiązań, jest przeprowadzenie grupowania znormalizowanych czasów w
+            odniesieniu do ustalonej wartości rytmicznej. W ten sposób możliwe byłoby odzwierciedlenie wartości rytmicznych
+            występujących w zbiorze danych i przedstawienie ich w dyskretny sposób bez arbitralnego określania zbioru dozwolonych
+            wartości. 
+            Ponownie, po podziale na grupy problem zostanie przekształcony do problemu klasyfikacji 1 z N.
         }
+    }
+
+    \section{Podsumowanie}
+    {
+        Z powodu zalet i wad przedstawionych w powyższej analizie, zdecydowano się na reprezentacje dźwięków w postaci
+        wektorów zanurzonych, a czas jako dyskretne wartości uzyskane poprzez grupowanie.
     }
 }
