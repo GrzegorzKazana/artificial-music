@@ -76,7 +76,7 @@
             Wartości tego parametru odpowiadają kolejnym dźwiękom skali dwunastotonowej poczynając od C-1 i kończąc na G9.
             Dostępne dźwięki są nadzbiorem dźwięków dostępnych na klawiaturze klasycznego fortepianu.
 
-            Dodatkowym parametrem każdej wiadomości jest wartość time, będąca ilością ticków które upłynęły
+            Dodatkowym parametrem każdej wiadomości jest wartość time, będąca ilością impulsów (ang. 'ticks') które upłynęły
             od poprzedniej wiadomości. Oznacza to, że długość trwania dźwięku można wyznaczyć poprzez zsumowanie parametrów time
             wiadomości występujących pomiędzy odpowiadającymi sobie zdarzeniami note\textunderscore on i note\textunderscore off.
 
@@ -100,6 +100,10 @@
 
     \section{Opis wybranego zbioru danych}
     {
-
+        Do dalszych eksperymentów, opierających się na różnych sposobach tworzenia numerycznej reprezentacji
+        danych wybrałem stosunkowo mały zbiór zawierający utwory z serii gier Pokemon wyprodukowanych na konsolę Nintendo.
+        Zbiór składa się z dziesięciu utworów o średniej długości wynoszącej 90 sekund. Kompozycje zawierają za równo 
+        elementy monofoniczne, jak i polifoniczne. Główną motywacją wyboru tego zbioru była jego mała obszerność,
+        co pozwalało na szybsze testowanie metod obróbki danych i procesu uczenia.
     }
 }

@@ -1,0 +1,76 @@
+\chapter{Sposoby reprezentacji danych}
+{
+    Znaczna część modeli uczenia maszynowego, w tym sieci neuronowe, wymagają 
+    danych w postaci numerycznej. Odpowiednio dobierając proces przekształcania danych
+    jesteśmy w stanie nie tylko umożliwić skorzystanie z tych modeli, ale również możemy 
+    uwypuklić informacje prawdziwie w nim istotne, co skróci i ułatwi proces uczenia modelu.
+
+    Poniższy rozdział zawiera analizę różnych podejść do przedstawionego problemu.
+
+    \section{Reprezentacja dźwięków}
+    {
+        Pierwszym z wymiarów naszych danych są wysokości dźwięków. W przypadku plików midi
+        oryginalnie są to liczby z przedziału 0-127. Są to już dane numeryczne, które
+        moglibyśmy teoretycznie wykorzystać jest bezpośrednio do uczenia modelu.
+        W takim przypadku nasze zadanie sprowadziłoby się do problemu regresji, ponieważ próbowalibyśmy
+        oszacować wartość numeryczną, którą następnie trzeba by ograniczyć do liczb z dozwolonego zakresu.
+
+        Jedną z wad tego rozwiązania, jest fałszywe przedstawienie relacji między dźwiękami.
+        Dźwięki znajdujące się w bliższym sąsiedztwie byłyby traktowane jako bardziej podobne.
+        Takie założenie w muzyce nie zawsze jest prawdą. Przykładowo, dźwięki 60 i 66 (C4 i F\#4), znajdują się
+        relatywnie blisko, mimo tego że występuje między nimi interwał trytonu, będący jednym z najsilniejszych dysonansów w skali 
+        dwunastotonowej. Z drugiej strony, dźwięki 60 i 84 (C4 i C6) dzieli spora odległość, mimo tego że jest to ten sam dźwięk
+        zagrany dwie oktawy wyżej.
+
+        Niniejsze problemy można próbować zaadresować poprzez stosowanie poniższych podejść.
+
+        \subsection{Kody 1 z N i M z N}
+        {
+            Klasycznym sposobem na rozwiązanie powyższego problemu jest zastosowanie kodu 1 z N. W przypadku
+            informacji o dźwiękach midi, oznaczałoby to wypełnienie wektora 128 zerami, i postawieniem jedynki na 
+            pozycji reprezentującej dany dźwięk. 
+            Zaletą tego rozwiązania jest możliwość reprezentacji melodii polifonicznych, co przekształciłoby
+            powyższy kod na kod M z N, gdzie M to ilość dźwięków granych jednocześnie w danym momencie sekwencji.
+            Mimo tego, że w taki sposób pozbywany się fałszywych zależności między sąsiednimi dźwiękami, 
+            to nie reprezentujemy zależności prawdziwych, jak w przypadku dźwięków odległych o oktawy. 
+            Kolejnym problem tego podejścia jest również znaczący wzrost wymiarowości naszych danych i spadek ich kompresji,
+            co przełoży się na wolniejszy proces uczenia.
+        }
+
+        \subsection{Wektory zanurzone}
+        {
+            Powyższy problem dużej wymiarowości i niemożliwości wyrażenia relacji między obiektami nie jest
+            charakterystyczny tylko i wyłącznie dla analizy dźwięku. Problem ten występuje również w dziale
+            przetwarzania języka naturalnego. Również w tym kontekście każdy wyraz stanowi
+            jeden element z N, gdzie N jest rozmiarem słownika - zbioru wszystkich wyrazów.
+
+            %%% link do word2veca
+            Rozwiązaniem cieszącym się dużym powodzeniem jest algorytm Word2Vec zaproponowany w roku 2013 przez ... .
+            Jest to algorytm służący do wyznaczenia ukrytej reprezentacji kodów 1 z N w postaci wektorów wartości ciągłych
+            o dużo mniejszym wymiarze. Metoda opiera się na założeniu twierdzącym że wektory 
+            o podobnym znaczeniu występują w sąsiedztwie podobnych lub nawet tych samych wyrazów. Ponieważ to założenie 
+            jest również prawdziwe w kontekście muzyki przyjęto użycie algorytmy Word2Vec za podstawne.
+            
+            Jedyną modyfikacją potrzebną do wykorzystania tej metody do przykładów polifonicznych, było traktowanie 
+            całych wielodźwięków jako pojedynczych obiektów w słowniku.
+        }
+    }
+
+    \section{Reprezentacja czasu}
+    {
+        \subsection{Próbkowanie}
+        {
+
+        }
+
+        \subsection{Czas jako zmienna ciągła}
+        {
+
+        }
+
+        \subsection{Grupowanie długości dźwięków}
+        {
+
+        }
+    }
+}
