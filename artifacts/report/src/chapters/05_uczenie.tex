@@ -1,19 +1,54 @@
 \chapter{Uczenie} 
 {
-
-
     \section{Architektura modelu}
     {
+        Otrzymawszy dane w postaci sekwencji par wektorów opisujących dźwięki i ich czas trwania,
+        przystąpiono do projektu architektury modelu. Z powodu dwuelementowej postaci danych
+        zdecydowano się na zaprojektowanie modelu dwuwejściowego i dwuwyjściowego.
 
+        Ponieważ charakter wektorów w sekwencji jest różny - wartości ciągłe opisujące dźwięki i 
+        kategoryczny kod 1 z N opisujący długość dźwięku - przed złączeniem wektorów postanowiono 
+        przekształcić wektor 1 z N przez warstwę gęstą o wymiarze mniejszym niż N. Celem tej operacji
+        było wprowadzenie konieczności przez sieć kompresji informacji, co najprawdopodobniej przełoży się 
+        na wyznaczenie pewnej reprezentacji ciągłej kodu. 
+
+        Następnie wektory zostają złączone, i ich sekwencje trafiają do warstw rekurencyjnej sieci LSTM,
+        w której model ma szanse ekstrahować wiedzę o zależnościach między elementami sekwencji.
+
+        Otrzymywane wektory są połączone do osobnych, mniejszych sieci LSTM i następnie poprzez warstwy 
+        gęsto połączone stają się osobnymi wyjściami modelu.
+        
+        Wyjście odpowiedzialne za dźwięki uczone jest funkcją błędu odpowiednią do problemu 
+        regresji - błędem średniokwadratowym, a wyjście klasyfikujące długość dźwięku funkcją odpowiednią
+        dla zadania klasyfikacji 1 z N - categorical crossentrophy.
     }
 
     \section{Dobór parametrów}
     {
-
+        Podczas procesu uczenia najistotniejszymi parametrami były:
+        \begin{itemize}
+            \item rozmiar okna, czyli długość uczonych sekwencji,
+            \item ilość przykładów w wiązce, czyli ile sekwencji było uczonych jednocześnie
+            poprzedzając pojedyncze przeprowadzenie algorytmu propagacji wstecznej,
+            \item rozmiar głównej sieci LSTM.
+        \end{itemize}
     }
 
     \section{Proces uczenia}
     {
+        Podczas uczenia modelu zdecydowano się na dynamiczny rozmiar okna,
+        będący liczbą losową z zakresu <15, 50>. Motywacją tego wyboru były testowe 
+        uruchomienia modelu potwierdzające zdroworozsądkową intuicję mówiącą, że większe wartości
+        umożliwią uczenie dłuższych powtarzających się motywów, a krótsze lokalne następstwo nut.
+
+        Interesującą obserwacją był wpływ ilości przykładów w wiązce. Większe wartości, rzędu 16 lub 32
+        miały negatywny wpływ na jakość generowanych sekwencji. Mniejsze wartości prowadziły do przetrenowania
+        modelu.
+
+        Rozmiar głównej sieci miał spodziewany efekt, nieodpowiednio duży prowadził do przetrenowania. Dla obecnego
+        zbioru danych zdecydowałem się zachować wartość 64 jednostek.
+
+        %%% możnaby uzupełnić o średni czas uczenia, itp
 
     }
 }
