@@ -32,3 +32,22 @@ def tonal_compression(sparse_track_notes):
     blob = ':'.join(tokens).encode()
 
     return len(blob) / len(zlib.compress(blob))
+
+
+def tonal_transition_matrix(encoded_track_notes, wv):
+    """
+    expects embeddings of m-out-out-n vectors, return square matrix
+    """
+    tokens = [wv.similar_by_vector(f, topn=1)[0][0]
+              for f in encoded_track_notes]
+
+    n = len(wv.vocab.items())
+
+    transition_matrix = np.zeros((n, n))
+
+    for i, token in enumerate(tokens[:-1]):
+        idx_curr_token = wv.vocab[token].index
+        idx_next_token = wv.vocab[tokens[i + 1]].index
+        transition_matrix[idx_curr_token, idx_next_token] += 1
+
+    return transition_matrix / transition_matrix.max()
