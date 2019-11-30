@@ -1,5 +1,6 @@
 import numpy as np
 import zlib
+import itertools
 from scipy import sparse
 
 from src.data_processing.embedding_sparse_notes.common import hash_frame, map_hashed_frame_to_names
@@ -34,20 +35,25 @@ def tonal_compression(sparse_track_notes):
     return len(blob) / len(zlib.compress(blob))
 
 
-def tonal_transition_matrix(encoded_track_notes, wv):
+def tonal_transition_matrix(sparse_track_notes):
     """
-    expects embeddings of m-out-out-n vectors, return square matrix
+    expects m-out-out-n vectors, return square matrix
     """
-    tokens = [wv.similar_by_vector(f, topn=1)[0][0]
-              for f in encoded_track_notes]
 
-    n = len(wv.vocab.items())
+    notes_in_each_step = np.split(
+        np.argwhere(sparse_track_notes)[:, 1],
+        np.cumsum(np.unique(np.argwhere(sparse_track_notes)[:, 0],
+                            return_counts=True)[1])[:-1]
+    )
+
+    n = 128
 
     transition_matrix = np.zeros((n, n))
 
-    for i, token in enumerate(tokens[:-1]):
-        idx_curr_token = wv.vocab[token].index
-        idx_next_token = wv.vocab[tokens[i + 1]].index
-        transition_matrix[idx_curr_token, idx_next_token] += 1
+    for i, notes in enumerate(notes_in_each_step[:-1]):
+        notes_curr = notes
+        notes_next = notes_in_each_step[i + 1]
+        for pair in itertools.product(notes_curr, notes_next):
+            transition_matrix[pair[0], pair[1]] += 1
 
     return transition_matrix / transition_matrix.max()
