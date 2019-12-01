@@ -40,13 +40,128 @@
         Do kompresji wykorzystano bibliotekę zlib, korzystającą z algorytmu delfate.
     }
 
+    \section{Pomiar zbioru treningowego}
+    {
+        Ponieważ wartości miar będą różne dla każdego zbioru danych, w procesie oceny generowanych próbek powinno się je 
+        stosować w odniesieniu do wartości wyznaczonych dla całego zbioru danych.
+        
+        Na ilustracjach ... przestawione są wartości miar całego zbioru testowego.
+
+        %%% ilustracja tonalnego histogramu
+
+        %%% tonalna macierz przejść
+
+        %%% histogram rytmiczny
+
+        %%% rytmiczna macierz przejść
+
+        %%% tabelka z zakresami i kompresją
+
+        Na postawie wykresów możemy wyciągnąć następujące wnioski:
+        \begin{itemize}
+            \item najczęściej występującym dźwiękiem w zbiorze jest A, a najrzadszym D\#,
+            \item wyższe wartości na przekątnej macierzy przejść dźwięków wskazują, że dźwięk występujący w bieżącym wielodźwięku
+            często występuje również w następującym
+            \item symetria macierzy przejść dźwięków wskazuje na brak silnego wpływu kierunku odtwarzania utworu na następstwa tonalne
+            \item klasy przedstawiające długości trwania dźwięków są silnie niezrównoważone
+        \end{itemize}
+    }
+
     \section{Wyniki}
     {
+        Kolejnym krokiem było wygenerowanie próbek, i opisanie ich za pomocą wymienionych miar. Zestawienie wartości miar i różnic
+        w odniesieniu do zbioru treningowego przedstawia tabela []. Wyniki pogrupowano na podstawie użytego ziarna.
 
+        %%% tabelka z wynikami
+        \begin{center}
+            \begin{tabular}{ |p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}| }
+            \hline
+            Ziarno & Rozpiętość tonalna & Średnia kwadratowa różnicy histogramu tonalnego & Średnia kwadratowa różnicy tonalnej macierzy przejść & Współczynnik kompresji dźwięków \\ 
+            \hline
+            \hline
+            Wartości losowe rozkładu normalnego & 65 & 0.026 & 0.112 & 7.69 \\  
+            \hline
+            Wektory zerowe & 61 & 0.062 & 0.116 & 9.52 \\
+            \hline
+            Pojedynczy dźwięk & 67 & 0.025 & 0.111 & 9.83 \\
+            \hline
+            Sekwencja losowych dźwięków & 69 & 0.023 & 0.120 & 8.84 \\
+            \hline
+            Harmoniczna sekwencja dźwięków & 69 & 0.021 & 0.106  & 8.78 \\
+            \hline
+            \end{tabular}
+        \end{center}
+        
+        \begin{center}
+            \begin{tabular}{ |p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}| }
+            \hline
+            Ziarno & Rozpiętość rytmiczna & Średnia kwadratowa różnicy histogramu rytmicznego & Średnia kwadratowa różnicy rytmicznej macierzy przejść & Współczynnik kompresji długości dźwięków \\ 
+            \hline
+            \hline
+            Wartości losowe rozkładu normalnego & 19 & 0.019 & 0.034 & 7.99 \\  
+            \hline
+            Wektory zerowe & 16 & 0.035 & 0.059 & 10.4 \\
+            \hline
+            Pojedynczy dźwięk & 20 & 0.030 & 0.042 & 9.52 \\
+            \hline
+            Sekwencja losowych dźwięków & 21 & 0.028 & 0.042 & 8.19 \\
+            \hline
+            Harmoniczna sekwencja dźwięków & 21 & 0.030 & 0.043 & 7.89 \\
+            \hline
+            \end{tabular}
+        \end{center}
+
+        Występujące różnice między wynikami nie pozwalają na pewne wskazanie najlepszego ziarna, lecz 
+        zachęcają do wysunięcia kilku wniosków.
+
+        Wszystkie sekwencje poza inicjowanymi pustymi wektorami dają zbliżone różnice miedzy histogramami i 
+        tonalnymi macierzami przejść. 
+        Sekwencje zapoczątkowane wartościami losowymi zgodnie z intuicją charakteryzują się niższym współczynnikiem
+        kompresji, co może przekładać się na większe zróżnicowanie sekwencji dźwięków.
+        Spośród zbadanych ziaren, sekwencje początkowane harmonicznym zestawem dźwięków najwierniej
+        odwzorowały rozkłady następujących dźwięków.
+        
+        Na ilustracji zamieszczono wykresy tych miar.
+
+        %%% wykresiki
     }
 
     \section{Wrażenia subiektywne}
     {
+        Próbki wygenerowane przez model nie dały zadowalających rezultatów. Pomimo akceptowalnego poziomu 
+        harmonii utworów, rytmiczność pozostawia wiele do życzenia. Zdecydowanie dominującą wartością 
+        rytmiczną jest najkrótsza możliwa wartość. Najbardziej prawdopodobnym wytłumaczeniem tego zjawiska jest 
+        problem niezrównoważenia kategorii wartości rytmicznych. 
+
+        Po dogłębnej analizie stwierdzono, że zdecydowana większość dźwięków o najkrótszym czasie trwania
+        wynika z przesunięć wiadomości w plikach midi o 1 lub 2 wartości taktujące. Dla kontekstu, najczęściej stosowaną
+        prędkością taktowania jest 120 taktów na ćwierćnutę. Źródłem tego zjawiska mógł być zamierzony 
+        zabieg mający na celu wprowadzenie ludzkiego charakteru nagrania wykonywanego przez
+        prawdziwych artystów.
+        Nieszczęśliwie, zabieg ten uniemożliwił generowanie subiektywnie akceptowalnych sekwencji.
+
+        Na podstawie powyższych wniosków, podjęto ponowną próbę uczenia. Tym razem, zbiór danych został
+        ograniczony o powyżej opisane dźwięki. Proces uczenia i generowania został przeprowadzony w ten sam sposób
+        co poprzednio. Na wykresach [] widać oczywiste zmiany w miarach związanych z rytmiką.
+
+        %%% tutaj wykresiki tego lepszego modelu
+
+        Ograniczenie zbioru nie miało znaczącego wpływu na zależności tonalne.
+
+        %%% hist i matrix tonalna
+
+        Tym razem wyniki, choć wciąż nie idealne, były conajmniej akceptowalne. W generowanych utworach
+        obserwowalny był zupełnie inny rozkład długości dźwięków. Sekwencje w subiektywnym odczuciu były dużo mniej
+        chaotyczne, a zwiększone długości dźwięków pozwalały na skupienie się na następujących dźwiękach.
         
+        Spośród sekwencji powstałych przy pomocy różnych ziaren, subiektywnie najbardziej interesujące wyniki
+        zostały otrzymane przy początkowaniu generacji pojedynczym dźwiękiem lub pustymi wektorami.
+        Fakt ten można próbować tłumaczyć pozostawieniem sieci największej swobody przy generowaniu sekwencji, lecz
+        jest to jedynie spekulacja oparta na bardzo ograniczonej liczbie obserwacji.
+
+        Uzasadnione są zastrzeżenia co do tak inwazyjnej ingerencji w zbiór danych jaką jest eliminacja 
+        wszystkich przedstawicieli konkretnej klasy. Bardziej eleganckim rozwiązaniem mogłoby być na przykład
+        dynamiczne skalowanie wartości błędu predykcji dla poszczególnych przypadków w czasie uczenia, w taki sposób
+        aby mniejsza waga była przywiązywana do przedstawicieli nadreprezentowanej klasy.
     }
 }
