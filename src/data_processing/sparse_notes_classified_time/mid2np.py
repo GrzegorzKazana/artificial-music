@@ -30,6 +30,7 @@ def ppq_to_quarters(durations):
 
 def create_clustering_dict(db, durations):
     d = {}
+    stats = []
 
     for l in np.unique(db.labels_):
         avg = durations[db.labels_ == l].mean()
@@ -38,13 +39,19 @@ def create_clustering_dict(db, durations):
         max_ = durations[db.labels_ == l].max()
         std = durations[db.labels_ == l].std()
 
-        d[int(l)] = {
+        stats.append({
             'avg': avg,
             'count': count,
             'min': min_,
             'max': max_,
             'std': std,
-        }
+            'label': str(l),
+        })
+
+    sorted_stats = sorted(stats, key=lambda x: x['avg'])
+
+    for i, s in enumerate(sorted_stats):
+        d[str(i)] = s
 
     return d
 
@@ -53,10 +60,16 @@ def cluster_and_ohe_durations(durations):
     db = KMeans(n_clusters=N_CLUSTERS).fit(durations.reshape(-1, 1))
     durations_ohe = np.zeros((durations.size, N_CLUSTERS))
 
-    for i, p in enumerate(db.predict(durations.reshape(-1, 1))):
-        durations_ohe[i, p] = 1
+    durations_dict = create_clustering_dict(db, durations)
+    db_label_to_dict_label = {
+        v['label']: k for k, v in durations_dict.items()
+    }
 
-    return durations_ohe, db, create_clustering_dict(db, durations)
+    for i, p in enumerate(db.predict(durations.reshape(-1, 1))):
+        label_in_dict = db_label_to_dict_label[str(p)]
+        durations_ohe[i, int(label_in_dict)] = 1
+
+    return durations_ohe, db, durations_dict
 
 
 def mid2np(mid, **kwargs):
