@@ -58,13 +58,13 @@ def tonal_transition_matrix(sparse_track_notes):
                             return_counts=True)[1])[:-1]
     )
 
-    n = 128
+    n = 12
 
     transition_matrix = np.zeros((n, n))
 
     for i, notes in enumerate(notes_in_each_step[:-1]):
-        notes_curr = notes
-        notes_next = notes_in_each_step[i + 1]
+        notes_curr = notes % 12
+        notes_next = notes_in_each_step[i + 1] % 12
         for pair in itertools.product(notes_curr, notes_next):
             transition_matrix[pair[0], pair[1]] += 1
 
