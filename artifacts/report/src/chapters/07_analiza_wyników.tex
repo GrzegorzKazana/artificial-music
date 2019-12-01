@@ -14,9 +14,30 @@
         Na podstawie artykułu [] zdecydowano się zaimplementować następujące miary:
         \begin{itemize}
             \item Rozpiętość tonalna - odległość między najniższym i najwyższym dźwiękiem, w przypadku plików midi ograniczona
-            zakresem <0,127>
-            \item Histogram tonalny - 
+            zakresem <0,127>,
+            \item Histogram tonalny - rozkład występowania poszczególnych dźwięków z dwunastotonowej skali, niezależnie od oktawy, 
+            \item Macierz przejść dźwięków - dwuwymiarowa macierz przedstawiająca częstotliwość występowania par dźwięków następujących
+            po sobie. Uwagi wymaga kwestia nanoszenia na macierz informacji o następujących po sobie wielodźwiękach, w celu oddania
+            również takich zdarzeń, na macierz nanoszone są pary będące wynikami iloczynu kartezjańskiego między składowymi wielodźwięków.
+            \item Rozpiętość rytmiczna - odległość między najkrótszą i najdłuższą wartością rytmiczną występującą w mierzonej próbce. 
+            Ponieważ wartości kodu 1 z N są posortowane według długości trwania, może być wyrażona poprzez różnicę indeksów 
+            między klasami kodu 1 z N. Przyjmuje wartości z zakresu <0, ilość klas rytmicznych>.
+            \item Histogram rytmiczny - rozkład występowania poszczególnych klas wartości rytmicznych.
+            \item Macierz przejść wartości rytmicznych - opisuje częstość przejść między konkretnymi wartościami rytmicznymi.
         \end{itemize}
+
+        Dodatkowo, opracowano dwie miary mierzące stopień kompresji generowanych ciągów dźwięków i wartości rytmicznych. 
+        Intuicją idącą za uznaniem stopnia kompresji jako istotny parametr jest fakt wynikający z zasady działania dużej części
+        algorytmów kompresji, w których powtarzające się ciągi znaków są zastępowane krótszym znacznikiem wskazującym na pierwsze 
+        wystąpienie ciągu. 
+        Oznacza to, że sekwencje charakteryzujące się większą powtarzalnością mogą zostać skompresowane w większym stopniu.
+        Główną zaletą tej miary jest jej zdolność wykrywania powtarzających się ciągów odległych od siebie, co stanowi uzupełnienie 
+        bardziej lokalnej miary, jaką jest macierz przejść.
+
+        W celu możliwości skorzystania z dostępnych algorytmów, sekwencje dźwięków i wartości rytmicznych zostały przekształcone
+        na ciągi znaków.
+
+        Do kompresji wykorzystano bibliotekę zlib, korzystającą z algorytmu delfate.
     }
 
     \section{Wyniki}
