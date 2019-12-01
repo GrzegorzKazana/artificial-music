@@ -20,7 +20,19 @@ def tonal_hist(sparse_track_notes):
     expects m-out-out-n vectors, returns histogram scaled to 1
     """
     assert sparse_track_notes.ndim == 2
-    return sparse_track_notes.sum(axis=0) / sparse_track_notes.sum()
+
+    padded_sparse = np.zeros((
+        sparse_track_notes.shape[0],
+        sparse_track_notes.shape[1] if sparse_track_notes.shape[1] % 12 == 0 else 12 * (
+            sparse_track_notes.shape[1] // 12 + 1)
+    ))
+    padded_sparse[:, :sparse_track_notes.shape[1]] = sparse_track_notes
+
+    n_splits = padded_sparse.shape[1] // 12
+    stacked_by_octave = np.concatenate(
+        np.split(padded_sparse, n_splits, axis=1), axis=0)
+
+    return stacked_by_octave.sum(axis=0) / stacked_by_octave.sum()
 
 
 def tonal_compression(sparse_track_notes):
