@@ -7,7 +7,7 @@
     {
         Proces otrzymywania generowanych sekwencji zależny jest od rodzaju modelu.
         W przypadku modeli typu sequence-to-sequence, możliwe byłoby podanie losowego 
-        wektora na część modelu w którym dokonuje się przekształcenie postaci ukrytej na sekwencję.
+        wektora na część modelu w którym dokonuje się przekształcenie jednowymiarowej postaci ukrytej na sekwencję.
         Przy zastosowaniu architektury opisanej w poprzednim rozdziale, konieczne będzie 
         rozpoczynanie generacji sekwencją, dalej nazywaną ziarnem. 
 
@@ -26,7 +26,7 @@
 
         Ponadto, opracowano ziarna zawierające pojedynczy dźwięk, sekwencję losowych dźwięków
         i sekwencję dźwięków często współwystępujących. Dźwięki współwystępujące są obierane poprzez
-        porównanie odległości między ich wektorami.
+        porównanie odległości między składowymi ich wektorów.
 
         %%% obrazek
     }
