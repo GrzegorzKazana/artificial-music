@@ -21,6 +21,7 @@
         Wyjście odpowiedzialne za dźwięki uczone jest funkcją błędu odpowiednią do problemu 
         regresji - błędem średniokwadratowym, a wyjście klasyfikujące długość dźwięku funkcją odpowiednią
         dla zadania klasyfikacji 1 z N - categorical crossentrophy.
+
     }
 
     \section{Dobór parametrów}
@@ -41,14 +42,48 @@
         uruchomienia modelu potwierdzające zdroworozsądkową intuicję mówiącą, że większe wartości
         umożliwią uczenie dłuższych powtarzających się motywów, a krótsze lokalne następstwo nut.
 
-        Interesującą obserwacją był wpływ ilości przykładów w wiązce. Większe wartości, rzędu 16 lub 32
-        miały negatywny wpływ na jakość generowanych sekwencji. Mniejsze wartości prowadziły do przetrenowania
-        modelu.
+        Dodatkowo, warto przybliżyć sposób tworzenia przypadków testowych. Naiwnym podejściem byłoby
+        jednokrotne utworzenie zbioru danych poprzez utworzenie wszystkich możliwych podciągów o zadanej
+        długości (rozmiarze okna) i dalsze używanie ich jako statycznej listy przypadków. 
+        Takie rozwiązanie nie umożliwiałoby dynamicznej zmiany długości sekwencji, i wymagałoby dodatkowego 
+        kroku w procesie przetwarzania danych. Alternatywnym podejściem, na które się zdecydowano jest dynamiczne
+        wybieranie losowych podciągów z utworów należących do zbioru danych, które odbywa się równolegle z uczeniem modelu. 
+        Główną obawą jaką można posiadać do takiego podejścia jest jego narzut podczas uczenia modelu, 
+        aczkolwiek zaobserwowano że tempo przygotowania i kolejkowania kolejnych przypadków testowych znacznie przewyższa tempo ich uczenia.
+
+        Podczas testowania różnych wartości innych parametrów, zaobserwowano Interesujący wpływ ilości przykładów w wiązce.
+        %%% można jakby co opisać czym jest wiązka 
+        Większe wartości, rzędu 16 lub 32 miały negatywny wpływ na jakość generowanych sekwencji. 
+        Mniejsze wartości prowadziły do przetrenowania modelu.
 
         Rozmiar głównej sieci miał spodziewany efekt, nieodpowiednio duży prowadził do przetrenowania. Dla obecnego
         zbioru danych zdecydowano się zachować wartość 64 jednostek.
 
-        %%% możnaby uzupełnić o średni czas uczenia, itp
+        Podczas uczenia monitorowano metryki opisujące jakość predykcji i postęp uczenia modelu.
+        Do mierzonych metryk należą funkcje błędu dla poszczególnych wyjść modelu, średni błąd kwadratowy
+        wyjścia reprezentującego wektory dźwięków oraz kategoryczna dokładność stwierdzająca czy najwyższa wartość
+        wektorów znajduje się na tym samym indeksie.
+        
+        Uczenie podzielone było na epoki. W klasycznych zastosowaniach przez jedną epokę rozumie się jednokrotne
+        wykorzystanie każdego przykładu z zbioru treningowego. Jednakże z powodu opisanego powyżej sposobu otrzymywania
+        przypadków testowych, niemożliwe było wykorzystanie tej definicji. Zdecydowano się na arbitralne przyjęcie konkretnej 
+        ilości przypadków testowych jako jednostkę jednej epoki. Obraną wartością był tysiąc.
 
+        Po ukończeniu każdej epoki przeprowadzane były pomiary skuteczności modelu na danych wyjętych spoza korpusu 
+        danych treningowych. Ponieważ problematycznym byłoby wydzielenie sekwencji walidacyjnych z części środkowych
+        utworów, zdecydowano się zarezerwowanie ostatnich 25 elementów sekwencji z każdego utworu.
+        Na podstawie powyższych wyników, można wyciągać wnioski dotyczące postępu uczenia modelu.
+
+        Uczenie zaplanowano na okres 35 epok, co przełożyło się na czas bliski 20 minut. Do uczenia wykorzystano
+        akcelerację sprzętową w postaci karty graficznej dostępnej w usłudze chmury obliczeniowej Google Colab.
+
+        Ilustracje [] zawierają wykresy opisujące miary postępu uczenia podczas kroków walidacyjnych.
+
+        %%% ilustracje epoch_val_duration_output_categorical_accuracy
+        %%% epoch_val_notes_output_mean_squared_error
+
+        Na ilustracjach można dostrzec trafność predykcji klasy długości trwania dźwięku, oraz błąd średniokwadratowy
+        predykcji wektorów dźwięków. W pierwszej połowie uczenia na obydwu wykresach można zaobserwować pożądaną tendencję,
+        czyli wzrost trafności i spadek błędu. Po kolejnych epokach postęp uczenia malał, lub nawet zachodził jego regres.
     }
 }
