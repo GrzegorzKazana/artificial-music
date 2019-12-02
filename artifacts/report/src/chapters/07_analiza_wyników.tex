@@ -31,11 +31,12 @@
         algorytmów kompresji, w których powtarzające się ciągi znaków są zastępowane krótszym znacznikiem wskazującym na pierwsze 
         wystąpienie ciągu. 
         Oznacza to, że sekwencje charakteryzujące się większą powtarzalnością mogą zostać skompresowane w większym stopniu.
-        Główną zaletą tej miary jest jej zdolność wykrywania powtarzających się ciągów odległych od siebie, co stanowi uzupełnienie 
+        Główną zaletą tej miary jest jej zdolność wykrywania powtarzających się ciągów rozsuniętych w czasie, co stanowi uzupełnienie 
         bardziej lokalnej miary, jaką jest macierz przejść.
 
         W celu możliwości skorzystania z dostępnych algorytmów, sekwencje dźwięków i wartości rytmicznych zostały przekształcone
-        na ciągi znaków.
+        na ciągi znaków. W przypadku wektorów opisujących dźwięki zdecydowano się na zapis symboli kolejnych dźwięków. Wartości
+        rytmiczne przedstawione były przez indeksy odpowiadających im klas. 
 
         Do kompresji wykorzystano bibliotekę zlib, korzystającą z algorytmu delfate.
     }
@@ -43,7 +44,7 @@
     \section{Pomiar zbioru treningowego}
     {
         Ponieważ wartości miar będą różne dla każdego zbioru danych, w procesie oceny generowanych próbek powinno się je 
-        stosować w odniesieniu do wartości wyznaczonych dla całego zbioru danych.
+        stosować w odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych.
         
         Na ilustracjach ... przestawione są wartości miar całego zbioru testowego.
 
@@ -121,7 +122,7 @@
         Spośród zbadanych ziaren, sekwencje początkowane harmonicznym zestawem dźwięków najwierniej
         odwzorowały rozkłady następujących dźwięków.
         
-        Na ilustracji zamieszczono wykresy tych miar.
+        Na ilustracji zamieszczono uśrednione histogramy i macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
 
         %%% wykresiki
     }
@@ -129,15 +130,15 @@
     \section{Wrażenia subiektywne}
     {
         Próbki wygenerowane przez model nie dały zadowalających rezultatów. Pomimo akceptowalnego poziomu 
-        harmonii utworów, rytmiczność pozostawia wiele do życzenia. Zdecydowanie dominującą wartością 
-        rytmiczną jest najkrótsza możliwa wartość. Najbardziej prawdopodobnym wytłumaczeniem tego zjawiska jest 
+        harmoniczności utworów, rytmiczność pozostawia wiele do życzenia. Zdecydowanie dominującą wartością 
+        rytmiczną była najkrótsza możliwa wartość. Najbardziej prawdopodobnym wytłumaczeniem tego zjawiska jest 
         problem niezrównoważenia kategorii wartości rytmicznych. 
 
         Po dogłębnej analizie stwierdzono, że zdecydowana większość dźwięków o najkrótszym czasie trwania
         wynika z przesunięć wiadomości w plikach midi o 1 lub 2 wartości taktujące. Dla kontekstu, najczęściej stosowaną
         prędkością taktowania jest 120 taktów na ćwierćnutę. Źródłem tego zjawiska mógł być zamierzony 
-        zabieg mający na celu wprowadzenie ludzkiego charakteru nagrania wykonywanego przez
-        prawdziwych artystów.
+        zabieg wprowadzający element niedoskonałości, mający na celu wprowadzenie ludzkiego charakteru nagrania 
+        wykonywanego przez prawdziwych artystów.
         Nieszczęśliwie, zabieg ten uniemożliwił generowanie subiektywnie akceptowalnych sekwencji.
 
         Na podstawie powyższych wniosków, podjęto ponowną próbę uczenia. Tym razem, zbiór danych został
@@ -160,8 +161,8 @@
         jest to jedynie spekulacja oparta na bardzo ograniczonej liczbie obserwacji.
 
         Uzasadnione są zastrzeżenia co do tak inwazyjnej ingerencji w zbiór danych jaką jest eliminacja 
-        wszystkich przedstawicieli konkretnej klasy. Bardziej eleganckim rozwiązaniem mogłoby być na przykład
-        dynamiczne skalowanie wartości błędu predykcji dla poszczególnych przypadków w czasie uczenia, w taki sposób
-        aby mniejsza waga była przywiązywana do przedstawicieli nadreprezentowanej klasy.
+        wszystkich przedstawicieli konkretnej klasy. Z technicznego punktu widzenia bardziej poprawnym 
+        rozwiązaniem mogłoby być dynamiczne skalowanie wartości błędu predykcji dla poszczególnych przypadków w czasie uczenia, 
+        w taki sposób aby mniejsza waga była przywiązywana do przedstawicieli nadreprezentowanej klasy.
     }
 }

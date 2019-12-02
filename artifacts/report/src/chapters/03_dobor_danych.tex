@@ -30,7 +30,8 @@
             częstotliwości ograniczony wartością 22050Hz, będącą bliską granicy słyszalności
             ucha ludzkiego. 
 
-            Ponieważ wysokości dźwięków wyrażone są jedynie poprzez sekwencje zmian amplitudy sygnału,
+            W przeciwieństwie do pozostałych opisanych formatów, wysokości dźwięków wyrażone są 
+            jedynie poprzez sekwencje zmian amplitudy sygnału, przez co
             ich ekstrakcja wymagałaby wykorzystania transformaty Fouriera.
 
             Największą zaletą i wadą tego formatu jednocześnie jest jego swoboda. 
@@ -48,7 +49,7 @@
 
             Ponieważ jest to odpowiednik zapisu nutowego, oznacza to
             że za równo wysokości dźwięków, jak i wartości rytmiczne należą do dyskretnego zbioru.
-            Fakt ten nakłada spore ograniczenie na treść plików, lecz w kontekście muzyki jest to 
+            Fakt ten nakłada spore ograniczenie na treść plików, lecz w kontekście muzyki są to 
             ograniczenia bardzo pomocne.
 
             Poza informacją o samym dźwięku i jego wartości rytmicznej, format zawiera również metadane
@@ -60,8 +61,9 @@
             znaków jesteśmy w stanie opisać znaczną część utworu muzycznego. Głównym mankamentem notacji ABC
             w kontekście niniejszej pracy jest fakt, że nie wszystkie ciągi znaków są poprawnymi zapisami 
             w notacji ABC. Oznacza to, że pojedyncze błędy w generowanych sekwencjach mogą powodować niepoprawność całego utworu.
-            W przypadku niemożliwości wyuczenia modelu tworzenia całkowicie poprawnych w ciągów wymagałoby
-            walidacji i obsługi poprawiania błędów w zapisie.
+            W przypadku niemożliwości wyuczenia modelu tworzenia całkowicie poprawnych sekwencji niemożliwa byłaby
+            transformacja dowolnej sekwencji do pliku midi. Chcąc zapewnić możliwość generacji utworów muzycznych
+            konieczna byłaby walidacja i implementacja obsługi i poprawiania błędów w zapisie.
         }
 
         \subsection{Format midi}
@@ -74,9 +76,9 @@
             W przypadku wiadomości związanych z rozpoczęciem lub zakończeniem
             dźwięku dołączony jest również numer dźwięku z zakresu 0-127. 
             Wartości tego parametru odpowiadają kolejnym dźwiękom skali dwunastotonowej poczynając od C-1 i kończąc na G9.
-            Dostępne dźwięki są nadzbiorem dźwięków dostępnych na klawiaturze klasycznego fortepianu.
+            Dostępne dźwięki są nadzbiorem dźwięków dostępnych na 88 klawiszowej klawiaturze klasycznego fortepianu.
 
-            Dodatkowym parametrem każdej wiadomości jest wartość time, będąca ilością impulsów (ang. 'ticks') które upłynęły
+            Dodatkowym parametrem każdej wiadomości jest wartość time, będąca ilością taktów (ang. 'ticks') które upłynęły
             od poprzedniej wiadomości. Oznacza to, że długość trwania dźwięku można wyznaczyć poprzez zsumowanie parametrów time
             wiadomości występujących pomiędzy odpowiadającymi sobie zdarzeniami note\textunderscore on i note\textunderscore off.
 
@@ -91,7 +93,7 @@
         {
             Wszystkie omówione formaty danych mają wady i zalety. Cechą opisującą wszystkie z nich, jest 
             bogata dostępność danych, przez co wybór dokonano na podstawie pozostałych cech.
-            W dalszej części pracy opisywane podejścia będą tyczyć jedynie plików w formacie midi, na którego 
+            W dalszej części pracy opisywane podejścia będą tyczyć się jedynie plików w formacie midi, na którego 
             wybór zdecydowano się drogą eliminacji. Pliki audio odrzucono przez wymaganą złożoność wstępnej obróbki,
             a notację ABC z powodu obaw związanych z trudnościami zagwarantowania syntaktycznej poprawności 
             generowanych ciągów znaków.
@@ -101,7 +103,7 @@
     \section{Opis wybranego zbioru danych}
     {
         Do dalszych eksperymentów, opierających się na różnych sposobach tworzenia numerycznej reprezentacji
-        danych wybrałem stosunkowo mały zbiór zawierający utwory z serii gier Pokemon wyprodukowanych na konsolę Nintendo.
+        danych wybrano stosunkowo mały zbiór zawierający utwory z serii gier Pokemon wyprodukowanych na konsolę Nintendo.
         Zbiór składa się z dziesięciu utworów o średniej długości wynoszącej 90 sekund. Kompozycje zawierają za równo 
         elementy monofoniczne, jak i polifoniczne. Główną motywacją wyboru tego zbioru była jego mała obszerność,
         co pozwalało na szybsze testowanie metod obróbki danych i procesu uczenia.

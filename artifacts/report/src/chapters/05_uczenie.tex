@@ -10,7 +10,7 @@
         kategoryczny kod 1 z N opisujący długość dźwięku - przed złączeniem wektorów postanowiono 
         przekształcić wektor 1 z N przez warstwę gęstą o wymiarze mniejszym niż N. Celem tej operacji
         było wprowadzenie konieczności przez sieć kompresji informacji, co najprawdopodobniej przełoży się 
-        na wyznaczenie pewnej reprezentacji ciągłej kodu. 
+        na wyznaczenie ciągłej reprezentacji kodu o mniejszej wymiarowości. 
 
         Następnie wektory zostają złączone, i ich sekwencje trafiają do warstw rekurencyjnej sieci LSTM,
         w której model ma szanse ekstrahować wiedzę o zależnościach między elementami sekwencji.
@@ -21,7 +21,6 @@
         Wyjście odpowiedzialne za dźwięki uczone jest funkcją błędu odpowiednią do problemu 
         regresji - błędem średniokwadratowym, a wyjście klasyfikujące długość dźwięku funkcją odpowiednią
         dla zadania klasyfikacji 1 z N - categorical crossentrophy.
-
     }
 
     \section{Dobór parametrów}
