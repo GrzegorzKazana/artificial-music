@@ -45,39 +45,23 @@
         Ponieważ wartości miar będą różne dla każdego zbioru danych, w procesie oceny generowanych próbek powinno się je 
         stosować w odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych.
         
-        Na ilustracjach \ref{tonal_hist}, \ref{tonal_transition}, \ref{rythm_hist}, \ref{rythm_transition} oraz w tabeli \ref{range_and_compression} 
+        Na ilustracjach \ref{tonal_hist_transition}, \ref{rythm_hist_transition} oraz w tabeli \ref{range_and_compression} 
         przestawione są wartości miar całego zbioru testowego.
 
-        %%% ilustracja tonalnego histogramu
+        %%% ilustracja tonalnego histogramu i macierzy przejść
         \begin{figure}
             \centering
-            \includegraphics[scale=0.5]{tonal_hist}
-            \caption{Histogram występowania poszczególnych dźwięków}
-            \label{tonal_hist}
+            \includegraphics[scale=0.5]{tonal_hist_transition}
+            \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
+            \label{tonal_hist_transition}
         \end{figure}
 
-        %%% tonalna macierz przejść
+        %%% histogram rytmiczny i macierz przejść
         \begin{figure}
             \centering
-            \includegraphics[scale=0.5]{tonal_transition}
-            \caption{Macierz przejść dźwięków}
-            \label{tonal_transition}
-        \end{figure}
-
-        %%% histogram rytmiczny
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.5]{rythm_hist}
-            \caption{Histogram występowania poszczególnych długości dźwięków}
-            \label{rythm_hist}
-        \end{figure}
-
-        %%% rytmiczna macierz przejść
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.5]{rythm_transition}
-            \caption{Macierz przejść długości dźwięków}
-            \label{rythm_transition}
+            \includegraphics[scale=0.5]{rythm_hist_transition}
+            \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
+            \label{rythm_hist_transition}
         \end{figure}
 
         %%% tabelka z zakresami i kompresją
@@ -165,39 +149,24 @@
         Spośród zbadanych ziaren, sekwencje początkowane harmonicznym zestawem dźwięków najwierniej
         odwzorowały rozkłady następujących dźwięków.
         
-        Na ilustracji zamieszczono uśrednione histogramy i macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
+        Na ilustracji \ref{tonal_hist_transition_1} oraz \ref{rythm_hist_transition_1} zamieszczono uśrednione 
+        histogramy i macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
 
         %%% wykresiki
-        %%% ilustracja tonalnego histogramu
+        %%% ilustracja tonalnego histogramu i macierzy przejść
         \begin{figure}
             \centering
-            \includegraphics[scale=0.5]{tonal_hist_1}
-            \caption{Histogram występowania poszczególnych dźwięków w generowanych próbkach}
-            \label{tonal_hist_1}
+            \includegraphics[scale=0.5]{tonal_hist_transition_1}
+            \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
+            \label{tonal_hist_transition_1}
         \end{figure}
 
-        %%% tonalna macierz przejść
+        %%% histogram rytmiczny i macierz przejść
         \begin{figure}
             \centering
-            \includegraphics[scale=0.5]{tonal_transition_1}
-            \caption{Macierz przejść dźwięków w generowanych próbkach}
-            \label{tonal_transition_1}
-        \end{figure}
-
-        %%% histogram rytmiczny
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.5]{rythm_hist_1}
-            \caption{Histogram występowania poszczególnych długości dźwięków w generowanych próbkach}
-            \label{rythm_hist_1}
-        \end{figure}
-
-        %%% rytmiczna macierz przejść
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.5]{rythm_transition_1}
-            \caption{Macierz przejść długości dźwięków w generowanych próbkach}
-            \label{rythm_transition_1}
+            \includegraphics[scale=0.5]{rythm_hist_transition_1}
+            \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
+            \label{rythm_hist_transition_1}
         \end{figure}
     }
 
@@ -222,39 +191,22 @@
         % Na wykresach \ref{rythm_hist_2}, \ref{rythm_transition_2}, \ref{tonal_hist_2} i \ref{tonal_transition_2} widać oczywiste zmiany w miarach związanych z rytmiką.
 
         % %%% tutaj wykresiki tego lepszego modelu
-        % %%% histogram rytmiczny
+        % %%% ilustracja tonalnego histogramu i macierzy przejść
         % \begin{figure}
         %     \centering
-        %     \includegraphics[scale=0.5]{rythm_hist_2}
-        %     \caption{Histogram występowania poszczególnych długości dźwięków w generowanych próbkach}
-        %     \label{rythm_hist_2}
-        % \end{figure}
-
-        % %%% rytmiczna macierz przejść
-        % \begin{figure}
-        %     \centering
-        %     \includegraphics[scale=0.5]{rythm_transition_2}
-        %     \caption{Macierz przejść długości dźwięków w generowanych próbkach}
-        %     \label{rythm_transition_2}
+        %     \includegraphics[scale=0.5]{tonal_hist_transition_1}
+        %     \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
+        %     \label{tonal_hist_transition_1}
         % \end{figure}
 
         % Jak można zaobserwować, ograniczenie zbioru danych miało również wpływ na zależności tonalne.
 
-        % %%% hist i matrix tonalna
-        % %%% ilustracja tonalnego histogramu
+        %%% histogram rytmiczny i macierz przejść
         % \begin{figure}
         %     \centering
-        %     \includegraphics[scale=0.5]{tonal_hist_2}
-        %     \caption{Histogram występowania poszczególnych dźwięków w generowanych próbkach}
-        %     \label{tonal_hist_2}
-        % \end{figure}
-
-        % %%% tonalna macierz przejść
-        % \begin{figure}
-        %     \centering
-        %     \includegraphics[scale=0.5]{tonal_transition_2}
-        %     \caption{Macierz przejść dźwięków w generowanych próbkach}
-        %     \label{tonal_transition_2}
+        %     \includegraphics[scale=0.5]{rythm_hist_transition_1}
+        %     \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
+        %     \label{rythm_hist_transition_1}
         % \end{figure}
 
         Tym razem wyniki, choć wciąż nie idealne, były conajmniej akceptowalne. W generowanych utworach
