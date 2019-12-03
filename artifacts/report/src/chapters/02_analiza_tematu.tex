@@ -12,19 +12,17 @@
   \section{Wprowadzenie do dziedziny}
   {
     Jedną z najbardziej rozpowszechnionych metod uczenia maszynowego jest zastosowanie sieci neuronowych.
-    %%% tu można by cyknąć link do artykułu %%%
-    Zaproponowane w latach czterdziestych i rozwijane w drugiej połowie XX wieku, sztuczne sieci neuronowe
+    Zaproponowane w latach czterdziestych i rozwijane w drugiej połowie XX wieku \cite{McCulloch1943}, sztuczne sieci neuronowe
     czerpią inspirację z sposobu funkcjonowania ludzkiego mózgu, który jest zbudowany z komórek nerwowych - neuronów.
     Połączenia między komórkami są modelowane poprzez wagi, reprezentujące siłę połączenia, a zjawisku aktywacji
     komórek w sieci odpowiada operacja ważonej sumy informacji pochodzących z połączonych neuronów oraz wag tych połączeń.
-    %%% tu też można odwołanie %%%
     W latach siedemdziesiątych opracowano algorytm uczenia sztucznych sieci z powodzeniem wykorzystywany
     do dziś - propagację wsteczną. Metoda ta polega na minimalizacji błędu predykcji poprzez regulację
     wag w oparciu o pochodną funkcji błędu.
-    %%% odnośnik do czegoś z 'Universal approximation theorem'
+
     Zastosowania sieci neuronowych są bardzo szerokie i różnorodne. Zasadą będącym podporą uniwersalności 
     sztucznych sieci neuronowych jest twierdzenie stanowiące o ich możliwości aproksymacji dowolnej 
-    funkcji ciągłej w zamkniętym przedziale.
+    funkcji ciągłej w zamkniętym przedziale \cite{Csji2001ApproximationWA}.
 
     Mimo tego, że ta metoda uczenia maszynowego jest znana od wielu dekad, dopiero w ostatnich latach
     przeżywa swoisty renesans spowodowany wzrostem dostępnej mocy obliczeniowej oraz 
@@ -37,17 +35,16 @@
     Sieciami spełniającymi powyższy warunek są modele należące do grupy rekurencyjnych sieci neuronowych.
     Najprostszym przykładem rekurencyjnej sieci neuronowej jest sieć na której wejście 
     przekazywany jest również stan wyjść z analizy poprzedniego elementu sekwencji.
-    %%% obrazek RNN ???
+    
     Niestety, taka architektura jest narażona na wiele problemów, takich jak trudność
     tworzenia powiązań pomiędzy odległymi elementami sekwencji oraz zjawisko znikającego lub eksplodującego gradientu.
 
-    %%% link do artykułu o lstmach %%%
-    Architekturą rozwiązującą powyższe problemy jest zasugerowana przez XXXXXX architektura
-    Long short-term memory network (LSTM). Autor rozszerza klasyczną sieć neuronową o globalną pamięć niezależną
+    Architekturą rozwiązującą powyższe problemy jest architektura
+    Long Short-term Memory network (LSTM) \cite{LongShortTermMemory}. 
+    Autor rozszerza klasyczną sieć neuronową o globalną pamięć niezależną
     od stanu wyjść. Dane mogą zostać wprowadzone lub wymazane z pamięci dzięki warstwom bramkującym. 
     Kosztem większych możliwości architektury jest zwielokrotnienie 
     ilości parametrów, co może przekładać się na dłuższy czas uczenia.
-    %%% obrazek  lstm ???
   }
 
   \section{Założenia}
@@ -70,53 +67,46 @@
 
   \section{Przegląd literatury}
   {
-    %%% 1 https://pdfs.semanticscholar.org/c933/79a401dd159fc0c90eab44c43d07286b227e.pdf?_ga=2.50884521.120758669.1574698982-424907339.1573330492
-    %%% 2 https://pdfs.semanticscholar.org/9632/2047dd7a0f8b3ff30a3d44c219d45e4e8779.pdf
-    %%% 3 https://pdfs.semanticscholar.org/c72b/45d33260d736023aa0c7bd1ef8401a8de677.pdf
-    %%% 4 https://arxiv.org/pdf/1703.10847.pdf
-    %%% 5 https://arxiv.org/pdf/1612.01010.pdf
-    %%% 6 https://arxiv.org/pdf/1712.05274.pdf
-    %%% 7 https://arxiv.org/pdf/1611.09904.pdf
-    %%% 8 https://arxiv.org/pdf/1609.03499.pdf
-    %%% 
     W podobnej tematyce powstało wiele prac, lecz każda wyróżnia 
     się innym podejściem do problemu.
 
     Elementem wspólnym dużej części prac jest wykorzystany format danych wejściowych.
     W większości studiowanych artykułów, twórcy decydują się na wykorzystanie 
-    danych muzycznych w formacie midi [4,5,6,7], aczkolwiek równie popularnym wyjściem
-    jest skorzystanie z plików notacji ABC [1,2]. Najrzadsze jest podejście opierające się o
-    wykorzystanie nieprzetworzonych plików audio, na przykład w formacie wave [8].
+    danych muzycznych w formacie midi \cite{Yang2017MidiNetAC, Hadjeres2016DeepBachAS, Wu2017AHR, Mogren2016CRNNGANCR}, 
+    aczkolwiek równie popularnym wyjściem jest skorzystanie z plików notacji ABC \cite{Agarwala2017MusicCU, Sturm2015FolkMS}. 
+    Najrzadsze jest podejście opierające się o wykorzystanie nieprzetworzonych plików audio, 
+    na przykład w formacie wave \cite{Oord2016WaveNetAG}.
     
     Jedną z różnic występujących między podejściami jest sposób obróbki i tworzenia
     wewnętrznej reprezentacji danych, gdyż praktycznie wszyscy autorzy 
     proponują własne rozwiązanie problemu. 
     W przypadku danych tekstowych w formacie ABC, częstym elementem jest ograniczenie
-    lub usunięcie meta informacji zawartych w plikach [1,2] oraz pominięcie białych znaków.
-    Konkretne znaki zapisu są albo przedstawione jako wektory kodu 1 z N [2], 
-    lub przekształcane są kolejne wartości liczb naturalnych [1].
+    lub usunięcie meta informacji zawartych w plikach \cite{Agarwala2017MusicCU, Sturm2015FolkMS} oraz pominięcie białych znaków.
+    Konkretne znaki zapisu są albo przedstawione jako wektory kodu 1 z N \cite{Sturm2015FolkMS}, 
+    lub przekształcane są kolejne wartości liczb naturalnych \cite{Agarwala2017MusicCU}.
     W pracach korzystających z plików midi, częstym podejściem do problemu reprezentacji wysokości
-    dźwięku jest zastosowanie kodu 1 z N [4]. Większym zróżnicowaniem cechuje się podejście
+    dźwięku jest zastosowanie kodu 1 z N \cite{Yang2017MidiNetAC}. Większym zróżnicowaniem cechuje się podejście
     do reprezentacji danych w wymiarze czasu. Duża część podejść opiera się na restrykcji możliwych
-    wartości rytmicznych do ustalonego dyskretnego zbioru [5,6], podczas gdy stosowane są również podejścia
-    korzystające z wewnętrznej częstotliwości próbkowania plików midi [7].
+    wartości rytmicznych do ustalonego dyskretnego zbioru \cite{Hadjeres2016DeepBachAS, Wu2017AHR}, 
+    podczas gdy stosowane są również podejścia korzystające z wewnętrznej częstotliwości próbkowania 
+    plików midi \cite{Mogren2016CRNNGANCR}.
 
     Kluczowym aspektem wszystkich prac jest dobór modelu uczenia maszynowego.
-    Najbardziej popularnym wyborem są rekurencyjne sieci neuronowe [1,2,3,7],
+    Najbardziej popularnym wyborem są rekurencyjne sieci neuronowe \cite{Agarwala2017MusicCU, Sturm2015FolkMS, Souza2018DeepNN, Mogren2016CRNNGANCR},
     ale opisywane są również inne podejścia, na przykład:
     \begin{itemize}
-      \item modele kontekstowe, takie jak Continous Bag-of-Words [1],
-      \item modele generatywno adwersyjne (Generative Adversial Networks) [1,7],
-      \item modele oparte o sieci konwolucyjne [4,8]
+      \item modele kontekstowe, takie jak Continous Bag-of-Words \cite{Agarwala2017MusicCU},
+      \item modele generatywno adwersyjne (Generative Adversial Networks) \cite{Agarwala2017MusicCU, Mogren2016CRNNGANCR}
+      \item modele oparte o sieci konwolucyjne \cite{Yang2017MidiNetAC, Oord2016WaveNetAG}.
     \end{itemize}
 
     Aspektem wartym zwrócenia uwagi, są również poczynione założenia i nałożone
     ograniczenia. Niektóre metody przytoczone przez autorów prac wymagają:
     \begin{itemize}
-      \item pominięcia elementów polifonicznych utworów [2,5],
+      \item pominięcia elementów polifonicznych utworów \cite{Sturm2015FolkMS, Hadjeres2016DeepBachAS},
       \item ograniczenia zbioru danych do utworów będących w 
-      ustalonej tonacji i/lub ustalonym metrum [2,6]
-      \item ograniczenia występujących wartości rytmicznych [5].
+      ustalonej tonacji i/lub ustalonym metrum \cite{Sturm2015FolkMS, Wu2017AHR},
+      \item ograniczenia występujących wartości rytmicznych \cite{Hadjeres2016DeepBachAS}.
     \end{itemize}
   }
 
