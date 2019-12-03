@@ -88,10 +88,21 @@
         Uczenie zaplanowano na okres 35 epok, co przełożyło się na czas bliski 20 minut. Do uczenia wykorzystano
         akcelerację sprzętową w postaci karty graficznej dostępnej w usłudze chmury obliczeniowej Google Colab.
 
-        Ilustracje [] zawierają wykresy opisujące miary postępu uczenia podczas kroków walidacyjnych.
+        Ilustracje \ref{epoch_val_duration_output_categorical_accuracy} i \ref{epoch_val_notes_output_mean_squared_error} zawierają wykresy opisujące miary postępu uczenia podczas kroków walidacyjnych.
 
-        %%% ilustracje epoch_val_duration_output_categorical_accuracy
-        %%% epoch_val_notes_output_mean_squared_error
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.4]{epoch_val_duration_output_categorical_accuracy}
+            \caption{Wartości miary precyzji predykcji długości trwania dźwięków}
+            \label{epoch_val_duration_output_categorical_accuracy}
+        \end{figure}
+        
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.4]{epoch_val_notes_output_mean_squared_error}
+            \caption{Wartości błędu średniokwadratowego predykcji wektora dźwięków}
+            \label{epoch_val_notes_output_mean_squared_error}
+        \end{figure}
 
         Na ilustracjach można dostrzec trafność predykcji klasy długości trwania dźwięku, oraz błąd średniokwadratowy
         predykcji wektorów dźwięków. W pierwszej połowie uczenia na obydwu wykresach można zaobserwować pożądaną tendencję,

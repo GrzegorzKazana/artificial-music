@@ -45,17 +45,56 @@
         Ponieważ wartości miar będą różne dla każdego zbioru danych, w procesie oceny generowanych próbek powinno się je 
         stosować w odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych.
         
-        Na ilustracjach ... przestawione są wartości miar całego zbioru testowego.
+        Na ilustracjach \ref{tonal_hist}, \ref{tonal_transition}, \ref{rythm_hist}, \ref{rythm_transition} oraz w tabeli \ref{range_and_compression} 
+        przestawione są wartości miar całego zbioru testowego.
 
         %%% ilustracja tonalnego histogramu
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{tonal_hist}
+            \caption{Histogram występowania poszczególnych dźwięków}
+            \label{tonal_hist}
+        \end{figure}
 
         %%% tonalna macierz przejść
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{tonal_transition}
+            \caption{Macierz przejść dźwięków}
+            \label{tonal_transition}
+        \end{figure}
 
         %%% histogram rytmiczny
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{rythm_hist}
+            \caption{Histogram występowania poszczególnych długości dźwięków}
+            \label{rythm_hist}
+        \end{figure}
 
         %%% rytmiczna macierz przejść
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{rythm_transition}
+            \caption{Macierz przejść długości dźwięków}
+            \label{rythm_transition}
+        \end{figure}
 
         %%% tabelka z zakresami i kompresją
+        \begin{table}
+            \begin{center}
+                \begin{tabular}{ |p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}| }
+                \hline
+                 & Zakres & Współczynnik kompresji \\ 
+                \hline
+                Wysokość dźwięków & 69 & 6.932 \\  
+                \hline
+                Długość dźwięków & 23 & 11.364 \\
+                \hline
+                \end{tabular}
+            \end{center}
+            \caption{Zakresy i współczynniki kompresji danych} \label{range_and_compression}
+        \end{table}
 
         Na postawie wykresów możemy wyciągnąć następujące wnioski:
         \begin{itemize}
@@ -129,6 +168,37 @@
         Na ilustracji zamieszczono uśrednione histogramy i macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
 
         %%% wykresiki
+        %%% ilustracja tonalnego histogramu
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{tonal_hist_1}
+            \caption{Histogram występowania poszczególnych dźwięków w generowanych próbkach}
+            \label{tonal_hist_1}
+        \end{figure}
+
+        %%% tonalna macierz przejść
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{tonal_transition_1}
+            \caption{Macierz przejść dźwięków w generowanych próbkach}
+            \label{tonal_transition_1}
+        \end{figure}
+
+        %%% histogram rytmiczny
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{rythm_hist_1}
+            \caption{Histogram występowania poszczególnych długości dźwięków w generowanych próbkach}
+            \label{rythm_hist_1}
+        \end{figure}
+
+        %%% rytmiczna macierz przejść
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{rythm_transition_1}
+            \caption{Macierz przejść długości dźwięków w generowanych próbkach}
+            \label{rythm_transition_1}
+        \end{figure}
     }
 
     \section{Wrażenia subiektywne}
@@ -147,13 +217,45 @@
 
         Na podstawie powyższych wniosków, podjęto ponowną próbę uczenia. Tym razem, zbiór danych został
         ograniczony o powyżej opisane dźwięki. Proces uczenia i generowania został przeprowadzony w ten sam sposób
-        co poprzednio. Na wykresach [] widać oczywiste zmiany w miarach związanych z rytmiką.
+        co poprzednio. 
+        %%% ZOSTAWIĆ CZY NIE
+        % Na wykresach \ref{rythm_hist_2}, \ref{rythm_transition_2}, \ref{tonal_hist_2} i \ref{tonal_transition_2} widać oczywiste zmiany w miarach związanych z rytmiką.
 
-        %%% tutaj wykresiki tego lepszego modelu
+        % %%% tutaj wykresiki tego lepszego modelu
+        % %%% histogram rytmiczny
+        % \begin{figure}
+        %     \centering
+        %     \includegraphics[scale=0.5]{rythm_hist_2}
+        %     \caption{Histogram występowania poszczególnych długości dźwięków w generowanych próbkach}
+        %     \label{rythm_hist_2}
+        % \end{figure}
 
-        Ograniczenie zbioru nie miało znaczącego wpływu na zależności tonalne.
+        % %%% rytmiczna macierz przejść
+        % \begin{figure}
+        %     \centering
+        %     \includegraphics[scale=0.5]{rythm_transition_2}
+        %     \caption{Macierz przejść długości dźwięków w generowanych próbkach}
+        %     \label{rythm_transition_2}
+        % \end{figure}
 
-        %%% hist i matrix tonalna
+        % Jak można zaobserwować, ograniczenie zbioru danych miało również wpływ na zależności tonalne.
+
+        % %%% hist i matrix tonalna
+        % %%% ilustracja tonalnego histogramu
+        % \begin{figure}
+        %     \centering
+        %     \includegraphics[scale=0.5]{tonal_hist_2}
+        %     \caption{Histogram występowania poszczególnych dźwięków w generowanych próbkach}
+        %     \label{tonal_hist_2}
+        % \end{figure}
+
+        % %%% tonalna macierz przejść
+        % \begin{figure}
+        %     \centering
+        %     \includegraphics[scale=0.5]{tonal_transition_2}
+        %     \caption{Macierz przejść dźwięków w generowanych próbkach}
+        %     \label{tonal_transition_2}
+        % \end{figure}
 
         Tym razem wyniki, choć wciąż nie idealne, były conajmniej akceptowalne. W generowanych utworach
         obserwowalny był zupełnie inny rozkład długości dźwięków. Sekwencje w subiektywnym odczuciu były dużo mniej
