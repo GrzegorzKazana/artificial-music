@@ -1,6 +1,6 @@
 \chapter{Uczenie} 
 {
-    Do przetworzenia danych do wybranej postaci, również zostały wykorzystane modele wymagające uczenia.
+    Do przetworzenia danych do wybranej postaci, zostały wykorzystane modele wymagające uczenia.
     Pierwszym z opisanych nich jest model k-Means, który został wykorzystany w celu wyznaczenia klastrów
     długości trwania dźwięków. Do głównych parametrów tego modelu należy docelowa ilość klastrów, ilość iteracji
     oraz niezależnych uruchomień modelu mające na celu rozwiązania problemu zatrzymywania uczenia w lokalnym minimum.
@@ -25,14 +25,14 @@
         na wyznaczenie ciągłej reprezentacji kodu o mniejszej wymiarowości. 
 
         Następnie wektory zostają złączone, i ich sekwencje trafiają do warstw rekurencyjnej sieci LSTM,
-        w której model ma szanse ekstrahować wiedzę o zależnościach między elementami sekwencji.
+        w której model ma szanse ekstrahować wiedzę o zależnościach między kolejnymi elementami sekwencji.
 
-        Otrzymywane wektory są połączone do osobnych, mniejszych sieci LSTM i następnie poprzez warstwy 
-        gęsto połączone stają się osobnymi wyjściami modelu.
+        Otrzymywane wektory są połączone z osobnymi, mniejszymi sieciami LSTM i następnie z warstwami 
+        gęstymi będącymi osobnymi wyjściami modelu.
         
         Wyjście odpowiedzialne za dźwięki uczone jest funkcją błędu odpowiednią do problemu 
         regresji - błędem średniokwadratowym, a wyjście klasyfikujące długość dźwięku funkcją odpowiednią
-        dla zadania klasyfikacji 1 z N - categorical crossentrophy.
+        dla zadania klasyfikacji 1 z N - kategorycznej entropii krzyżowej.
     }
 
     \section{Dobór parametrów}
@@ -62,13 +62,17 @@
         Główną obawą jaką można posiadać do takiego podejścia jest jego narzut podczas uczenia modelu, 
         aczkolwiek zaobserwowano że tempo przygotowania i kolejkowania kolejnych przypadków testowych znacznie przewyższa tempo ich uczenia.
 
-        Podczas testowania różnych wartości innych parametrów, zaobserwowano Interesujący wpływ ilości przykładów w wiązce.
+        \bigskip
+
+        Podczas testowania różnych wartości pozostałych parametrów, zaobserwowano interesujący wpływ ilości przykładów w wiązce.
         %%% można jakby co opisać czym jest wiązka 
         Większe wartości, rzędu 16 lub 32 miały negatywny wpływ na jakość generowanych sekwencji. 
         Mniejsze wartości prowadziły do przetrenowania modelu.
 
         Rozmiar głównej sieci miał spodziewany efekt, nieodpowiednio duży prowadził do przetrenowania. Dla obecnego
         zbioru danych zdecydowano się zachować wartość 64 jednostek.
+
+        \bigskip
 
         Podczas uczenia monitorowano metryki opisujące jakość predykcji i postęp uczenia modelu.
         Do mierzonych metryk należą funkcje błędu dla poszczególnych wyjść modelu, średni błąd kwadratowy
@@ -92,14 +96,14 @@
 
         \begin{figure}
             \centering
-            \includegraphics[scale=0.4]{epoch_val_duration_output_categorical_accuracy}
+            \includegraphics[scale=0.35]{epoch_val_duration_output_categorical_accuracy}
             \caption{Wartości miary precyzji predykcji długości trwania dźwięków}
             \label{epoch_val_duration_output_categorical_accuracy}
         \end{figure}
-        
+
         \begin{figure}
             \centering
-            \includegraphics[scale=0.4]{epoch_val_notes_output_mean_squared_error}
+            \includegraphics[scale=0.35]{epoch_val_notes_output_mean_squared_error}
             \caption{Wartości błędu średniokwadratowego predykcji wektora dźwięków}
             \label{epoch_val_notes_output_mean_squared_error}
         \end{figure}

@@ -17,14 +17,18 @@
     ograniczające wyniki i potencjalne zastosowania. Przykładem takiego kompromisu jest automatyczne wykrywanie
     najczęstszych wartości rytmicznych, pozwalające na dyskretyzację reprezentacji czasowej bez
     manualnego definiowania zbioru dozwolonych wartości, odbywające się kosztem całkowitej swobody jaką oferuje format midi.
+    
     Do ograniczeń opisanego procesu można zaliczyć między innymi niemożliwość reprezentowania utworów wieloinstrumentowych, 
     ograniczony słownik wielodźwięków oraz stratność przekształcenia plików midi na macierze i ponownego przetworzenia
     macierzy na plik midi.
+
     Rozdział dotyczący uczenia modelu zaprezentował podstawowe kroki, jakie należy poczynić podchodząc do
     dowolnego problemu uczenia maszynowego. Do najważniejszych należy projekt architektury modelu,
     dobór miar i funkcji kosztów oraz walidacja modelu. Opisywany etap pracy również pozwolił na zapoznanie 
     się z współczesnymi narzędziami ułatwiającymi wszelkie zadania uczenia maszynowego, takimi jak Tensorflow, 
     TensorBoard i Google Colab. 
+
+    \bigskip
 
     Otrzymane rezultaty nie spełniały wszystkich oczekiwań, lecz wykazywały conajmniej poprawność i częściowy
     sukces obranego podejścia. Jedną z przyczyn zastrzeżeń potencjalnie mógł być sam zbiór danych, nie 
@@ -39,9 +43,11 @@
     muzycznymi, a nie konkretnymi dźwiękami.
     Wraz z zmianą danych oraz ich objętości, konieczna byłaby ponowna parametryzacja modelu i procesu uczenia.
 
+    \bigskip
+
     Interesującym kierunkiem, który jest podatny na dalszą eksplorację są inne rodzaje architektur sieci neuronowych.
     Pomimo że problem inherentnie opiera się na analizie sekwencji co silnie sugeruje wykorzystanie rekurencyjnych 
-    sieci typu Long-short Term Memory, możliwe są konstrukcje modeli odmienne od przytoczonych. Jedną z nich są modele typu 
+    sieci typu Long Short-term Memory, możliwe są konstrukcje modeli odmienne od przytoczonych. Jedną z nich są modele typu 
     sequence-to-sequence encode-decoder, na których wyjściu i wejściu są sieci LSTM, lecz dane pomiędzy nimi są
     kompresowane do jednowymiarowego tensora, który potem jest ponownie przekształcany na sekwencję. 
     Alternatywnym podejściem szeroko stosowanym w problemach transferu stylu i generacji obrazów, 
@@ -49,6 +55,7 @@
     próbek i sieci uczącej się rozróżniać oryginały od falsyfikatów.
 
     %%%
+    \bigskip
 
     Problem generowania utworów muzycznych jest jednym z problemów przekraczających granice, które
     jeszcze w nieodległej przeszłości wydawały się niemożliwe do przekroczenia. Zadanie to kieruje nas na wiele pytań 

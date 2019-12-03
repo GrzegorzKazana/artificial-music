@@ -11,7 +11,7 @@
         \item dostępność danych treningowych,
         \item sposób reprezentacji upływu czasu,
         \item sposób wyrażenia wysokości dźwięku,
-        \item jasne przedstawienie zależności między dźwiękami,
+        \item jasność przedstawiania zależności między dźwiękami,
         \item stopień kompresji,
         \item złożoność samego formatu oraz możliwość istnienia niepoprawnych reprezentacji.
     \end{itemize}
@@ -27,7 +27,7 @@
             zależy zakres możliwych do wyrażenia częstotliwości. Typową wartością dla plików
             WAV jest 44100Hz, co według twierdzenia Nyquista-Shannona przekłada się na zakres
             częstotliwości ograniczony wartością 22050Hz \cite{Shannon1949CommunicationIT}, będącą bliską granicy słyszalności
-            ucha ludzkiego. 
+            ludzkiego aparatu słuchowego. 
 
             W przeciwieństwie do pozostałych opisanych formatów, wysokości dźwięków wyrażone są 
             jedynie poprzez sekwencje zmian amplitudy sygnału, przez co
@@ -87,7 +87,7 @@
             od poprzedniej wiadomości. Oznacza to, że długość trwania dźwięku można wyznaczyć poprzez zsumowanie parametrów time
             wiadomości występujących pomiędzy odpowiadającymi sobie zdarzeniami note\textunderscore on i note\textunderscore off.
 
-            Możliwa jest konwersja wartości za równo na czas w milisekundach jak i wartości rytmiczne.
+            Możliwa jest konwersja wyznaczonej wartości za równo na czas w milisekundach jak i wartości rytmiczne.
             Stałe potrzebne do tych przekształceń są naczęściej zawarte w meta wiadomościach znajdujących się na początku utworu.
 
             Zaletą formatu midi jest dyskretna reprezentacja wysokości dźwięku oraz pozwalająca na elastyczną 
@@ -108,7 +108,7 @@
     \section{Opis wybranego zbioru danych}
     {
         Do dalszych eksperymentów, opierających się na różnych sposobach tworzenia numerycznej reprezentacji
-        danych wybrano stosunkowo mały zbiór zawierający utwory z serii gier Pokemon wyprodukowanych na konsolę Nintendo.
+        danych wybrano stosunkowo mały zbiór zawierający utwory z serii gier Pokemon.
         Zbiór składa się z dziesięciu utworów o średniej długości wynoszącej 90 sekund. Kompozycje zawierają za równo 
         elementy monofoniczne, jak i polifoniczne. Główną motywacją wyboru tego zbioru była jego mała obszerność,
         co pozwalało na szybsze testowanie metod obróbki danych i procesu uczenia.

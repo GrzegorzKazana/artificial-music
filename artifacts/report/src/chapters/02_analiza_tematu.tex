@@ -2,11 +2,11 @@
 {
   Celem zadania doboru i analizy metod obróbki plików muzycznych jest 
   przekształcenie danych do postaci użytecznej przez algorytmy uczenia maszynowego.
-  Do istotnych aspektów tego kroku należy między innymi stopień kompresji danych,
+  Do istotnych aspektów wyników tego kroku należy między innymi stopień kompresji danych,
   sposób wyrażania relacji między przykładami, możliwość bezstratnej transformacji odwrotnej. 
 
   Zadanie generowania muzyki polega na ekstrakcji pewnych cech charakterystycznych
-  przykładowych utworów, np. stylu konkretnego artysty, 
+  przykładowych utworów, na przykład stylu konkretnego artysty, 
   i wykorzystaniu ich przy syntezie tworzonych próbek. 
 
   \section{Wprowadzenie do dziedziny}
@@ -16,6 +16,7 @@
     czerpią inspirację z sposobu funkcjonowania ludzkiego mózgu, który jest zbudowany z komórek nerwowych - neuronów.
     Połączenia między komórkami są modelowane poprzez wagi, reprezentujące siłę połączenia, a zjawisku aktywacji
     komórek w sieci odpowiada operacja ważonej sumy informacji pochodzących z połączonych neuronów oraz wag tych połączeń.
+    
     W latach siedemdziesiątych opracowano algorytm uczenia sztucznych sieci z powodzeniem wykorzystywany
     do dziś - propagację wsteczną. Metoda ta polega na minimalizacji błędu predykcji poprzez regulację
     wag w oparciu o pochodną funkcji błędu.
@@ -41,17 +42,18 @@
 
     Architekturą rozwiązującą powyższe problemy jest architektura
     Long Short-term Memory network (LSTM) \cite{LongShortTermMemory}. 
-    Autor rozszerza klasyczną sieć neuronową o globalną pamięć niezależną
+    Jej pomysłodawca rozszerza klasyczną rekurencyjną sieć neuronową o globalną pamięć niezależną
     od stanu wyjść. Dane mogą zostać wprowadzone lub wymazane z pamięci dzięki warstwom bramkującym. 
     Kosztem większych możliwości architektury jest zwielokrotnienie 
     ilości parametrów, co może przekładać się na dłuższy czas uczenia.
   }
 
+  \newpage
+
   \section{Założenia}
   {
-    Na potrzeby pracy została przyjęta następująca definicja muzyki:
-
-    Muzyką nazywamy ciągi dźwięków tworzące kompozycyjną całość. 
+    Na potrzeby pracy została przyjęta definicja muzyki stanowiąca, że muzyką nazywamy ciągi 
+    dźwięków tworzące kompozycyjną całość. 
 
     Utwory muzyczne można analizować pod wieloma względami, takimi jak:
     \begin{itemize}
@@ -88,7 +90,7 @@
     dźwięku jest zastosowanie kodu 1 z N \cite{Yang2017MidiNetAC}. Większym zróżnicowaniem cechuje się podejście
     do reprezentacji danych w wymiarze czasu. Duża część podejść opiera się na restrykcji możliwych
     wartości rytmicznych do ustalonego dyskretnego zbioru \cite{Hadjeres2016DeepBachAS, Wu2017AHR}, 
-    podczas gdy stosowane są również podejścia korzystające z wewnętrznej częstotliwości próbkowania 
+    podczas gdy stosowane są również podejścia korzystające bezpośrednio z taktowania 
     plików midi \cite{Mogren2016CRNNGANCR}.
 
     Kluczowym aspektem wszystkich prac jest dobór modelu uczenia maszynowego.
@@ -96,7 +98,7 @@
     ale opisywane są również inne podejścia, na przykład:
     \begin{itemize}
       \item modele kontekstowe, takie jak Continous Bag-of-Words \cite{Agarwala2017MusicCU},
-      \item modele generatywno adwersyjne (Generative Adversial Networks) \cite{Agarwala2017MusicCU, Mogren2016CRNNGANCR}
+      \item modele generatywno-adwersyjne (Generative Adversial Networks) \cite{Agarwala2017MusicCU, Mogren2016CRNNGANCR}
       \item modele oparte o sieci konwolucyjne \cite{Yang2017MidiNetAC, Oord2016WaveNetAG}.
     \end{itemize}
 
