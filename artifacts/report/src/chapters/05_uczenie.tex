@@ -1,5 +1,17 @@
 \chapter{Uczenie} 
 {
+    Do przetworzenia danych do wybranej postaci, również zostały wykorzystane modele wymagające uczenia.
+    Pierwszym z opisanych nich jest model k-Means, który został wykorzystany w celu wyznaczenia klastrów
+    długości trwania dźwięków. Do głównych parametrów tego modelu należy docelowa ilość klastrów, ilość iteracji
+    oraz niezależnych uruchomień modelu mające na celu rozwiązania problemu zatrzymywania uczenia w lokalnym minimum.
+    
+    Kolejnym zastosowaniem uczenia maszynowego w etapie przetwarzania danych było użycie algorytmu Word2Vec. Algorytm 
+    został użyty do wyznaczenia ciągłej reprezentacji rzadkich wektorów reprezentujących dźwięki. Model wymagał 
+    określenia docelowej wymiarowości wektorów i rozmiaru kontekstu. 
+
+    W poniższych podrozdziałach skupiono się jednak na uczeniu głównego modelu, czyli sieci neuronowej której
+    zadaniem jest ekstrakcja cech utworów treningowych.
+
     \section{Architektura modelu}
     {
         Otrzymawszy dane w postaci sekwencji par wektorów opisujących dźwięki i ich czas trwania,
