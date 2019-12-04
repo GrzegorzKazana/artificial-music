@@ -1,7 +1,7 @@
 \chapter{Analiza wyników}
 {
 
-    Jednym z napotkanych problemów w procesie rozwoju procesu przetwarzania danych i projektu architektury modelu
+    Jednym z napotkanych problemów podczas implementacji procesu przetwarzania danych i projektu architektury modelu
     był czasochłonny krok oceny wyników. Po każdorazowym uczeniu modelu konieczne było generowanie próbek, 
     konwersja ich postaci numerycznej na pliki midi, manualny odsłuch i subiektywna ocena.
 
@@ -19,14 +19,14 @@
             po sobie. Uwagi wymaga kwestia nanoszenia na macierz informacji o następujących po sobie wielodźwiękach. W celu oddania
             również takich zdarzeń, na macierz nanoszone są pary będące wynikami iloczynu kartezjańskiego między składowymi wielodźwięków.
             \item Rozpiętość rytmiczna - odległość między najkrótszą i najdłuższą wartością rytmiczną występującą w mierzonej próbce. 
-            Ponieważ wartości kodu 1 z N są posortowane według długości trwania, może być wyrażona poprzez różnicę indeksów 
+            Ponieważ wartości kodu 1 z N są posortowane według długości trwania, może ona być wyrażona poprzez różnicę indeksów 
             między klasami kodu 1 z N. Przyjmuje wartości z zakresu <0, ilość klas rytmicznych>.
             \item Histogram rytmiczny - rozkład występowania poszczególnych klas wartości rytmicznych.
             \item Macierz przejść wartości rytmicznych - opisuje częstość przejść między konkretnymi wartościami rytmicznymi.
         \end{itemize}
 
         Dodatkowo, opracowano dwie miary mierzące stopień kompresji generowanych ciągów dźwięków i wartości rytmicznych. 
-        Intuicją idącą za uznaniem stopnia kompresji jako istotny parametr jest fakt wynikający z zasady działania dużej części
+        Uznanie stopnia kompresji jako istotny parametr wynika z intuicji wynikającej z zasady działania dużej części
         algorytmów kompresji, w których powtarzające się ciągi znaków są zastępowane krótszym znacznikiem wskazującym na pierwsze 
         wystąpienie ciągu. 
         Oznacza to, że sekwencje charakteryzujące się większą powtarzalnością mogą zostać skompresowane w większym stopniu.
@@ -45,7 +45,7 @@
         Ponieważ wartości miar będą różne dla każdego zbioru danych, w procesie oceny generowanych próbek powinno się je 
         stosować w odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych.
         
-        Na ilustracjach \ref{tonal_hist_transition}, \ref{rythm_hist_transition} oraz w tabeli \ref{range_and_compression} 
+        Na obrazkach \ref{tonal_hist_transition}, \ref{rythm_hist_transition} oraz w tabeli \ref{range_and_compression} 
         przestawione są wartości miar całego zbioru testowego.
 
         %%% ilustracja tonalnego histogramu i macierzy przejść
@@ -60,7 +60,7 @@
         \begin{figure}
             \centering
             \includegraphics[scale=0.5]{rythm_hist_transition}
-            \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
+            \caption{Histogram występowania poszczególnych długości dźwięków oraz macierz przejść między nimi}
             \label{rythm_hist_transition}
         \end{figure}
 
@@ -82,7 +82,7 @@
 
         \pagebreak
 
-        Na postawie wykresów możemy wyciągnąć następujące wnioski:
+        Na postawie wykresów możemy sformułować następujące wnioski:
         \begin{itemize}
             \item najczęściej występującym dźwiękiem w zbiorze jest A, a najrzadszym D\#,
             \item wyższe wartości na przekątnej macierzy przejść dźwięków wskazują, że dźwięk występujący w bieżącym wielodźwięku
@@ -94,7 +94,7 @@
 
     \section{Wyniki}
     {
-        Kolejnym krokiem było wygenerowanie próbek, i opisanie ich za pomocą wymienionych miar. Zestawienie wartości miar i różnic
+        Kolejnym krokiem było wygenerowanie próbek i opisanie ich za pomocą wymienionych miar. Zestawienie wartości miar i różnic
         w odniesieniu do zbioru treningowego przedstawiają tabele \ref{tonal_measuremnts_table} i \ref{rythm_measuremnts_table}. Wyniki pogrupowano na podstawie użytego ziarna.
 
         \begin{table}
@@ -149,9 +149,9 @@
         Sekwencje zapoczątkowane wartościami losowymi zgodnie z intuicją charakteryzują się niższym współczynnikiem
         kompresji, co może przekładać się na większe zróżnicowanie sekwencji dźwięków.
         Spośród zbadanych ziaren, sekwencje początkowane harmonicznym zestawem dźwięków najwierniej
-        odwzorowały rozkłady następujących dźwięków.
+        odwzorowały rozkłady następujących po sobie dźwięków.
         
-        Na ilustracji \ref{tonal_hist_transition_1} oraz \ref{rythm_hist_transition_1} zamieszczono uśrednione 
+        Na obrazku \ref{tonal_hist_transition_1} oraz \ref{rythm_hist_transition_1} zamieszczono uśrednione 
         histogramy i macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
 
         %%% wykresiki
@@ -186,7 +186,7 @@
         prędkością taktowania jest 120 taktów na ćwierćnutę. Źródłem tego zjawiska mógł być zamierzony 
         zabieg wprowadzający element niedoskonałości, mający na celu wprowadzenie ludzkiego charakteru nagrania 
         wykonywanego przez prawdziwych artystów.
-        Nieszczęśliwie, zabieg ten uniemożliwił generowanie subiektywnie akceptowalnych sekwencji.
+        Niestety, zabieg ten uniemożliwił generowanie subiektywnie akceptowalnych sekwencji.
 
         Na podstawie powyższych wniosków, podjęto ponowną próbę uczenia. Tym razem, zbiór danych został
         ograniczony o powyżej opisane dźwięki. Proces uczenia i generowania został przeprowadzony w ten sam sposób
@@ -217,7 +217,7 @@
 
         Tym razem wyniki, choć wciąż nie idealne, były conajmniej akceptowalne. W generowanych utworach
         obserwowalny był zupełnie inny rozkład długości dźwięków. Sekwencje w subiektywnym odczuciu były dużo mniej
-        chaotyczne, a zwiększone długości dźwięków pozwalały na skupienie się na następujących dźwiękach.
+        chaotyczne, a zwiększone długości dźwięków pozwalały na skupienie się na następujących po sobie dźwiękach.
         
         Spośród sekwencji powstałych przy pomocy różnych ziaren, subiektywnie najbardziej interesujące wyniki
         zostały otrzymane przy początkowaniu generacji pojedynczym dźwiękiem lub pustymi wektorami.
@@ -229,6 +229,6 @@
         Uzasadnione są zastrzeżenia co do tak inwazyjnej ingerencji w zbiór danych jaką jest eliminacja 
         wszystkich przedstawicieli konkretnej klasy. Z technicznego punktu widzenia bardziej poprawnym 
         rozwiązaniem mogłoby być dynamiczne skalowanie wartości błędu predykcji dla poszczególnych przypadków w czasie uczenia, 
-        w taki sposób aby mniejsza waga była przywiązywana do przedstawicieli nadreprezentowanej klasy.
+        w taki sposób, aby mniejsza waga była przywiązywana do przedstawicieli nadreprezentowanej klasy.
     }
 }

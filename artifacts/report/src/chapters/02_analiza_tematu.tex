@@ -1,8 +1,11 @@
 \chapter{Analiza tematu}
 {
+  Temat pracy wymaga rozwiązania dwóch etapów: opracowania danych i wykorzystania modelu
+  uczenia maszynowego.
+
   Celem zadania doboru i analizy metod obróbki plików muzycznych jest 
   przekształcenie danych do postaci użytecznej przez algorytmy uczenia maszynowego.
-  Do istotnych aspektów wyników tego kroku należy między innymi stopień kompresji danych,
+  Do istotnych aspektów opracowanego procesu należy między innymi stopień kompresji danych,
   sposób wyrażania relacji między przykładami, możliwość bezstratnej transformacji odwrotnej. 
 
   Zadanie generowania muzyki polega na ekstrakcji pewnych cech charakterystycznych
@@ -13,7 +16,7 @@
   {
     Jedną z najbardziej rozpowszechnionych metod uczenia maszynowego jest zastosowanie sieci neuronowych.
     Zaproponowane w latach czterdziestych i rozwijane w drugiej połowie XX wieku \cite{McCulloch1943}, sztuczne sieci neuronowe
-    czerpią inspirację z sposobu funkcjonowania ludzkiego mózgu, który jest zbudowany z komórek nerwowych - neuronów.
+    czerpią inspirację ze sposobu funkcjonowania ludzkiego mózgu, który jest zbudowany z komórek nerwowych - neuronów.
     Połączenia między komórkami są modelowane poprzez wagi, reprezentujące siłę połączenia, a zjawisku aktywacji
     komórek w sieci odpowiada operacja ważonej sumy informacji pochodzących z połączonych neuronów oraz wag tych połączeń.
     
@@ -21,7 +24,7 @@
     do dziś - propagację wsteczną. Metoda ta polega na minimalizacji błędu predykcji poprzez regulację
     wag w oparciu o pochodną funkcji błędu.
 
-    Zastosowania sieci neuronowych są bardzo szerokie i różnorodne. Zasadą będącym podporą uniwersalności 
+    Zastosowania sieci neuronowych są bardzo szerokie i różnorodne. Zasadą będącą podporą uniwersalności 
     sztucznych sieci neuronowych jest twierdzenie stanowiące o ich możliwości aproksymacji dowolnej 
     funkcji ciągłej w zamkniętym przedziale \cite{Csji2001ApproximationWA}.
 
@@ -34,14 +37,14 @@
     Ponieważ dane reprezentujące muzykę mają postać sekwencji rozłożonej w czasie, 
     konieczne jest wykorzystanie sieci mających możliwość agregacji stanu, czyli architektur posiadających pamięć.
     Sieciami spełniającymi powyższy warunek są modele należące do grupy rekurencyjnych sieci neuronowych.
-    Najprostszym przykładem rekurencyjnej sieci neuronowej jest sieć na której wejście 
+    Najprostszym przykładem rekurencyjnej sieci neuronowej jest sieć na wejście której 
     przekazywany jest również stan wyjść z analizy poprzedniego elementu sekwencji.
     
     Niestety, taka architektura jest narażona na wiele problemów, takich jak trudność
     tworzenia powiązań pomiędzy odległymi elementami sekwencji oraz zjawisko znikającego lub eksplodującego gradientu.
 
     Architekturą rozwiązującą powyższe problemy jest architektura
-    Long Short-term Memory network (LSTM) \cite{LongShortTermMemory}. 
+    Long Short-term Memory Network (LSTM) \cite{LongShortTermMemory}. 
     Jej pomysłodawca rozszerza klasyczną rekurencyjną sieć neuronową o globalną pamięć niezależną
     od stanu wyjść. Dane mogą zostać wprowadzone lub wymazane z pamięci dzięki warstwom bramkującym. 
     Kosztem większych możliwości architektury jest zwielokrotnienie 
@@ -50,15 +53,15 @@
 
   \newpage
 
-  \section{Założenia}
+  \section{Założenia pracy}
   {
-    Na potrzeby pracy została przyjęta definicja muzyki stanowiąca, że muzyką nazywamy ciągi 
+    Na potrzeby pracy przyjęto definicję muzyki mówiącą, że muzyką nazywamy ciągi 
     dźwięków tworzące kompozycyjną całość. 
 
     Utwory muzyczne można analizować pod wieloma względami, takimi jak:
     \begin{itemize}
         \item rytmiczność - organizacja dźwięków w czasie
-        \item melodyczność - sposób zestawiania następujących dźwięków 
+        \item melodyczność - sposób zestawiania następujących po sobie dźwięków 
         \item harmoniczność - spójność i ład występujący między dźwiękami
         \item dynamika - zróżnicowanie siły dźwięków
     \end{itemize}
@@ -69,14 +72,15 @@
 
   \section{Przegląd literatury}
   {
-    W podobnej tematyce powstało wiele prac, lecz każda wyróżnia 
-    się innym podejściem do problemu.
+
+    Wiele prac powstało w tematyce tworzenia muzyki za pomocą uczenia maszynowego, 
+    lecz każda wyróżnia się innym podejściem do problemu.
 
     Elementem wspólnym dużej części prac jest wykorzystany format danych wejściowych.
-    W większości studiowanych artykułów, twórcy decydują się na wykorzystanie 
+    W większości analizowanych artykułów, twórcy decydują się na wykorzystanie 
     danych muzycznych w formacie midi \cite{Yang2017MidiNetAC, Hadjeres2016DeepBachAS, Wu2017AHR, Mogren2016CRNNGANCR}, 
     aczkolwiek równie popularnym wyjściem jest skorzystanie z plików notacji ABC \cite{Agarwala2017MusicCU, Sturm2015FolkMS}. 
-    Najrzadsze jest podejście opierające się o wykorzystanie nieprzetworzonych plików audio, 
+    Najrzadsze podejście opiera się na wykorzystaniu nieprzetworzonych plików audio, 
     na przykład w formacie wave \cite{Oord2016WaveNetAG}.
     
     Jedną z różnic występujących między podejściami jest sposób obróbki i tworzenia
@@ -97,7 +101,7 @@
     Najbardziej popularnym wyborem są rekurencyjne sieci neuronowe \cite{Agarwala2017MusicCU, Sturm2015FolkMS, Souza2018DeepNN, Mogren2016CRNNGANCR},
     ale opisywane są również inne podejścia, na przykład:
     \begin{itemize}
-      \item modele kontekstowe, takie jak Continous Bag-of-Words \cite{Agarwala2017MusicCU},
+      \item modele kontekstowe, takie jak Continuous Bag-of-Words \cite{Agarwala2017MusicCU},
       \item modele generatywno-adwersyjne (Generative Adversial Networks) \cite{Agarwala2017MusicCU, Mogren2016CRNNGANCR}
       \item modele oparte o sieci konwolucyjne \cite{Yang2017MidiNetAC, Oord2016WaveNetAG}.
     \end{itemize}
@@ -117,7 +121,7 @@
     Niniejsza praca w kolejnych rozdziałach prezentuje analizę różnych podejść do kolejnych etapów
     procesu implementacji systemu, którego celem jest generowanie utworów muzycznych. 
 
-    W rozdziale 3. poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
+    W rozdziale trzecim poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
     były przeprowadzane eksperymenty. Przedstawiono również potencjalne trudności wiążące się z wyborem
     poszczególnych źródeł danych.
 
@@ -141,8 +145,8 @@
       \item Google Colab - usługa będąca środowiskiem obliczeniowym przystosowanym 
       do uruchamiania skryptów w języku Python, z dostępem do akceleratorów obliczeniowych
       w postaci kart graficznych i jednostek tensorowych,
-      \item Tensorflow - biblioteka języka Python służąca do wydajnych obliczeń, ułatiwająca 
-      tworzenie i uczenia głębokich sieci neuronowych. Podczas pracy skorzystano z 
+      \item Tensorflow - biblioteka języka Python służąca do wydajnych obliczeń, ułatwiająca 
+      tworzenie i uczenie głębokich sieci neuronowych. Podczas pracy skorzystano z 
       wysokopoziomowego interfejsu tf.keras, zawierającego predefiniowane architektury i warstwy sieci,
       \item Jupyter notebook - środowisko uruchomieniowe języka Python, umożliwiające przejrzystą
       ilustrację wykonywanych operacji,

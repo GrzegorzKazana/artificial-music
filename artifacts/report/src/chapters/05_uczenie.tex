@@ -1,4 +1,4 @@
-\chapter{Uczenie} 
+\chapter{Proces uczenia} 
 {
     Do przetworzenia danych do wybranej postaci, zostały wykorzystane modele wymagające uczenia.
     Pierwszym z opisanych nich jest model k-Means, który został wykorzystany w celu wyznaczenia klastrów
@@ -9,7 +9,7 @@
     został użyty do wyznaczenia ciągłej reprezentacji rzadkich wektorów reprezentujących dźwięki. Model wymagał 
     określenia docelowej wymiarowości wektorów i rozmiaru kontekstu. 
 
-    W poniższych podrozdziałach skupiono się jednak na uczeniu głównego modelu, czyli sieci neuronowej której
+    W poniższych podrozdziałach skupiono się jednak na procesie uczenia głównego modelu, czyli sieci neuronowej której
     zadaniem jest ekstrakcja cech utworów treningowych.
 
     \section{Architektura modelu}
@@ -51,7 +51,7 @@
         Podczas uczenia modelu zdecydowano się na dynamiczny rozmiar okna,
         będący liczbą losową z zakresu <15, 50>. Motywacją tego wyboru były testowe 
         uruchomienia modelu potwierdzające zdroworozsądkową intuicję mówiącą, że większe wartości
-        umożliwią uczenie dłuższych powtarzających się motywów, a krótsze lokalne następstwo nut.
+        umożliwią uczenie dłuższych powtarzających się motywów, a krótsze wartości umożliwią uczenie lokalnego następstwa nut.
 
         Dodatkowo, warto przybliżyć sposób tworzenia przypadków testowych. Naiwnym podejściem byłoby
         jednokrotne utworzenie zbioru danych poprzez utworzenie wszystkich możliwych podciągów o zadanej
@@ -69,7 +69,7 @@
         Większe wartości, rzędu 16 lub 32 miały negatywny wpływ na jakość generowanych sekwencji. 
         Mniejsze wartości prowadziły do przetrenowania modelu.
 
-        Rozmiar głównej sieci miał spodziewany efekt, nieodpowiednio duży prowadził do przetrenowania. Dla obecnego
+        Rozmiar głównej sieci miał spodziewany efekt, zbyt duży prowadził do przetrenowania. Dla obecnego
         zbioru danych zdecydowano się zachować wartość 64 jednostek.
 
         \bigskip
@@ -79,10 +79,10 @@
         wyjścia reprezentującego wektory dźwięków oraz kategoryczna dokładność stwierdzająca czy najwyższa wartość
         wektorów znajduje się na tym samym indeksie.
         
-        Uczenie podzielone było na epoki. W klasycznych zastosowaniach przez jedną epokę rozumie się jednokrotne
+        Proces uczenia podzielone był na epoki. W klasycznych zastosowaniach przez jedną epokę rozumie się jednokrotne
         wykorzystanie każdego przykładu z zbioru treningowego. Jednakże z powodu opisanego powyżej sposobu otrzymywania
         przypadków testowych, niemożliwe było wykorzystanie tej definicji. Zdecydowano się na arbitralne przyjęcie konkretnej 
-        ilości przypadków testowych jako jednostkę jednej epoki. Obraną wartością był tysiąc.
+        ilości przypadków testowych jako jednostkę jednej epoki. Obraną wartością był jeden tysiąc.
 
         Po ukończeniu każdej epoki przeprowadzane były pomiary skuteczności modelu na danych wyjętych spoza korpusu 
         danych treningowych. Ponieważ problematycznym byłoby wydzielenie sekwencji walidacyjnych z części środkowych
@@ -92,7 +92,7 @@
         Uczenie zaplanowano na okres 35 epok, co przełożyło się na czas bliski 20 minut. Do uczenia wykorzystano
         akcelerację sprzętową w postaci karty graficznej dostępnej w usłudze chmury obliczeniowej Google Colab.
 
-        Ilustracje \ref{epoch_val_duration_output_categorical_accuracy} i \ref{epoch_val_notes_output_mean_squared_error} zawierają wykresy opisujące miary postępu uczenia podczas kroków walidacyjnych.
+        Obrazki \ref{epoch_val_duration_output_categorical_accuracy} i \ref{epoch_val_notes_output_mean_squared_error} zawierają wykresy opisujące miary postępu uczenia podczas kroków walidacyjnych.
 
         \begin{figure}
             \centering
@@ -108,7 +108,7 @@
             \label{epoch_val_notes_output_mean_squared_error}
         \end{figure}
 
-        Na ilustracjach można dostrzec trafność predykcji klasy długości trwania dźwięku, oraz błąd średniokwadratowy
+        Na obrazkach można dostrzec trafność predykcji klasy długości trwania dźwięku, oraz błąd średniokwadratowy
         predykcji wektorów dźwięków. W pierwszej połowie uczenia na obydwu wykresach można zaobserwować pożądaną tendencję,
         czyli wzrost trafności i spadek błędu. Po kolejnych epokach postęp uczenia malał, lub nawet zachodził jego regres.
     }

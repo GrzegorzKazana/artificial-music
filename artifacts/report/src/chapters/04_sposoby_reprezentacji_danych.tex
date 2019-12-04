@@ -11,9 +11,9 @@
     {
         Pierwszym z wymiarów danych muzycznych są wysokości dźwięków. W przypadku plików midi
         oryginalnie są to liczby z przedziału 0-127. Są to już dane numeryczne, które
-        moglibyśmy teoretycznie wykorzystać jest bezpośrednio do uczenia modelu.
+        moglibyśmy teoretycznie wykorzystać bezpośrednio do uczenia modelu.
         W takim przypadku nasze zadanie sprowadziłoby się do problemu regresji, ponieważ próbowalibyśmy
-        oszacować wartość numeryczną, którą następnie trzeba by ograniczyć do liczb całkowitych z dozwolonego zakresu.
+        oszacować wartość numeryczną, którą następnie trzebaby ograniczyć do liczb całkowitych z dozwolonego zakresu.
 
         Jedną z wad tego rozwiązania, jest przedstawienie fałszywych relacji między dźwiękami.
         Dźwięki znajdujące się w bliższym sąsiedztwie byłyby traktowane jako bardziej sobie podobne.
@@ -22,17 +22,17 @@
         dwunastotonowej. Z drugiej strony, dźwięki 60 i 84 (C4 i C6) dzieli spora odległość, mimo tego że jest to ten sam dźwięk
         zagrany dwie oktawy wyżej.
 
-        Niniejsze problemy można próbować zaadresować poprzez stosowanie poniższych podejść.
+        Z niniejszymi problemami można się mierzyć poprzez stosowanie poniższych podejść.
 
         \subsection{Kody 1 z N i M z N}
         {
             Klasycznym sposobem na rozwiązanie powyższego problemu jest zastosowanie kodu 1 z N. W przypadku
-            informacji o dźwiękach midi, oznaczałoby to wypełnienie wektora 128 zerami, i postawieniem jedynki na 
+            informacji o dźwiękach midi, oznaczałoby to wypełnienie wektora 128 zerami i postawienie jedynki na 
             pozycji reprezentującej dany dźwięk. 
             Zaletą tego rozwiązania jest możliwość reprezentacji melodii polifonicznych, co przekształciłoby
             powyższy kod w kod M z N, gdzie M to ilość dźwięków wybrzmiewających jednocześnie w danym momencie sekwencji.
             Mimo tego, że w taki sposób unikamy problemu fałszywych zależności między sąsiednimi dźwiękami, 
-            to nie reprezentujemy również zależności mogących być użytecznych w procesie uczenia, 
+            to nie reprezentujemy również zależności mogących być użytecznymi w procesie uczenia, 
             takich jak w przypadku reprezentacji dźwięków odległych o oktawy. 
             Kolejnym problem tego podejścia jest również znaczący wzrost wymiarowości danych i spadek ich kompresji,
             co przełoży się na wolniejszy proces uczenia.
@@ -60,13 +60,13 @@
     \section{Reprezentacja czasu}
     {
         Drugim wymiarem danych muzycznych jest czas. Ponownie, wartość oznaczająca upływ czasu
-        mogłaby użyta bezpośrednio, znów sprowadzając problem do regresji. Dodatkowo, rozsądnym krokiem
-        byłoby znormalizowanie wartości w impulsach midi do arbitralnie wybranej wartości reprezentującą konkretną
+        mogłaby być użyta bezpośrednio, znów sprowadzając problem do regresji. Dodatkowo, rozsądnym krokiem
+        byłoby znormalizowanie wartości w impulsach midi do arbitralnie wybranej wartości reprezentującej konkretną
         wartość rytmiczną. Przykładowym mapowaniem mogłoby być przyjęcie wartości 1 dla ćwierćnut.
 
-        Głównym mankamentem tego rozwiązania jest spowodowane naturą regresji ryzyko niemożliwości precyzyjnego wyuczenia 
+        Głównym mankamentem tego rozwiązania, jest spowodowane naturą regresji ryzyko niemożliwości precyzyjnego wyuczenia 
         dokładnych wartości rytmicznych, a jedynie oscylowanie między wartościami. W takim przypadku generowana muzyka
-        mogłaby nie sprawiać wrażenia rytmicznej, gdyż następujące dźwięki nie tworzyłyby spójnych taktów. 
+        mogłaby sprawiać wrażenia arytmicznej, gdyż następujące dźwięki nie tworzyłyby spójnych taktów. 
 
         \subsection{Próbkowanie}
         {
@@ -80,7 +80,7 @@
             Wadą tego podejścia jest konieczność doboru częstotliwości próbkowania. Zbyt niskie wartości 
             uniemożliwiłyby precyzyjne przestawienie utworu. Natomiast, wraz z wyborem większej częstotliwości próbkowania,
             te same dźwięki byłyby reprezentowane przez większą ilość wektorów, 
-            co powodowały oddalenie następujących dźwięków w sekwencji i utrudnienie uczenia.
+            co powodowały oddalenie następujących po sobie dźwięków w sekwencji i utrudnienie uczenia.
         }
 
         \subsection{Grupowanie długości dźwięków}

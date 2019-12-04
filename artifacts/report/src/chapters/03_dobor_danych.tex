@@ -6,7 +6,7 @@
     określany jest konieczny nakład pracy w procesie ich obróbki. 
     Ponadto, odpowiedni dobór danych ma znaczący wpływ na otrzymywane wyniki.
 
-    W przypadku danych muzycznych należy zwrócić między innymi na cechy takie jak:
+    W przypadku danych muzycznych należy zwrócić uwagę między innymi na cechy takie jak:
     \begin{itemize}
         \item dostępność danych treningowych,
         \item sposób reprezentacji upływu czasu,
@@ -33,9 +33,9 @@
             jedynie poprzez sekwencje zmian amplitudy sygnału, przez co
             ich ekstrakcja wymagałaby wykorzystania transformaty Fouriera.
 
-            Największą zaletą i wadą tego formatu jednocześnie jest jego swoboda. 
+            Największą zaletą i jednocześnie wadą tego formatu jest jego swoboda. 
             Postać fali akustycznej pozwala na przedstawienie każdego dźwięku będącego w paśmie
-            przenoszenia, za równo złożonych wieloinstrumentowych kompozycji muzycznych, 
+            przenoszenia, zarówno złożonych wieloinstrumentowych kompozycji muzycznych, 
             prostych melodii, jak i dźwięków nie podlegających pod definicję muzyki. 
             Prowadzi to do niskiego stopnia kompresji informacji, wymuszającego złożone metody obróbki i skomplikowane
             modele uczenia.
@@ -47,13 +47,13 @@
             Dane w plikach ABC przedstawione są za pomocą znaków ASCII.
 
             Ponieważ jest to odpowiednik zapisu nutowego, oznacza to
-            że za równo wysokości dźwięków, jak i wartości rytmiczne należą do dyskretnego zbioru.
+            że zarówno wysokości dźwięków, jak i wartości rytmiczne należą do dyskretnego zbioru.
             Fakt ten nakłada spore ograniczenie na treść plików, lecz w kontekście muzyki są to 
             ograniczenia bardzo pomocne.
 
             Poza informacją o samym dźwięku i jego wartości rytmicznej, format zawiera również metadane
             utworu takie jak autor, sygnatura i tempo. Przykładowy fragment utworu w notacji ABC przedstawia
-            ilustracja \ref{abcnotation}.
+            obrazek \ref{abcnotation}.
 
             \begin{figure}
                 \centering
@@ -62,7 +62,7 @@
                 \label{abcnotation}
             \end{figure}
 
-            Dużą zaletą tego formatu jest jego wysoki stopień kompresji, za pomocą relatywnie krótkich ciągów
+            Dużą zaletą tego formatu jest jego wysoki stopień kompresji. Za pomocą relatywnie krótkich ciągów
             znaków jesteśmy w stanie opisać znaczną część utworu muzycznego. Głównym mankamentem notacji ABC
             w kontekście niniejszej pracy jest fakt, że nie wszystkie ciągi znaków są poprawnymi zapisami 
             w notacji ABC. Oznacza to, że pojedyncze błędy w generowanych sekwencjach mogą powodować niepoprawność całego utworu.
@@ -87,7 +87,7 @@
             od poprzedniej wiadomości. Oznacza to, że długość trwania dźwięku można wyznaczyć poprzez zsumowanie parametrów time
             wiadomości występujących pomiędzy odpowiadającymi sobie zdarzeniami note\textunderscore on i note\textunderscore off.
 
-            Możliwa jest konwersja wyznaczonej wartości za równo na czas w milisekundach jak i wartości rytmiczne.
+            Możliwa jest konwersja wyznaczonej wartości zarówno na czas w milisekundach i wartości rytmiczne.
             Stałe potrzebne do tych przekształceń są naczęściej zawarte w meta wiadomościach znajdujących się na początku utworu.
 
             Zaletą formatu midi jest dyskretna reprezentacja wysokości dźwięku oraz pozwalająca na elastyczną 
@@ -109,8 +109,8 @@
     {
         Do dalszych eksperymentów, opierających się na różnych sposobach tworzenia numerycznej reprezentacji
         danych wybrano stosunkowo mały zbiór zawierający utwory z serii gier Pokemon.
-        Zbiór składa się z dziesięciu utworów o średniej długości wynoszącej 90 sekund. Kompozycje zawierają za równo 
-        elementy monofoniczne, jak i polifoniczne. Główną motywacją wyboru tego zbioru była jego mała obszerność,
+        Zbiór składa się z dziesięciu utworów o średniej długości wynoszącej 90 sekund. Kompozycje zawierają zarówno 
+        elementy monofoniczne, jak i polifoniczne. Główną motywacją wyboru tego zbioru była jego mała objętość,
         co pozwalało na szybsze testowanie metod obróbki danych i procesu uczenia.
     }
 }
