@@ -1,18 +1,38 @@
 \chapter{Proces uczenia} 
 {
-    Do przetworzenia danych do wybranej postaci, zostały wykorzystane modele wymagające uczenia.
-    Pierwszym z\,\,opisanych nich jest model k-Means, który został wykorzystany w\,\,celu wyznaczenia klastrów
-    długości trwania dźwięków. Do głównych parametrów tego modelu należy docelowa ilość klastrów, ilość iteracji
-    oraz niezależnych uruchomień modelu mające na celu rozwiązania problemu zatrzymywania uczenia w\,\,lokalnym minimum.
-    
-    Kolejnym zastosowaniem uczenia maszynowego w\,\,etapie przetwarzania danych było użycie algorytmu Word2Vec. Algorytm 
-    został użyty do wyznaczenia ciągłej reprezentacji rzadkich wektorów reprezentujących dźwięki. Model wymagał 
-    określenia docelowej wymiarowości wektorów i\,\,rozmiaru kontekstu. 
-
-    W\,\,poniższych podrozdziałach skupiono się jednak na procesie uczenia głównego modelu, czyli sieci neuronowej której
+    Do przetworzenia danych do wybranej postaci zostały wykorzystane modele wymagające uczenia.
+    Ich opis został zawarty w sekcji \ref{chap:models_data_k} i\,\,\ref{chap:models_data_v}. Sekcja \ref{chap:main_model} oraz następujące
+    poświęcone są opisowi procesu uczenia głównego modelu, czyli sieci neuronowej której 
     zadaniem jest ekstrakcja cech utworów treningowych.
 
-    \section{Architektura modelu}
+    \section{Grupowanie wartości rytmicznych - k-Means}\label{chap:models_data_k}
+    {
+        Model k-Means został wykorzystany w\,\,celu wyznaczenia klastrów
+        długości trwania dźwięków. Powyższy zabieg umożliwił ograniczenie wszystkich występujących 
+        wartości rytmicznych do dyskretnego zbioru. 
+        
+        Model dzieli występujące przypadki na grupy w taki sposób, aby zminimalizować odległość 
+        między przypadkami należącymi do jednej grupy.
+        Do głównych parametrów tego modelu należy docelowa ilość klastrów, ilość iteracji
+        oraz niezależnych uruchomień modelu mająca na celu rozwiązania problemu zatrzymywania uczenia w\,\,lokalnym minimum.
+
+        Przykładowy wynik grupowania przedstawia rysunek.
+        % RYSUNEK Z KLASTERYZACJI
+    }
+
+    \section{Wyznaczanie wektorów zanurzonych - Word2Vec}\label{chap:models_data_v}
+    {
+        Kolejnym zastosowaniem uczenia maszynowego w\,\,etapie przetwarzania danych było użycie algorytmu Word2Vec. Algorytm 
+        został użyty do wyznaczenia ciągłej reprezentacji rzadkich wektorów reprezentujących dźwięki.
+        
+        Uczenie algorytmu Word2Vec polega na wyznaczaniu wag ukrytej warstwy wielowarstwowego perceptronu
+        uczonego wektorami reprezentującymi kolejne słowa należące do kontekstu.
+        Model wymagał określenia docelowej wymiarowości wektorów i\,\,rozmiaru kontekstu. 
+    }
+    
+    
+
+    \section{Architektura modelu sieci neuronowej}\label{chap:main_model}
     {
         Otrzymawszy dane w\,\,postaci sekwencji par wektorów opisujących dźwięki i\,\,ich czas trwania,
         przystąpiono do projektu architektury modelu. Z\,\,powodu dwuelementowej postaci danych
@@ -21,7 +41,7 @@
         Ponieważ charakter wektorów w\,\,sekwencji jest różny - wartości ciągłe opisujące dźwięki i\,\,
         kategoryczny kod 1 z\,\,N opisujący długość dźwięku - przed złączeniem wektorów postanowiono 
         przekształcić wektor 1 z\,\,N przez warstwę gęstą o\,\,wymiarze mniejszym niż\,\,N. Celem tej operacji
-        było wprowadzenie konieczności przez sieć kompresji informacji, co najprawdopodobniej przełoży się 
+        było wprowadzenie konieczności przez sieć kompresji informacji, co przełoży się 
         na wyznaczenie ciągłej reprezentacji kodu o\,\,mniejszej wymiarowości. 
 
         Następnie wektory zostają złączone, i\,\,ich sekwencje trafiają do warstw rekurencyjnej sieci LSTM,
@@ -60,7 +80,7 @@
         Takie rozwiązanie nie umożliwiałoby dynamicznej zmiany długości sekwencji, i\,\,wymagałoby dodatkowego 
         kroku w\,\,procesie przetwarzania danych. Alternatywnym podejściem, na które się zdecydowano jest dynamiczne
         wybieranie losowych podciągów z\,\,utworów należących do zbioru danych, które odbywa się równolegle z\,\,uczeniem modelu. 
-        Główną obawą jaką można posiadać do takiego podejścia jest jego narzut podczas uczenia modelu, 
+        Główną obawą jaką można posiadać do takiego podejścia jest jego narzut czasowy podczas uczenia modelu, 
         aczkolwiek zaobserwowano że tempo przygotowania i\,\,kolejkowania kolejnych przypadków testowych znacznie przewyższa tempo ich uczenia.
 
         \bigskip
@@ -88,12 +108,13 @@
         Po ukończeniu każdej epoki przeprowadzane były pomiary skuteczności modelu na danych wyjętych spoza korpusu 
         danych treningowych. Ponieważ problematycznym byłoby wydzielenie sekwencji walidacyjnych z\,\,części środkowych
         utworów, zdecydowano się zarezerwowanie ostatnich 25 elementów sekwencji z\,\,każdego utworu.
-        Na podstawie powyższych wyników, można wyciągać wnioski dotyczące postępu uczenia modelu.
+        Na podstawie wyników powyższych miar, można wyciągać wnioski dotyczące postępu uczenia modelu.
 
-        Uczenie zaplanowano na okres 35 epok, co przełożyło się na czas bliski 20 minut. Do uczenia wykorzystano
+        Uczenie zaplanowano na okres 35 epok, co przełożyło się na czas bliski 20 minut. Dobrana ilość epok wynikała 
+        z\,\,obserwacji spadku trafności predykcji następującej po tej liczbie powtórzeń. Do uczenia wykorzystano
         akcelerację sprzętową w\,\,postaci karty graficznej dostępnej w\,\,usłudze chmury obliczeniowej Google Colab.
 
-        Obrazki \ref{epoch_val_duration_output_categorical_accuracy} i\,\,\ref{epoch_val_notes_output_mean_squared_error} zawierają wykresy opisujące miary postępu uczenia podczas kroków walidacyjnych.
+        Rysunki \ref{epoch_val_duration_output_categorical_accuracy} i\,\,\ref{epoch_val_notes_output_mean_squared_error} zawierają wykresy opisujące miary postępu uczenia podczas kroków walidacyjnych.
 
         \begin{figure}[H]
             \centering

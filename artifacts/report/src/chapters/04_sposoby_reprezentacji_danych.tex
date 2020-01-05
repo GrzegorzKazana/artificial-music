@@ -24,7 +24,7 @@
 
         Z\,\,niniejszymi problemami można się mierzyć poprzez stosowanie poniższych podejść.
 
-        \subsection{Kody 1 z\,\,N i\,\,M z\,\,N}
+        \subsection{Kody 1 z N i M z N}
         {
             Klasycznym sposobem na rozwiązanie powyższego problemu jest zastosowanie kodu 1 z\,\,N. W\,\,przypadku
             informacji o\,\,dźwiękach midi, oznaczałoby to wypełnienie wektora 128 zerami i\,\,postawienie jedynki na 
@@ -90,6 +90,9 @@
             występujących w\,\,zbiorze danych i\,\,przedstawienie ich w\,\,dyskretny sposób bez arbitralnego określania zbioru dozwolonych
             wartości. 
             Po podziale wartości rytmicznych na niezależne klasy problem zostanie przekształcony do problemu klasyfikacji 1\,z\,N. 
+
+            W celu otrzymania grup odpowiadających najczęstszym wartościom rytmicznym można skorzystać 
+            z\,\,algorytmów klasteryzujących takich jak k-Means \cite{MacQueen1967SomeMF} lub DBSCAN \cite{Ester1996ADA}.
         }
     }
 

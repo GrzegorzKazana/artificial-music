@@ -16,8 +16,10 @@
             \item Rozpiętość tonalna - odległość między najniższym i\,\,najwyższym dźwiękiem, w\,\,przypadku plików midi ograniczona
             zakresem <0,127>,
             \item Histogram tonalny - rozkład występowania poszczególnych dźwięków z\,\,dwunastotonowej skali, niezależnie od oktawy, 
-            \item Macierz przejść dźwięków - dwuwymiarowa macierz przedstawiająca częstotliwość występowania par dźwięków następujących
-            po sobie. Uwagi wymaga kwestia nanoszenia na macierz informacji o\,\,następujących po sobie wielodźwiękach. W\,\,celu oddania
+            \item Macierz przejść dźwięków - dwuwymiarowa macierz przedstawiająca występowanie konkretnych par dźwięków następujących
+            bezpośrednio po sobie. Za równo kolumny, jak i rzędy odpowiadają dźwiękom skali dwunastotonowej. 
+            Wartość znajdująca się na przecięciu odpowiada częstości następowania po sobie dźwięków określonych kolumną i rzędem. 
+            Uwagi wymaga kwestia nanoszenia na macierz informacji o\,\,następujących po sobie wielodźwiękach. W\,\,celu oddania
             również takich zdarzeń, na macierz nanoszone są pary będące wynikami iloczynu kartezjańskiego między składowymi wielodźwięków.
             \item Rozpiętość rytmiczna - odległość między najkrótszą i\,\,najdłuższą wartością rytmiczną występującą w\,\,mierzonej próbce. 
             Ponieważ wartości kodu 1 z\,\,N są posortowane według długości trwania, może ona być wyrażona poprzez różnicę indeksów 
@@ -44,7 +46,7 @@
     \section{Pomiar zbioru treningowego}
     {
         Ponieważ wartości miar będą różne dla każdego zbioru danych, w\,\,procesie oceny generowanych próbek powinno się je 
-        stosować w\,\,odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych.
+        stosować w\,\,odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych. 
         
         Na rysunkach \ref{tonal_hist_transition}, \ref{rythm_hist_transition} oraz w\,\,tabeli \ref{range_and_compression} 
         przestawione są wartości miar całego zbioru testowego.
@@ -53,7 +55,7 @@
         \begin{figure}
             \centering
             \includegraphics[scale=0.5]{tonal_hist_transition}
-            \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
+            \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między kolejnymi dźwiękami utworów zbioru treningowego}
             \label{tonal_hist_transition}
         \end{figure}
 
@@ -61,7 +63,7 @@
         \begin{figure}
             \centering
             \includegraphics[scale=0.5]{rythm_hist_transition}
-            \caption{Histogram występowania poszczególnych długości dźwięków oraz macierz przejść między nimi}
+            \caption{Histogram występowania poszczególnych długości dźwięków oraz macierz przejść między kolejnymi wartościami rytmicznymi dźwięków należących do utworów zbioru treningowego}
             \label{rythm_hist_transition}
         \end{figure}
 
@@ -92,6 +94,11 @@
             \item symetria macierzy przejść dźwięków wskazuje na brak silnego wpływu kierunku odtwarzania utworu na następstwa tonalne
             \item klasy przedstawiające długości trwania dźwięków są silnie niezrównoważone
         \end{itemize}
+
+        Pomimo że nie wszystkie miary pozwalają na bezpośrednią interpretację w kontekście melodyczności lub rytmiczności, 
+        mogą one zostać użyte w celu porównanaia z innymi zbiorami danych lub wygenerowanymi próbkami. 
+        Porównanie wartości miar między zbiorem treningowym a wygenerowanymi próbkami pozwoli na ocenę 
+        jakości odzwierciedlenia charakteru danych treningowych.
     }
 
     \section{Wyniki}
@@ -156,7 +163,8 @@
         \bigskip
         
         Na rysunku \ref{tonal_hist_transition_1} oraz \ref{rythm_hist_transition_1} zamieszczono uśrednione 
-        histogramy i\,\,macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
+        histogramy i\,\,macierze przejść próbek wygenerowanych przy pomocy różnych ziaren. 
+        Można zaobserwować znaczące podobnieństwo względem histogramów i macierzy opisujących zbiór teningowy, co sugeruje pomyślne odwzorowanie tych parametrów danych.
 
         %%% wykresiki
         %%% ilustracja tonalnego histogramu i\,\,macierzy przejść
