@@ -1,55 +1,55 @@
 \chapter{Analiza wyników}
 {
 
-    Jednym z napotkanych problemów podczas implementacji procesu przetwarzania danych i projektu architektury modelu
+    Jednym z\,\,napotkanych problemów podczas implementacji procesu przetwarzania danych i\,\,projektu architektury modelu
     był czasochłonny krok oceny wyników. Po każdorazowym uczeniu modelu konieczne było generowanie próbek, 
-    konwersja ich postaci numerycznej na pliki midi, manualny odsłuch i subiektywna ocena.
+    konwersja ich postaci numerycznej na pliki midi, manualny odsłuch i\,\,subiektywna ocena.
 
-    W celu formalizacji wyników i uzyskania możliwości wygodniejszego sposobu oceny modelu, konieczne było wyznaczenie
+    W\,\,celu formalizacji wyników i\,\,uzyskania możliwości wygodniejszego sposobu oceny modelu, konieczne było wyznaczenie
     miar opisujących generowane próbki. 
 
-    \section{Miary i ich definicje}
+    \section{Miary i\,\,ich definicje}
     {
         Na podstawie artykułu 'On the evaluation of generative models in music'\cite{Yang2018OnTE} zdecydowano się zaimplementować następujące miary:
         \begin{itemize}
             \setlength\itemsep{-0.5em}
-            \item Rozpiętość tonalna - odległość między najniższym i najwyższym dźwiękiem, w przypadku plików midi ograniczona
+            \item Rozpiętość tonalna - odległość między najniższym i\,\,najwyższym dźwiękiem, w\,\,przypadku plików midi ograniczona
             zakresem <0,127>,
-            \item Histogram tonalny - rozkład występowania poszczególnych dźwięków z dwunastotonowej skali, niezależnie od oktawy, 
+            \item Histogram tonalny - rozkład występowania poszczególnych dźwięków z\,\,dwunastotonowej skali, niezależnie od oktawy, 
             \item Macierz przejść dźwięków - dwuwymiarowa macierz przedstawiająca częstotliwość występowania par dźwięków następujących
-            po sobie. Uwagi wymaga kwestia nanoszenia na macierz informacji o następujących po sobie wielodźwiękach. W celu oddania
+            po sobie. Uwagi wymaga kwestia nanoszenia na macierz informacji o\,\,następujących po sobie wielodźwiękach. W\,\,celu oddania
             również takich zdarzeń, na macierz nanoszone są pary będące wynikami iloczynu kartezjańskiego między składowymi wielodźwięków.
-            \item Rozpiętość rytmiczna - odległość między najkrótszą i najdłuższą wartością rytmiczną występującą w mierzonej próbce. 
-            Ponieważ wartości kodu 1 z N są posortowane według długości trwania, może ona być wyrażona poprzez różnicę indeksów 
-            między klasami kodu 1 z N. Przyjmuje wartości z zakresu <0, ilość klas rytmicznych>.
+            \item Rozpiętość rytmiczna - odległość między najkrótszą i\,\,najdłuższą wartością rytmiczną występującą w\,\,mierzonej próbce. 
+            Ponieważ wartości kodu 1 z\,\,N są posortowane według długości trwania, może ona być wyrażona poprzez różnicę indeksów 
+            między klasami kodu 1 z\,\,N. Przyjmuje wartości z\,\,zakresu <0, ilość klas rytmicznych>.
             \item Histogram rytmiczny - rozkład występowania poszczególnych klas wartości rytmicznych.
             \item Macierz przejść wartości rytmicznych - opisuje częstość przejść między konkretnymi wartościami rytmicznymi.
         \end{itemize}
 
-        Dodatkowo, opracowano dwie miary mierzące stopień kompresji generowanych ciągów dźwięków i wartości rytmicznych. 
-        Uznanie stopnia kompresji jako istotny parametr wynika z intuicji wynikającej z zasady działania dużej części
-        algorytmów kompresji, w których powtarzające się ciągi znaków są zastępowane krótszym znacznikiem wskazującym na pierwsze 
+        Dodatkowo, opracowano dwie miary mierzące stopień kompresji generowanych ciągów dźwięków i\,\,wartości rytmicznych. 
+        Uznanie stopnia kompresji jako istotny parametr wynika z\,\,intuicji wynikającej z\,\,zasady działania dużej części
+        algorytmów kompresji, w\,\,których powtarzające się ciągi znaków są zastępowane krótszym znacznikiem wskazującym na pierwsze 
         wystąpienie ciągu. 
-        Oznacza to, że sekwencje charakteryzujące się większą powtarzalnością mogą zostać skompresowane w większym stopniu.
-        Główną zaletą tej miary jest jej zdolność wykrywania powtarzających się ciągów rozsuniętych w czasie, co stanowi uzupełnienie 
+        Oznacza to, że sekwencje charakteryzujące się większą powtarzalnością mogą zostać skompresowane w\,\,większym stopniu.
+        Główną zaletą tej miary jest jej zdolność wykrywania powtarzających się ciągów rozsuniętych w\,\,czasie, co stanowi uzupełnienie 
         bardziej lokalnej miary, jaką jest macierz przejść.
 
-        W celu możliwości skorzystania z dostępnych algorytmów, sekwencje dźwięków i wartości rytmicznych zostały przekształcone
-        na ciągi znaków. W przypadku wektorów opisujących dźwięki zdecydowano się na zapis symboli kolejnych dźwięków. Wartości
+        W\,\,celu możliwości skorzystania z\,\,dostępnych algorytmów, sekwencje dźwięków i\,\,wartości rytmicznych zostały przekształcone
+        na ciągi znaków. W\,\,przypadku wektorów opisujących dźwięki zdecydowano się na zapis symboli kolejnych dźwięków. Wartości
         rytmiczne przedstawione były przez indeksy odpowiadających im klas. 
 
-        Do kompresji wykorzystano bibliotekę zlib, korzystającą z algorytmu delfate.
+        Do kompresji wykorzystano bibliotekę zlib, korzystającą z\,\,algorytmu delfate.
     }
 
     \section{Pomiar zbioru treningowego}
     {
-        Ponieważ wartości miar będą różne dla każdego zbioru danych, w procesie oceny generowanych próbek powinno się je 
-        stosować w odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych.
+        Ponieważ wartości miar będą różne dla każdego zbioru danych, w\,\,procesie oceny generowanych próbek powinno się je 
+        stosować w\,\,odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych.
         
-        Na rysunkach \ref{tonal_hist_transition}, \ref{rythm_hist_transition} oraz w tabeli \ref{range_and_compression} 
+        Na rysunkach \ref{tonal_hist_transition}, \ref{rythm_hist_transition} oraz w\,\,tabeli \ref{range_and_compression} 
         przestawione są wartości miar całego zbioru testowego.
 
-        %%% ilustracja tonalnego histogramu i macierzy przejść
+        %%% ilustracja tonalnego histogramu i\,\,macierzy przejść
         \begin{figure}
             \centering
             \includegraphics[scale=0.5]{tonal_hist_transition}
@@ -57,7 +57,7 @@
             \label{tonal_hist_transition}
         \end{figure}
 
-        %%% histogram rytmiczny i macierz przejść
+        %%% histogram rytmiczny i\,\,macierz przejść
         \begin{figure}
             \centering
             \includegraphics[scale=0.5]{rythm_hist_transition}
@@ -65,9 +65,9 @@
             \label{rythm_hist_transition}
         \end{figure}
 
-        %%% tabelka z zakresami i kompresją
+        %%% tabelka z\,\,zakresami i\,\,kompresją
         \begin{table}
-            \caption{Zakresy i współczynniki kompresji danych} \label{range_and_compression}
+            \caption{Zakresy i\,\,współczynniki kompresji danych} \label{range_and_compression}
             \begin{center}
                 \begin{tabular}{ |p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}| }
                 \hline
@@ -86,9 +86,9 @@
         Na postawie wykresów można sformułować następujące wnioski:
         \begin{itemize}
             \setlength\itemsep{-0.5em}
-            \item najczęściej występującym dźwiękiem w zbiorze jest A, a najrzadszym D\#,
-            \item wyższe wartości na przekątnej macierzy przejść dźwięków wskazują, że dźwięk występujący w bieżącym wielodźwięku
-            często występuje również w następującym
+            \item najczęściej występującym dźwiękiem w\,\,zbiorze jest A, a\,\,najrzadszym D\#,
+            \item wyższe wartości na przekątnej macierzy przejść dźwięków wskazują, że dźwięk występujący w\,\,bieżącym wielodźwięku
+            często występuje również w\,\,następującym
             \item symetria macierzy przejść dźwięków wskazuje na brak silnego wpływu kierunku odtwarzania utworu na następstwa tonalne
             \item klasy przedstawiające długości trwania dźwięków są silnie niezrównoważone
         \end{itemize}
@@ -96,8 +96,8 @@
 
     \section{Wyniki}
     {
-        Kolejnym krokiem było wygenerowanie próbek i opisanie ich za pomocą wymienionych miar. Zestawienie wartości miar i różnic
-        w odniesieniu do zbioru treningowego przedstawiają tabele \ref{tonal_measuremnts_table} i \ref{rythm_measuremnts_table}. Wyniki pogrupowano na podstawie użytego ziarna.
+        Kolejnym krokiem było wygenerowanie próbek i\,\,opisanie ich za pomocą wymienionych miar. Zestawienie wartości miar i\,\,różnic
+        w\,\,odniesieniu do zbioru treningowego przedstawiają tabele \ref{tonal_measuremnts_table} i\,\,\ref{rythm_measuremnts_table}. Wyniki pogrupowano na podstawie użytego ziarna.
 
         \begin{table}
             \caption{Wyniki miar tonalnych próbek generowanych różnymi ziarnami} \label{tonal_measuremnts_table}
@@ -146,9 +146,9 @@
         Występujące różnice między wynikami nie pozwalają na pewne wskazanie najlepszego ziarna, lecz 
         zachęcają do wysunięcia kilku wniosków.
 
-        Wszystkie sekwencje poza inicjowanymi pustymi wektorami dają zbliżone różnice miedzy histogramami i 
+        Wszystkie sekwencje poza inicjowanymi pustymi wektorami dają zbliżone różnice miedzy histogramami i\,\,
         tonalnymi macierzami przejść. 
-        Sekwencje zapoczątkowane wartościami losowymi zgodnie z intuicją charakteryzują się niższym współczynnikiem
+        Sekwencje zapoczątkowane wartościami losowymi zgodnie z\,\,intuicją charakteryzują się niższym współczynnikiem
         kompresji, co może przekładać się na większe zróżnicowanie sekwencji dźwięków.
         Spośród zbadanych ziaren, sekwencje początkowane harmonicznym zestawem dźwięków najwierniej
         odwzorowały rozkłady następujących po sobie dźwięków.
@@ -156,10 +156,10 @@
         \bigskip
         
         Na rysunku \ref{tonal_hist_transition_1} oraz \ref{rythm_hist_transition_1} zamieszczono uśrednione 
-        histogramy i macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
+        histogramy i\,\,macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
 
         %%% wykresiki
-        %%% ilustracja tonalnego histogramu i macierzy przejść
+        %%% ilustracja tonalnego histogramu i\,\,macierzy przejść
         \begin{figure}
             \centering
             \includegraphics[scale=0.5]{tonal_hist_transition_1}
@@ -167,11 +167,11 @@
             \label{tonal_hist_transition_1}
         \end{figure}
 
-        %%% histogram rytmiczny i macierz przejść
+        %%% histogram rytmiczny i\,\,macierz przejść
         \begin{figure}
             \centering
             \includegraphics[scale=0.5]{rythm_hist_transition_1}
-            \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
+            \caption{Histogram występowania poszczególnych długości dźwięków i\,\,przejść między nimi}
             \label{rythm_hist_transition_1}
         \end{figure}
     }
@@ -185,21 +185,21 @@
 
         \bigskip
 
-        Po dogłębnej analizie stwierdzono, że zdecydowana większość dźwięków o najkrótszym czasie trwania
-        wynika z przesunięć wiadomości w plikach midi o 1 lub 2 wartości taktujące. Dla kontekstu, najczęściej stosowaną
+        Po dogłębnej analizie stwierdzono, że zdecydowana większość dźwięków o\,\,najkrótszym czasie trwania
+        wynika z\,\,przesunięć wiadomości w\,\,plikach midi o\,\,1 lub 2 wartości taktujące. Dla kontekstu, najczęściej stosowaną
         prędkością taktowania jest 120 taktów na ćwierćnutę. Źródłem tego zjawiska mógł być zamierzony 
         zabieg wprowadzający element niedoskonałości, mający na celu wprowadzenie ludzkiego charakteru nagrania 
         wykonywanego przez prawdziwych artystów.
         Niestety, zabieg ten uniemożliwił generowanie subiektywnie akceptowalnych sekwencji.
 
         Na podstawie powyższych wniosków, podjęto ponowną próbę uczenia. Tym razem, zbiór danych został
-        ograniczony o powyżej opisane dźwięki. Proces uczenia i generowania został przeprowadzony w ten sam sposób
+        ograniczony o\,\,powyżej opisane dźwięki. Proces uczenia i\,\,generowania został przeprowadzony w\,\,ten sam sposób
         co poprzednio. 
         %%% ZOSTAWIĆ CZY NIE
-        % Na wykresach \ref{rythm_hist_2}, \ref{rythm_transition_2}, \ref{tonal_hist_2} i \ref{tonal_transition_2} widać oczywiste zmiany w miarach związanych z rytmiką.
+        % Na wykresach \ref{rythm_hist_2}, \ref{rythm_transition_2}, \ref{tonal_hist_2} i\,\,\ref{tonal_transition_2} widać oczywiste zmiany w\,\,miarach związanych z\,\,rytmiką.
 
         % %%% tutaj wykresiki tego lepszego modelu
-        % %%% ilustracja tonalnego histogramu i macierzy przejść
+        % %%% ilustracja tonalnego histogramu i\,\,macierzy przejść
         % \begin{figure}
         %     \centering
         %     \includegraphics[scale=0.5]{tonal_hist_transition_1}
@@ -209,19 +209,19 @@
 
         % Jak można zaobserwować, ograniczenie zbioru danych miało również wpływ na zależności tonalne.
 
-        %%% histogram rytmiczny i macierz przejść
+        %%% histogram rytmiczny i\,\,macierz przejść
         % \begin{figure}
         %     \centering
         %     \includegraphics[scale=0.5]{rythm_hist_transition_1}
-        %     \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
+        %     \caption{Histogram występowania poszczególnych długości dźwięków i\,\,przejść między nimi}
         %     \label{rythm_hist_transition_1}
         % \end{figure}
 
         \bigskip
 
-        Tym razem wyniki, choć wciąż nie idealne, były conajmniej akceptowalne. W generowanych utworach
-        obserwowalny był zupełnie inny rozkład długości dźwięków. Sekwencje w subiektywnym odczuciu były dużo mniej
-        chaotyczne, a zwiększone długości dźwięków pozwalały na skupienie się na następujących po sobie dźwiękach.
+        Tym razem wyniki, choć wciąż nie idealne, były conajmniej akceptowalne. W\,\,generowanych utworach
+        obserwowalny był zupełnie inny rozkład długości dźwięków. Sekwencje w\,\,subiektywnym odczuciu były dużo mniej
+        chaotyczne, a\,\,zwiększone długości dźwięków pozwalały na skupienie się na następujących po sobie dźwiękach.
         
         Spośród sekwencji powstałych przy pomocy różnych ziaren, subiektywnie najbardziej interesujące wyniki
         zostały otrzymane przy początkowaniu generacji pojedynczym dźwiękiem lub pustymi wektorami.
@@ -230,9 +230,9 @@
 
         \bigskip
 
-        Uzasadnione są zastrzeżenia co do tak inwazyjnej ingerencji w zbiór danych jaką jest eliminacja 
-        wszystkich przedstawicieli konkretnej klasy. Z technicznego punktu widzenia bardziej poprawnym 
-        rozwiązaniem mogłoby być dynamiczne skalowanie wartości błędu predykcji dla poszczególnych przypadków w czasie uczenia, 
-        w taki sposób, aby mniejsza waga była przywiązywana do przedstawicieli nadreprezentowanej klasy.
+        Uzasadnione są zastrzeżenia co do tak inwazyjnej ingerencji w\,\,zbiór danych jaką jest eliminacja 
+        wszystkich przedstawicieli konkretnej klasy. Z\,\,technicznego punktu widzenia bardziej poprawnym 
+        rozwiązaniem mogłoby być dynamiczne skalowanie wartości błędu predykcji dla poszczególnych przypadków w\,\,czasie uczenia, 
+        w\,\,taki sposób, aby mniejsza waga była przywiązywana do przedstawicieli nadreprezentowanej klasy.
     }
 }

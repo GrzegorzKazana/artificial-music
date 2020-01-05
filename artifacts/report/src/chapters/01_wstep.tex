@@ -2,18 +2,18 @@
 \chapter{Wstęp}
 {
     Współczesne zastosowania metod uczenia maszynowego są bardzo szerokie. Codziennie, często nieświadomie,
-    korzystamy z usług i produktów których działanie nie byłoby tak skuteczne lub nawet możliwe bez sztucznej inteligencji.
-    Z pośród niezliczonej ilości problemów praktycznie niemożliwych do rozwiązania podejściami klasycznymi, 
-    takich jak detekcja i klasyfikacja obiektów na obrazach lub rozpoznawanie mowy,
-    duża część zostaje rozwiązana z wykorzystaniem szerokiej gamy algorytmów oraz modeli uczenia.
+    korzystamy z\,\,usług i\,\,produktów których działanie nie byłoby tak skuteczne lub nawet możliwe bez sztucznej inteligencji.
+    Z\,\,pośród niezliczonej ilości problemów praktycznie niemożliwych do rozwiązania podejściami klasycznymi, 
+    takich jak detekcja i\,\,klasyfikacja obiektów na obrazach lub rozpoznawanie mowy,
+    duża część zostaje rozwiązana z\,\,wykorzystaniem szerokiej gamy algorytmów oraz modeli uczenia.
 
     Zadania stawiane przed systemami sztucznej inteligencji można podzielić między innymi na problemy:
     \begin{itemize}
         \setlength\itemsep{-0.5em}
         \item klasyfikacji - polegające na przypisaniu obiektu do określonej kategorii, 
         na przykład rozpoznawanie obiektów na obrazie 
-        \item grupowania - polegające na wyodrębnieniu przypadków o podobnych cechach 
-        lub współwystępujących, na przykład systemy sugerujące przedmioty w sklepach internetowych na podstawie dotychczasowych wyborów
+        \item grupowania - polegające na wyodrębnieniu przypadków o\,\,podobnych cechach 
+        lub współwystępujących, na przykład systemy sugerujące przedmioty w\,\,sklepach internetowych na podstawie dotychczasowych wyborów
         \item regresji - polegające na oszacowaniu wartości ciągłej dla poszczególnych cech, 
         na przykład przewidywanie cen produktów.
     \end{itemize}
@@ -21,16 +21,16 @@
     \pagebreak
 
     Coraz szersze zastosowanie metod uczenia maszynowego prowadzi do powstawania pytań poruszających temat 
-    ich granic możliwości i zastosowań.
-    Pomimo powszechności i znaczenia zastosowań przytoczonych kategorii problemów, nie można w nich dostrzec przejawów kreatywności.
+    ich granic możliwości i\,\,zastosowań.
+    Pomimo powszechności i\,\,znaczenia zastosowań przytoczonych kategorii problemów, nie można w\,\,nich dostrzec przejawów kreatywności.
     
-    Jednym z problemów, którego rozwiązanie byłoby silnym argumentem w debacie na temat kreatywności i zdolności twórczych
+    Jednym z\,\,problemów, którego rozwiązanie byłoby silnym argumentem w\,\,debacie na temat kreatywności i\,\,zdolności twórczych
     systemów komputerowych jest komponowanie muzyki.
 
     \section{Cel pracy}
     {
         % Celem pracy jest analiza różnych podejść do obróbki plików muzycznych oraz 
-        % porównanie wyników sposobów syntezy próbek z wykorzystaniem metod uczenia maszynowego. 
+        % porównanie wyników sposobów syntezy próbek z\,\,wykorzystaniem metod uczenia maszynowego. 
 
         Celem pracy jest opracowanie oraz porównanie wyników metod generacji utworów muzycznych za pomocą
         sztucznych sieci neuronowych. Krokiem będącym fundamentem do realizacji celu jest również
@@ -38,14 +38,14 @@
         
         % Pomimo że praca ma charakter badawczo-eksperymentalny, 
         % opracowane metody oraz ich wyniki mogą potencjalnie znaleźć zastosowanie
-        % w zadaniach ekstrakcji stylu, augmentacji istniejących zbiorów danych,
-        % lub w optymistycznym scenariuszu jako narzędzie wspierające proces twórczy muzyków.
+        % w\,\,zadaniach ekstrakcji stylu, augmentacji istniejących zbiorów danych,
+        % lub w\,\,optymistycznym scenariuszu jako narzędzie wspierające proces twórczy muzyków.
         
-        Pomyślna realizacja celów i otrzymanie akceptowalnych rezultatów oznaczałoby, że
-        metody opracowane w procesie badawczym mają potencjał wdrożeniowy. 
+        Pomyślna realizacja celów i\,\,otrzymanie akceptowalnych rezultatów oznaczałoby, że
+        metody opracowane w\,\,procesie badawczym mają potencjał wdrożeniowy. 
         Zbadane algorytmy oraz kroki mogą potencjalnie znaleźć zastosowanie
-        w zadaniach ekstrakcji stylu, augmentacji istniejących zbiorów danych,
-        lub w optymistycznym scenariuszu jako narzędzie wspierające proces twórczy muzyków.
+        w\,\,zadaniach ekstrakcji stylu, augmentacji istniejących zbiorów danych,
+        lub w\,\,optymistycznym scenariuszu jako narzędzie wspierające proces twórczy muzyków.
     }
 
     \section{Zakres pracy}
@@ -54,35 +54,35 @@
         \begin{itemize}
             \setlength\itemsep{-0.5em}
             \item dobór zbioru danych
-            \item dobór, implementacja i analiza metod przetwarzania plików muzycznych
-            \item dobór i parametryzacja architektury modelu uczenia maszynowego
+            \item dobór, implementacja i\,\,analiza metod przetwarzania plików muzycznych
+            \item dobór i\,\,parametryzacja architektury modelu uczenia maszynowego
             \item wykorzystanie przygotowanych danych 
-            w procesie uczenia i syntezy nowych próbek
+            w\,\,procesie uczenia i\,\,syntezy nowych próbek
             \item ocena uzyskanych wyników
         \end{itemize}
     }
 
     \section{Struktura pracy}
     {
-        Niniejsza praca w kolejnych rozdziałach prezentuje analizę różnych podejść do kolejnych etapów
+        Niniejsza praca w\,\,kolejnych rozdziałach prezentuje analizę różnych podejść do kolejnych etapów
         procesu implementacji systemu, którego celem jest generowanie utworów muzycznych. 
 
-        Treścią 2. rozdziału jest przybliżenie dziedziny pracy oraz odniesienie do istniejących prac o powiązanej tematyce.
+        Treścią 2. rozdziału jest przybliżenie dziedziny pracy oraz odniesienie do istniejących prac o\,\,powiązanej tematyce.
         
-        W rozdziale 3. poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
-        były przeprowadzane eksperymenty. Przedstawiono również potencjalne trudności wiążące się z wyborem
+        W\,\,rozdziale 3. poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
+        były przeprowadzane eksperymenty. Przedstawiono również potencjalne trudności wiążące się z\,\,wyborem
         poszczególnych źródeł danych.
 
-        Rozdział 4. traktuje o różnych podejściach do zagadnienia reprezentacji wybranego formatu 
-        danych w postaci numerycznej. Rozdział zawiera również opis wad i zalet każdego z podejść.
+        Rozdział 4. traktuje o\,\,różnych podejściach do zagadnienia reprezentacji wybranego formatu 
+        danych w\,\,postaci numerycznej. Rozdział zawiera również opis wad i\,\,zalet każdego z\,\,podejść.
 
         Treścią 5. rozdziału jest przestawienie obranego typu modelu uczenia maszynowego oraz 
-        wybranej architektury, razem z opisem procesu uczenia.
+        wybranej architektury, razem z\,\,opisem procesu uczenia.
 
         Rozdział 6. jest rozdziałem poświęconym generacji próbek oraz opisowi przyjętego podejścia oraz sposobów 
         wymuszania procesu generacji.
 
-        Rozdziały 7. i 8. są poświęcone analizie wyników, wnioskom i sugestiom zmian w procesie mających na celu 
+        Rozdziały 7. i\,\,8. są poświęcone analizie wyników, wnioskom i\,\,sugestiom zmian w\,\,procesie mających na celu 
         poprawienie otrzymywanych rezultatów.
     }
 }
