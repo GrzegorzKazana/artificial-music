@@ -2,8 +2,8 @@
 {
     Znaczna część modeli uczenia maszynowego, w tym sieci neuronowe, wymagają 
     danych w postaci numerycznej. Odpowiednio dobierając proces przekształcania danych
-    jesteśmy w stanie nie tylko umożliwić skorzystanie z tych modeli, ale możemy również
-    uwypuklić informacje prawdziwie w nim istotne, co skróci i ułatwi proces uczenia modelu.
+    możliwe jest nie tylko dostosowanie danych do metody uczenia, ale również
+    uwypuklenie informacji prawdziwie w nich istotnych, co potenacjalnie skróci i ułatwi proces uczenia modelu.
 
     Poniższy rozdział zawiera analizę różnych podejść do przedstawionego problemu.
 
@@ -11,8 +11,8 @@
     {
         Pierwszym z wymiarów danych muzycznych są wysokości dźwięków. W przypadku plików midi
         oryginalnie są to liczby z przedziału 0-127. Są to już dane numeryczne, które
-        moglibyśmy teoretycznie wykorzystać bezpośrednio do uczenia modelu.
-        W takim przypadku nasze zadanie sprowadziłoby się do problemu regresji, ponieważ próbowalibyśmy
+        można by teoretycznie wykorzystać bezpośrednio do uczenia modelu.
+        W takim przypadku zadanie sprowadziłoby się do problemu regresji, ponieważ model próbowałby
         oszacować wartość numeryczną, którą następnie trzebaby ograniczyć do liczb całkowitych z dozwolonego zakresu.
 
         Jedną z wad tego rozwiązania, jest przedstawienie fałszywych relacji między dźwiękami.
@@ -31,10 +31,10 @@
             pozycji reprezentującej dany dźwięk. 
             Zaletą tego rozwiązania jest możliwość reprezentacji melodii polifonicznych, co przekształciłoby
             powyższy kod w kod M z N, gdzie M to ilość dźwięków wybrzmiewających jednocześnie w danym momencie sekwencji.
-            Mimo tego, że w taki sposób unikamy problemu fałszywych zależności między sąsiednimi dźwiękami, 
-            to nie reprezentujemy również zależności mogących być użytecznymi w procesie uczenia, 
+            Mimo tego, że w taki sposób można uniknąć problemu fałszywych zależności między sąsiednimi dźwiękami, 
+            to nie są reprezentowane również zależności mogących być użytecznymi w procesie uczenia, 
             takich jak w przypadku reprezentacji dźwięków odległych o oktawy. 
-            Kolejnym problem tego podejścia jest również znaczący wzrost wymiarowości danych i spadek ich kompresji,
+            Kolejnym problemem tego podejścia jest również znaczący wzrost wymiarowości danych i spadek ich kompresji,
             co przełoży się na wolniejszy proces uczenia.
         }
 
@@ -47,7 +47,7 @@
 
             Rozwiązaniem cieszącym się dużą popularnością jest algorytm Word2Vec zaproponowany w roku 2013 \cite{Mikolov2013EfficientEO}.
             Jest to algorytm służący do wyznaczenia ukrytej reprezentacji kodów 1 z N w postaci wektorów wartości ciągłych
-            o dużo mniejszym wymiarze. Metoda opiera się na założeniu twierdzącym że wektory 
+            o dużo mniejszym wymiarze. Metoda opiera się na założeniu twierdzącym, że wektory 
             o podobnym znaczeniu występują w sąsiedztwie podobnych lub nawet tych samych wyrazów. Ponieważ to założenie 
             jest również prawdziwe w kontekście muzyki przyjęto użycie algorytmu Word2Vec za podstawne.
             
@@ -71,7 +71,7 @@
         \subsection{Próbkowanie}
         {
             Alternatywną metodą wyrażenia upływu czasu jest próbkowanie. Z przyjętą częstotliwością próbkowania, 
-            możliwe byłoby tworzenie listy aktualnie wybrzmiewających dźwięków i zapełnienie macierzy o wymiarach t x n, gdzie n to
+            możliwe byłoby tworzenie listy aktualnie wybrzmiewających dźwięków i zapełnienie macierzy o wymiarach \(t \times n\), gdzie n to
             wymiarowość reprezentacji wysokości dźwięku, a t to ilość pobranych próbek w danym fragmencie utworu.
             
             Ponieważ dźwięki zawsze trwają wielokrotność pewnej wartości, można twierdzić, że łatwiejsze byłoby 
@@ -89,7 +89,7 @@
             odniesieniu do ustalonej wartości rytmicznej. W ten sposób możliwe byłoby odzwierciedlenie wartości rytmicznych
             występujących w zbiorze danych i przedstawienie ich w dyskretny sposób bez arbitralnego określania zbioru dozwolonych
             wartości. 
-            Po podziale wartości rytmicznych na niezależne klasy problem zostanie przekształcony do problemu klasyfikacji 1 z N.
+            Po podziale wartości rytmicznych na niezależne klasy problem zostanie przekształcony do problemu klasyfikacji 1\,z\,N. 
         }
     }
 
