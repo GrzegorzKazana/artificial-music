@@ -8,6 +8,7 @@
 
     W przypadku danych muzycznych należy zwrócić uwagę między innymi na cechy takie jak:
     \begin{itemize}
+        \setlength\itemsep{-0.5em}
         \item dostępność danych treningowych,
         \item sposób reprezentacji upływu czasu,
         \item sposób wyrażenia wysokości dźwięku,
@@ -18,6 +19,10 @@
 
     \section{Porównanie formatów danych}
     {
+        Wybór odpowiedniego formatu danych został poprzedzony analizą zbioru popularnych formatów muzycznych.
+        Zbiór porównanych rodzajów plików ograniczono do plików audio, notacji ABC oraz midi.
+        Opisane formaty zostały dobrane na podstawie ich odmienności względem siebie.
+
         \subsection{Pliki audio}
         {
             Najmniej restrykcyjnymi formatami plików audio są formaty będące zapisem
@@ -41,7 +46,7 @@
             modele uczenia.
         }
 
-        \subsection{Notacja ABC}
+        \subsection{Notacja ABC}\label{chap:abc}
         {
             Notacja ABC jest jedną z cyfrowych postaci klasycznego zapisu nutowego.
             Dane w plikach ABC przedstawione są za pomocą znaków ASCII.
@@ -53,7 +58,7 @@
 
             Poza informacją o samym dźwięku i jego wartości rytmicznej, format zawiera również metadane
             utworu takie jak autor, sygnatura i tempo. Przykładowy fragment utworu w notacji ABC przedstawia
-            obrazek \ref{abcnotation}.
+            rysunek \ref{abcnotation}.
 
             \begin{figure}
                 \centering
@@ -96,8 +101,13 @@
 
         \subsection{Podsumowanie}
         {
-            Wszystkie omówione formaty danych mają wady i zalety. Cechą opisującą wszystkie z nich, jest 
-            bogata dostępność danych, przez co wybór dokonano na podstawie pozostałych cech.
+            % Wszystkie omówione formaty danych mają wady i zalety. Cechą opisującą wszystkie z nich, jest 
+            % bogata dostępność danych, przez co wybór dokonano na podstawie pozostałych cech.
+
+            Wszystkie omówione formaty danych mają wady i zalety. 
+            Ponieważ dostępne są zbiory utworów w każdym z przytoczonych formatów, wybór nie był ograniczony dostępnością danych, 
+            a decyzja została podjęta na postawie ich cech.
+            
             W dalszej części pracy opisywane podejścia będą tyczyć się jedynie plików w formacie midi, na którego 
             wybór zdecydowano się drogą eliminacji. Pliki audio odrzucono przez wymaganą złożoność wstępnej obróbki,
             a notację ABC z powodu obaw związanych z trudnościami zagwarantowania syntaktycznej poprawności 

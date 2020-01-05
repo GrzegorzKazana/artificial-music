@@ -1,10 +1,10 @@
 \chapter{Analiza tematu}
 {
-  Temat pracy wymaga rozwiązania dwóch etapów: opracowania danych i wykorzystania modelu
+  Temat pracy wymaga realizacji dwóch etapów: opracowania danych i wykorzystania modelu
   uczenia maszynowego.
 
   Celem zadania doboru i analizy metod obróbki plików muzycznych jest 
-  przekształcenie danych do postaci użytecznej przez algorytmy uczenia maszynowego.
+  przekształcenie danych do postaci użytecznej dla algorytmów uczenia maszynowego.
   Do istotnych aspektów opracowanego procesu należy między innymi stopień kompresji danych,
   sposób wyrażania relacji między przykładami, możliwość bezstratnej transformacji odwrotnej. 
 
@@ -28,7 +28,7 @@
     sztucznych sieci neuronowych jest twierdzenie stanowiące o ich możliwości aproksymacji dowolnej 
     funkcji ciągłej w zamkniętym przedziale \cite{Csji2001ApproximationWA}.
 
-    Mimo tego, że ta metoda uczenia maszynowego jest znana od wielu dekad, dopiero w ostatnich latach
+    Mimo tego, że przytoczona metoda uczenia maszynowego jest znana od wielu dekad, dopiero w ostatnich latach
     przeżywa swoisty renesans spowodowany wzrostem dostępnej mocy obliczeniowej oraz 
     możliwością zastosowania w procesie uczenia akceleratorów (na przykład kart graficznych) znacząco 
     przyśpieszających równoległe operacje matematyczne.
@@ -60,6 +60,7 @@
 
     Utwory muzyczne można analizować pod wieloma względami, takimi jak:
     \begin{itemize}
+        \setlength\itemsep{-0.5em}
         \item rytmiczność - organizacja dźwięków w czasie
         \item melodyczność - sposób zestawiania następujących po sobie dźwięków 
         \item harmoniczność - spójność i ład występujący między dźwiękami
@@ -73,13 +74,16 @@
   \section{Przegląd literatury}
   {
 
-    Wiele prac powstało w tematyce tworzenia muzyki za pomocą uczenia maszynowego, 
-    lecz każda wyróżnia się innym podejściem do problemu.
+    % Wiele prac powstało w tematyce tworzenia muzyki za pomocą uczenia maszynowego, 
+    % lecz każda wyróżnia się innym podejściem do problemu.
+    Powstało wiele prac poruszających tematykę tworzenia muzyki za pomocą uczenia maszynowego, 
+    lecz każda z nich wyróżnia odmiennym podejściem do problemu.
 
     Elementem wspólnym dużej części prac jest wykorzystany format danych wejściowych.
     W większości analizowanych artykułów, twórcy decydują się na wykorzystanie 
-    danych muzycznych w formacie midi \cite{Yang2017MidiNetAC, Hadjeres2016DeepBachAS, Wu2017AHR, Mogren2016CRNNGANCR}, 
-    aczkolwiek równie popularnym wyjściem jest skorzystanie z plików notacji ABC \cite{Agarwala2017MusicCU, Sturm2015FolkMS}. 
+    danych muzycznych w formacie midi \cite{Hadjeres2016DeepBachAS, Mogren2016CRNNGANCR, Wu2017AHR, Yang2017MidiNetAC}, 
+    aczkolwiek równie popularnym wyjściem jest skorzystanie z plików notacji ABC które miało miejsce w pracach \cite{Agarwala2017MusicCU, Sturm2015FolkMS}. 
+    Opis formatu ABC ma miejsce w sekcji \ref{chap:abc}.
     Najrzadsze podejście opiera się na wykorzystaniu nieprzetworzonych plików audio, 
     na przykład w formacie wave \cite{Oord2016WaveNetAG}.
     
@@ -98,18 +102,20 @@
     plików midi \cite{Mogren2016CRNNGANCR}.
 
     Kluczowym aspektem wszystkich prac jest dobór modelu uczenia maszynowego.
-    Najbardziej popularnym wyborem są rekurencyjne sieci neuronowe \cite{Agarwala2017MusicCU, Sturm2015FolkMS, Souza2018DeepNN, Mogren2016CRNNGANCR},
+    Najbardziej popularnym wyborem są rekurencyjne sieci neuronowe \cite{Agarwala2017MusicCU, Mogren2016CRNNGANCR, Souza2018DeepNN, Sturm2015FolkMS},
     ale opisywane są również inne podejścia, na przykład:
     \begin{itemize}
+      \setlength\itemsep{-0.5em}
       \item modele kontekstowe, takie jak Continuous Bag-of-Words \cite{Agarwala2017MusicCU},
       \item modele generatywno-adwersyjne (Generative Adversial Networks) \cite{Agarwala2017MusicCU, Mogren2016CRNNGANCR}
-      \item modele oparte o sieci konwolucyjne \cite{Yang2017MidiNetAC, Oord2016WaveNetAG}.
+      \item modele oparte o sieci konwolucyjne \cite{Oord2016WaveNetAG, Yang2017MidiNetAC}.
     \end{itemize}
 
     Aspektem wartym zwrócenia uwagi, są również poczynione założenia i nałożone
     ograniczenia. Niektóre metody przytoczone przez autorów prac wymagają:
     \begin{itemize}
-      \item pominięcia elementów polifonicznych utworów \cite{Sturm2015FolkMS, Hadjeres2016DeepBachAS},
+      \setlength\itemsep{-0.5em}
+      \item pominięcia elementów polifonicznych utworów \cite{Hadjeres2016DeepBachAS, Sturm2015FolkMS},
       \item ograniczenia zbioru danych do utworów będących w 
       ustalonej tonacji i/lub ustalonym metrum \cite{Sturm2015FolkMS, Wu2017AHR},
       \item ograniczenia występujących wartości rytmicznych \cite{Hadjeres2016DeepBachAS}.
@@ -118,30 +124,34 @@
 
   \section{Odniesienie do istniejących prac}
   {
-    Niniejsza praca w kolejnych rozdziałach prezentuje analizę różnych podejść do kolejnych etapów
-    procesu implementacji systemu, którego celem jest generowanie utworów muzycznych. 
+    % Niniejsza praca w kolejnych rozdziałach prezentuje analizę różnych podejść do kolejnych etapów
+    % procesu implementacji systemu, którego celem jest generowanie utworów muzycznych. 
 
-    W rozdziale trzecim poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
-    były przeprowadzane eksperymenty. Przedstawiono również potencjalne trudności wiążące się z wyborem
-    poszczególnych źródeł danych.
+    % W rozdziale trzecim poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
+    % były przeprowadzane eksperymenty. Przedstawiono również potencjalne trudności wiążące się z wyborem
+    % poszczególnych źródeł danych.
 
-    W kolejnym rozdziale omówiono różne podejścia do zagadnienia reprezentacji wybranego formatu 
-    danych w postaci numerycznej. Rozdział zawiera również opis wad i zalet każdego z podejść.
+    % W kolejnym rozdziale omówiono różne podejścia do zagadnienia reprezentacji wybranego formatu 
+    % danych w postaci numerycznej. Rozdział zawiera również opis wad i zalet każdego z podejść.
 
-    Treścią piątego rozdziału jest przestawienie obranego typu modelu uczenia maszynowego oraz 
-    wybranej architektury, razem z opisem procesu uczenia.
+    % Treścią piątego rozdziału jest przestawienie obranego typu modelu uczenia maszynowego oraz 
+    % wybranej architektury, razem z opisem procesu uczenia.
 
-    Rozdział poświęcony generacji próbek zawiera opis przyjętego podejścia oraz sposobów 
-    wymuszania procesu generacji.
+    % Rozdział poświęcony generacji próbek zawiera opis przyjętego podejścia oraz sposobów 
+    % wymuszania procesu generacji.
 
-    Dalsze rozdziały poświęcone są analizie wyników, wnioskom i sugestiom zmian w procesie mających na celu 
-    poprawienie otrzymywanych rezultatów.
+    % Dalsze rozdziały poświęcone są analizie wyników, wnioskom i sugestiom zmian w procesie mających na celu 
+    % poprawienie otrzymywanych rezultatów.
+
+
+
   }
 
   \section{Opis narzędzi}
   {
     Podczas implementacji korzystano z narzędzi:
     \begin{itemize}
+      \setlength\itemsep{-0.5em}
       \item Google Colab - usługa będąca środowiskiem obliczeniowym przystosowanym 
       do uruchamiania skryptów w języku Python, z dostępem do akceleratorów obliczeniowych
       w postaci kart graficznych i jednostek tensorowych,

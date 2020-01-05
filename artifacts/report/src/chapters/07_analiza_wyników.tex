@@ -12,6 +12,7 @@
     {
         Na podstawie artykułu 'On the evaluation of generative models in music'\cite{Yang2018OnTE} zdecydowano się zaimplementować następujące miary:
         \begin{itemize}
+            \setlength\itemsep{-0.5em}
             \item Rozpiętość tonalna - odległość między najniższym i najwyższym dźwiękiem, w przypadku plików midi ograniczona
             zakresem <0,127>,
             \item Histogram tonalny - rozkład występowania poszczególnych dźwięków z dwunastotonowej skali, niezależnie od oktawy, 
@@ -45,7 +46,7 @@
         Ponieważ wartości miar będą różne dla każdego zbioru danych, w procesie oceny generowanych próbek powinno się je 
         stosować w odniesieniu do wartości wyznaczonych dla całego zbioru danych treningowych.
         
-        Na obrazkach \ref{tonal_hist_transition}, \ref{rythm_hist_transition} oraz w tabeli \ref{range_and_compression} 
+        Na rysunkach \ref{tonal_hist_transition}, \ref{rythm_hist_transition} oraz w tabeli \ref{range_and_compression} 
         przestawione są wartości miar całego zbioru testowego.
 
         %%% ilustracja tonalnego histogramu i macierzy przejść
@@ -84,6 +85,7 @@
 
         Na postawie wykresów możemy sformułować następujące wnioski:
         \begin{itemize}
+            \setlength\itemsep{-0.5em}
             \item najczęściej występującym dźwiękiem w zbiorze jest A, a najrzadszym D\#,
             \item wyższe wartości na przekątnej macierzy przejść dźwięków wskazują, że dźwięk występujący w bieżącym wielodźwięku
             często występuje również w następującym
@@ -153,7 +155,7 @@
 
         \bigskip
         
-        Na obrazku \ref{tonal_hist_transition_1} oraz \ref{rythm_hist_transition_1} zamieszczono uśrednione 
+        Na rysunku \ref{tonal_hist_transition_1} oraz \ref{rythm_hist_transition_1} zamieszczono uśrednione 
         histogramy i macierze przejść próbek wygenerowanych przy pomocy różnych ziaren.
 
         %%% wykresiki
