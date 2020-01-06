@@ -1,0 +1,48 @@
+\chapter{Implementacja}\label{chap:impl}
+{
+    Do implementacji wymaganych narzędzi oraz funkcjonalności skorzystano z języka Python. Głównym powodem tłumaczącym wybór tego języka programowania jest jego prostota, przenośność oraz szeroki zbiór wysokopoziomowych bibliotek często opartych na wydajnych implementacjach algorytmów napisanych w językach niskiego poziomu, takich jak C i C++. 
+
+    Kolejną zaletą języka Python jest dostępność systemu zarządzania bibliotekami - {\textit {{pip}}}, oraz narzędzi kontrolujących środowisko uruchomieniowe gwarantujące użycie poprawnej wersji interpretera i zależności na różnych systemach - {\textit {{pipenv}}}. Dodatkowo, wykorzystano popularne w dziedzinie analizy danych środowisko zastępujące standardowy interaktywny interpreter - {\textit {Jupyter Notebook}}. Pozwala ono między innymi na jednoczesną wizualizację i tworzenie procesu przetwarzania danych. 
+
+    \section{Struktura projektu}
+    {
+        Kod źródłowy został podzielony na moduły odpowiadające za poszczególne funkcjonalności. 
+
+        \begin{itemize}
+            \setlength\itemsep{-0.5em}
+            \item Moduł {\textbf {data\_processing}} - zawiera definicje funkcji odpowiedzialnych za przetwarzanie danych w postaci plików midi do postaci numerycznej i z numerycznej do midi. Moduł został podzielony na podfoldery ze względu na rodzaj numerycznej reprezentacji danych. Zaimplementowane w module metody umożliwiają uzyskanie danych w postaci:
+            \begin{itemize}
+                \setlength\itemsep{-0.5em}
+                \item Kod M z N + próbkowanie
+                \item Wektory zanurzone + próbkowanie
+                \item Wektory zanurzone + czas jako zmienna ciągła
+                \item Kod M z N + pogrupowane długości dźwięków
+                \item Wektory zanurzone + pogrupowane długości dźwięków
+            \end{itemize}
+            \item Moduł {\textbf {evaluation}} - zawiera miary opisane w rozdziale \ref{sec:measuremnts}.
+            \item Moduł {\textbf {training}} - główną zawartością modułu są {\textit {Notebooki}} służące do uczenia modeli, przeznaczone do uruchomienia lokalnie lub w usłudze Google Colab.
+            \item Moduł {\textbf {generating}} - zawiera funkcje konieczne do przeprowadzenia procesu generacji próbek będących w postaci danych opracowanych w module \\ {\textbf {data\_processing}}.
+        \end{itemize}
+    }
+
+    \section{Walidacja kodu}
+    {
+        Duża część modułu {\textit {data\_processing}} oraz {\textit {evaluation}} została pokryta testami jednostkowymi sprawdzającymi poprawność ich implementacji. 
+        Testy okazały się pomocnym narzędziem, które pozwoliło wcześnie dostrzec błędy w logice aplikacji.
+
+        Do implementacji testów wykorzystano bibliotekę {\textit {unittest}}.
+    }
+
+    \section{Uruchamianie}
+    {
+        Do uruchomienia narzędzi konieczne jest posiadanie interpretera języka Python, menadżera zależności {\textit {pip}} oraz środowiska {\textit {pipenv}}. Po wykonaniu poniższej komendy w głównym katalogu projektu, powinna zostać uruchomiona konsola w środowisku zawierającym wszystkie wymagane zależności.
+
+        \begin{verbatim}
+            pipenv install && pipenv shell
+        \end{verbatim}
+
+        Z uruchomionej konsoli można uruchomić serwer {\textit {Jupyter}} lub konsolę interpretera języka Python.
+
+        W celu ułatwienia i automatyzacji powtarzalnych czynności, takich jak przetwarzanie danych do różnych postaci opracowano konsolowe skrypty korzystające z powyższych modułów.
+    }
+}
