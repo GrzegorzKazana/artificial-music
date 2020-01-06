@@ -1,8 +1,11 @@
 {
     "python.pythonPath": "/usr/local/bin/python3",
-    "spellright.language": [],
+    "spellright.language": [
+        "pl"
+    ],
     "spellright.documentTypes": [
         "markdown",
-        "plaintext"
+        "plaintext",
+        "latex"
     ]
 }

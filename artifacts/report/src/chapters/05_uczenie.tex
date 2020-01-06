@@ -30,8 +30,6 @@
         Model wymagał określenia docelowej wymiarowości wektorów i\,\,rozmiaru kontekstu. 
     }
     
-    
-
     \section{Architektura modelu sieci neuronowej}\label{chap:main_model}
     {
         Otrzymawszy dane w\,\,postaci sekwencji par wektorów opisujących dźwięki i\,\,ich czas trwania,
@@ -44,14 +42,31 @@
         było wprowadzenie konieczności przez sieć kompresji informacji, co przełoży się 
         na wyznaczenie ciągłej reprezentacji kodu o\,\,mniejszej wymiarowości. 
 
-        Następnie wektory zostają złączone, i\,\,ich sekwencje trafiają do warstw rekurencyjnej sieci LSTM,
-        w\,\,której model ma szanse ekstrahować wiedzę o\,\,zależnościach między kolejnymi elementami sekwencji.
+        Następnie wektory zostają złączone, i\,\,ich sekwencje trafiają do warstw rekurencyjnej sieci LSTM, w\,\,której model ma szanse ekstrahować wiedzę o\,\,zależnościach między kolejnymi elementami sekwencji. W tym kroku analizowane są dane o wysokości i długości trwania dźwięków jednocześnie.
 
-        Otrzymywane wektory są połączone z\,\,osobnymi, mniejszymi sieciami LSTM i\,\,następnie z\,\,warstwami 
-        gęstymi będącymi osobnymi wyjściami modelu.
+        Otrzymywane wektory reprezentacji ukrytej są połączone z\,\,osobnymi, 
+        mniejszymi sieciami LSTM odpowiedzialnymi za przekształacnie reprezentacji 
+        ukrytej zawierającej za równo informacje o wysokościach i długościach trwania dźwięków, 
+        do postaci w której nacisk jest kładziony jedynie na jeden z dwóch powyższych aspektów. 
+        Wektory otrzymywane na wyjściach osobnych sieci LSTM są przekształcane przez warstwy gęste będące wyjściami modelu. 
+        Wspomniane przekształcenie przez warstwę gęstą umożliwia silniejsze uniezależnienie kodu 
+        wyjściowego od wewnętrzej reprezentacji danych na których przeprowadzane są operacje 
+        w sieciach rekurencyjnych, co pozostawia większą swobodę przy optymalizacji wag i wewnętrznej postaci danych.
         
+        Celem wprowadzenia dodatkowych sieci LSTM do procesu uczenia modelu był podział zadania pozwalający na lepszą specjalizację modeli, które były uczone na podstawie jednej części danych w izolacji. Korzystnym efektem ubocznym tej operacji jest uzyskanie zaplanowanej struktury modelu dwuwyjściowego.
+
+        Opracowaną strukturę modelu przedstawia rysunek \ref{model_struct}.
+        
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.5]{model_struct}
+            \caption{Diagram przestawiający architekturę modelu.}
+            \label{model_struct}
+        \end{figure}
+
+        Z powodu różnego charakteru otrzymywanych wektorów, wyjścia modelu były uczone odzielnymi funkcjami błędu. 
         Wyjście odpowiedzialne za dźwięki uczone jest funkcją błędu odpowiednią do problemu 
-        regresji - błędem średniokwadratowym, a\,\,wyjście klasyfikujące długość dźwięku funkcją odpowiednią
+        regresji - błędem średniokwadratowym, wyjście klasyfikujące długość dźwięku funkcją odpowiednią
         dla zadania klasyfikacji 1 z\,\,N - kategorycznej entropii krzyżowej.
     }
 
