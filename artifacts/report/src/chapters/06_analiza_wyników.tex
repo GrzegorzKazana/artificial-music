@@ -195,7 +195,7 @@
 
         \bigskip
 
-        Po dogłębnej analizie stwierdzono, że zdecydowana większość dźwięków o\,\,najkrótszym czasie trwania
+        Po dogłębnej analizie stwierdzono, że zdecydowana większość dźwięków o najkrótszym czasie trwania
         wynika z\,\,przesunięć wiadomości w\,\,plikach midi o\,\,1 lub 2 wartości taktujące. Dla kontekstu, najczęściej stosowaną
         prędkością taktowania jest 120 taktów na ćwierćnutę. Źródłem tego zjawiska mógł być zamierzony 
         zabieg wprowadzający element niedoskonałości, mający na celu wprowadzenie ludzkiego charakteru nagrania 
@@ -206,30 +206,31 @@
         ograniczony o\,\,powyżej opisane dźwięki. Proces uczenia i\,\,generowania został przeprowadzony w\,\,ten sam sposób
         co poprzednio. 
         %%% ZOSTAWIĆ CZY NIE
-        % Na wykresach \ref{rythm_hist_2}, \ref{rythm_transition_2}, \ref{tonal_hist_2} i\,\,\ref{tonal_transition_2} widać oczywiste zmiany w\,\,miarach związanych z\,\,rytmiką.
+        Na wykresach \ref{tonal_hist_transition_2} i \ref{rythm_hist_transition_2} widać oczywiste zmiany w\,\,miarach związanych z\,\,rytmiką. 
 
-        % %%% tutaj wykresiki tego lepszego modelu
-        % %%% ilustracja tonalnego histogramu i\,\,macierzy przejść
-        % \begin{figure}
-        %     \centering
-        %     \includegraphics[scale=0.5]{tonal_hist_transition_1}
-        %     \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
-        %     \label{tonal_hist_transition_1}
-        % \end{figure}
+        %%% tutaj wykresiki tego lepszego modelu
+        %%% ilustracja tonalnego histogramu i\,\,macierzy przejść
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{tonal_hist_transition_2}
+            \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
+            \label{tonal_hist_transition_2}
+        \end{figure}
 
-        % Jak można zaobserwować, ograniczenie zbioru danych miało również wpływ na zależności tonalne.
+        Jak można zaobserwować, ograniczenie zbioru danych miało również wpływ na zależności tonalne.
 
-        %%% histogram rytmiczny i\,\,macierz przejść
-        % \begin{figure}
-        %     \centering
-        %     \includegraphics[scale=0.5]{rythm_hist_transition_1}
-        %     \caption{Histogram występowania poszczególnych długości dźwięków i\,\,przejść między nimi}
-        %     \label{rythm_hist_transition_1}
-        % \end{figure}
+        %% histogram rytmiczny i\,\,macierz przejść
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.5]{rythm_hist_transition_2}
+            \caption{Histogram występowania poszczególnych długości dźwięków i\,\,przejść między nimi}
+            \label{rythm_hist_transition_2}
+        \end{figure}
 
         \bigskip
 
-        Tym razem wyniki, choć wciąż nie idealne, były conajmniej akceptowalne. W\,\,generowanych utworach
+        Tym razem wyniki, choć wciąż nie idealne, były conajmniej akceptowalne. 
+        W\,\,generowanych utworach
         obserwowalny był zupełnie inny rozkład długości dźwięków. Sekwencje w\,\,subiektywnym odczuciu były dużo mniej
         chaotyczne, a\,\,zwiększone długości dźwięków pozwalały na skupienie się na następujących po sobie dźwiękach.
         
