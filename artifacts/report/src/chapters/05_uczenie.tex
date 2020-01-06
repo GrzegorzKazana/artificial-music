@@ -20,8 +20,8 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.45]{grouping}
-            \caption{Rozkład długości trwania dźwięków oraz wynik grupowania. Dźwięki przydzielone do tej samej klasy są oznaczone tym samym kolorem.}
+            \includegraphics[scale=0.65]{grouping_grouped}
+            \caption{Wykres przedstawiający rozkład długości trwania dźwięków oraz wynik grupowania. Dźwięki przydzielone do tej samej klasy są oznaczone tym samym kolorem.}
             \label{grouping}
         \end{figure}
     }
@@ -34,6 +34,8 @@
         Uczenie algorytmu Word2Vec polega na wyznaczaniu wag ukrytej warstwy wielowarstwowego perceptronu
         uczonego wektorami reprezentującymi kolejne słowa należące do kontekstu.
         Model wymagał określenia docelowej wymiarowości wektorów i\,\,rozmiaru kontekstu. 
+
+        Użycie powyższego modelu pozwoliło przekształcić  wektory kodu M\,\,z\,\,N, gdzie M to ilość jednocześnie wybrzmiewających dźwięków a N to ilość wsystkich możliwych dźwięków, na wektory wartości ciągłych o wymiarze \(1 \times 20\).
     }
     
     \section{Architektura modelu sieci neuronowej}\label{chap:main_model}
