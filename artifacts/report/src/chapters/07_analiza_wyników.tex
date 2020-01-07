@@ -45,6 +45,8 @@
         Do kompresji wykorzystano bibliotekę zlib, korzystającą z algorytmu delfate.
     }
 
+        \newpage
+
     \section{Pomiar zbioru treningowego}
     {
         Ponieważ wartości miar będą różne dla każdego zbioru danych, w procesie oceny generowanych próbek powinno się je 
@@ -54,7 +56,7 @@
         przestawione są wartości miar całego zbioru testowego.
 
         %%% ilustracja tonalnego histogramu i macierzy przejść
-        \begin{figure}
+        \begin{figure}[ht!]
             \centering
             \includegraphics[scale=0.5]{tonal_hist_transition}
             \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między kolejnymi dźwiękami utworów zbioru treningowego}
@@ -62,7 +64,7 @@
         \end{figure}
 
         %%% histogram rytmiczny i macierz przejść
-        \begin{figure}
+        \begin{figure}[ht!]
             \centering
             \includegraphics[scale=0.5]{rythm_hist_transition}
             \caption{Histogram występowania poszczególnych długości dźwięków oraz macierz przejść między kolejnymi wartościami rytmicznymi dźwięków należących do utworów zbioru treningowego}
@@ -70,7 +72,7 @@
         \end{figure}
 
         %%% tabelka z zakresami i kompresją
-        \begin{table}
+        \begin{table}[ht!]
             \caption{Zakresy i współczynniki kompresji danych} \label{range_and_compression}
             \begin{center}
                 \begin{tabular}{ |p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}| }
@@ -210,7 +212,7 @@
 
         %%% tutaj wykresiki tego lepszego modelu
         %%% ilustracja tonalnego histogramu i macierzy przejść
-        \begin{figure}
+        \begin{figure}[ht!]
             \centering
             \includegraphics[scale=0.5]{tonal_hist_transition_2}
             \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
@@ -220,7 +222,7 @@
         Jak można zaobserwować, ograniczenie zbioru danych miało również wpływ na zależności tonalne.
 
         %% histogram rytmiczny i macierz przejść
-        \begin{figure}
+        \begin{figure}[ht!]
             \centering
             \includegraphics[scale=0.5]{rythm_hist_transition_2}
             \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
