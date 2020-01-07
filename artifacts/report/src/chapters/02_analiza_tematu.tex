@@ -1,57 +1,57 @@
 \chapter{Analiza tematu}\label{chap:analysis}
 {
-  Temat pracy wymaga realizacji dwóch etapów: opracowania danych i\,\,wykorzystania modelu
+  Temat pracy wymaga realizacji dwóch etapów: opracowania danych i wykorzystania modelu
   uczenia maszynowego.
 
-  Celem zadania doboru i\,\,analizy metod obróbki plików muzycznych jest 
+  Celem zadania doboru i analizy metod obróbki plików muzycznych jest 
   przekształcenie danych do postaci użytecznej dla algorytmów uczenia maszynowego.
   Do istotnych aspektów opracowanego procesu należy między innymi stopień kompresji danych,
   sposób wyrażania relacji między przykładami, możliwość bezstratnej transformacji odwrotnej. 
 
   Zadanie generowania muzyki polega na ekstrakcji pewnych cech charakterystycznych
   przykładowych utworów, na przykład stylu konkretnego artysty, 
-  i\,\,wykorzystaniu ich przy syntezie tworzonych próbek. 
+  i wykorzystaniu ich przy syntezie tworzonych próbek. 
 
   \section{Wprowadzenie do dziedziny}
   {
-    Jedną z\,\,najbardziej rozpowszechnionych metod uczenia maszynowego jest zastosowanie sieci neuronowych.
-    Zaproponowane w\,\,latach czterdziestych i\,\,rozwijane w\,\,drugiej połowie XX wieku \cite{McCulloch1943}, sztuczne sieci neuronowe
-    czerpią inspirację ze sposobu funkcjonowania ludzkiego mózgu, który jest zbudowany z\,\,komórek nerwowych - neuronów.
-    Połączenia między komórkami są modelowane poprzez wagi, reprezentujące siłę połączenia, a\,\,zjawisku aktywacji
-    komórek w\,\,sieci odpowiada operacja ważonej sumy informacji pochodzących z\,\,połączonych neuronów oraz wag tych połączeń.
+    Jedną z najbardziej rozpowszechnionych metod uczenia maszynowego jest zastosowanie sieci neuronowych.
+    Zaproponowane w latach czterdziestych i rozwijane w drugiej połowie XX wieku \cite{McCulloch1943}, sztuczne sieci neuronowe
+    czerpią inspirację ze sposobu funkcjonowania ludzkiego mózgu, który jest zbudowany z komórek nerwowych - neuronów.
+    Połączenia między komórkami są modelowane poprzez wagi, reprezentujące siłę połączenia, a zjawisku aktywacji
+    komórek w sieci odpowiada operacja ważonej sumy informacji pochodzących z połączonych neuronów oraz wag tych połączeń.
     
-    W\,\,latach siedemdziesiątych opracowano algorytm uczenia sztucznych sieci z\,\,powodzeniem wykorzystywany
+    W latach siedemdziesiątych opracowano algorytm uczenia sztucznych sieci z powodzeniem wykorzystywany
     do dziś - propagację wsteczną. Metoda ta polega na minimalizacji błędu predykcji poprzez regulację
-    wag w\,\,oparciu o\,\,pochodną funkcji błędu.
+    wag w oparciu o pochodną funkcji błędu.
 
-    Zastosowania sieci neuronowych są bardzo szerokie i\,\,różnorodne. Zasadą będącą podporą uniwersalności 
-    sztucznych sieci neuronowych jest twierdzenie stanowiące o\,\,ich możliwości aproksymacji dowolnej 
-    funkcji ciągłej w\,\,zamkniętym przedziale \cite{Csji2001ApproximationWA}.
+    Zastosowania sieci neuronowych są bardzo szerokie i różnorodne. Zasadą będącą podporą uniwersalności 
+    sztucznych sieci neuronowych jest twierdzenie stanowiące o ich możliwości aproksymacji dowolnej 
+    funkcji ciągłej w zamkniętym przedziale \cite{Csji2001ApproximationWA}.
 
-    Mimo tego, że przytoczona metoda uczenia maszynowego jest znana od wielu dekad, dopiero w\,\,ostatnich latach
+    Mimo tego, że przytoczona metoda uczenia maszynowego jest znana od wielu dekad, dopiero w ostatnich latach
     przeżywa swoisty renesans spowodowany wzrostem dostępnej mocy obliczeniowej oraz 
-    możliwością zastosowania w\,\,procesie uczenia akceleratorów (na przykład kart graficznych) znacząco 
+    możliwością zastosowania w procesie uczenia akceleratorów (na przykład kart graficznych) znacząco 
     przyśpieszających równoległe operacje matematyczne.
 
 
-    Ponieważ dane reprezentujące muzykę mają postać sekwencji rozłożonej w\,\,czasie, 
+    Ponieważ dane reprezentujące muzykę mają postać sekwencji rozłożonej w czasie, 
     konieczne jest wykorzystanie sieci mających możliwość agregacji stanu, czyli architektur posiadających pamięć.
     Sieciami spełniającymi powyższy warunek są modele należące do grupy rekurencyjnych sieci neuronowych.
     Najprostszym przykładem rekurencyjnej sieci neuronowej jest sieć na wejście której 
-    przekazywany jest również stan wyjść z\,\,analizy poprzedniego elementu sekwencji.
+    przekazywany jest również stan wyjść z analizy poprzedniego elementu sekwencji.
     
     Niestety, taka architektura jest narażona na wiele problemów, takich jak trudność
     tworzenia powiązań pomiędzy odległymi elementami sekwencji oraz zjawisko znikającego lub eksplodującego gradientu.
 
     Architekturą rozwiązującą powyższe problemy jest architektura
     Long Short-term Memory Network (LSTM) \cite{LongShortTermMemory}. 
-    Jej pomysłodawca rozszerza klasyczną rekurencyjną sieć neuronową o\,\,globalną pamięć niezależną
-    od stanu wyjść. Dane mogą zostać wprowadzone lub wymazane z\,\,pamięci dzięki warstwom bramkującym. 
+    Jej pomysłodawca rozszerza klasyczną rekurencyjną sieć neuronową o globalną pamięć niezależną
+    od stanu wyjść. Dane mogą zostać wprowadzone lub wymazane z pamięci dzięki warstwom bramkującym. 
     Kosztem większych możliwości architektury jest zwielokrotnienie 
     ilości parametrów, co może przekładać się na dłuższy czas uczenia.
   }
 
-  \newpage
+  % \newpage
 
   \section{Założenia pracy}
   {
@@ -61,44 +61,44 @@
     Utwory muzyczne można analizować pod wieloma względami, takimi jak:
     \begin{itemize}
         \setlength\itemsep{-0.5em}
-        \item rytmiczność - organizacja dźwięków w\,\,czasie
+        \item rytmiczność - organizacja dźwięków w czasie
         \item melodyczność - sposób zestawiania następujących po sobie dźwięków 
-        \item harmoniczność - spójność i\,\,ład występujący między dźwiękami
+        \item harmoniczność - spójność i ład występujący między dźwiękami
         \item dynamika - zróżnicowanie siły dźwięków
     \end{itemize}
 
-    W\,\,kontekście pracy skupiono się na dwóch aspektach wynikających z\,\,powyższej 
-    definicji: rytmiczności i\,\,tonalności.
+    W kontekście pracy skupiono się na dwóch aspektach wynikających z powyższej 
+    definicji: rytmiczności i tonalności.
   }
 
   \section{Przegląd literatury}
   {
 
-    % Wiele prac powstało w\,\,tematyce tworzenia muzyki za pomocą uczenia maszynowego, 
+    % Wiele prac powstało w tematyce tworzenia muzyki za pomocą uczenia maszynowego, 
     % lecz każda wyróżnia się innym podejściem do problemu.
     Powstało wiele prac poruszających tematykę tworzenia muzyki za pomocą uczenia maszynowego, 
-    lecz każda z\,\,nich wyróżnia odmiennym podejściem do problemu.
+    lecz każda z nich wyróżnia odmiennym podejściem do problemu.
 
     Elementem wspólnym dużej części prac jest wykorzystany format danych wejściowych.
-    W\,\,większości analizowanych artykułów, twórcy decydują się na wykorzystanie 
-    danych muzycznych w\,\,formacie midi \cite{Hadjeres2016DeepBachAS, Mogren2016CRNNGANCR, Wu2017AHR, Yang2017MidiNetAC}, 
-    aczkolwiek równie popularnym wyjściem jest skorzystanie z\,\,plików notacji ABC które miało miejsce w\,\,pracach \cite{Agarwala2017MusicCU, Sturm2015FolkMS}. 
-    Opis formatu ABC ma miejsce w\,\,sekcji \ref{chap:abc}.
+    W większości analizowanych artykułów, twórcy decydują się na wykorzystanie 
+    danych muzycznych w formacie midi \cite{Hadjeres2016DeepBachAS, Mogren2016CRNNGANCR, Wu2017AHR, Yang2017MidiNetAC}, 
+    aczkolwiek równie popularnym wyjściem jest skorzystanie z plików notacji ABC które miało miejsce w pracach \cite{Agarwala2017MusicCU, Sturm2015FolkMS}. 
+    Opis formatu ABC ma miejsce w sekcji \ref{chap:abc}.
     Najrzadsze podejście opiera się na wykorzystaniu nieprzetworzonych plików audio, 
-    na przykład w\,\,formacie wave \cite{Oord2016WaveNetAG}.
+    na przykład w formacie wave \cite{Oord2016WaveNetAG}.
     
-    Jedną z\,\,różnic występujących między podejściami jest sposób obróbki i\,\,tworzenia
+    Jedną z różnic występujących między podejściami jest sposób obróbki i tworzenia
     wewnętrznej reprezentacji danych, gdyż praktycznie wszyscy autorzy 
     proponują własne rozwiązanie problemu. 
-    W\,\,przypadku danych tekstowych w\,\,formacie ABC, częstym elementem jest ograniczenie
-    lub usunięcie meta informacji zawartych w plikach\,\,\cite{Agarwala2017MusicCU, Sturm2015FolkMS} oraz pominięcie białych znaków.
-    Konkretne znaki zapisu są albo przedstawione jako wektory kodu 1 z\,\,N \cite{Sturm2015FolkMS}, 
+    W przypadku danych tekstowych w formacie ABC, częstym elementem jest ograniczenie
+    lub usunięcie meta informacji zawartych w plikach \cite{Agarwala2017MusicCU, Sturm2015FolkMS} oraz pominięcie białych znaków.
+    Konkretne znaki zapisu są albo przedstawione jako wektory kodu  1\,\,z\,\,N \cite{Sturm2015FolkMS}, 
     lub przekształcane są kolejne wartości liczb naturalnych \cite{Agarwala2017MusicCU}.
-    W\,\,pracach korzystających z\,\,plików midi, częstym podejściem do problemu reprezentacji wysokości
-    dźwięku jest zastosowanie kodu 1 z\,\,N \cite{Yang2017MidiNetAC}. Większym zróżnicowaniem cechuje się podejście
-    do reprezentacji danych w\,\,wymiarze czasu. Duża część podejść opiera się na restrykcji możliwych
+    W pracach korzystających z plików midi, częstym podejściem do problemu reprezentacji wysokości
+    dźwięku jest zastosowanie kodu  1\,\,z\,\,N \cite{Yang2017MidiNetAC}. Większym zróżnicowaniem cechuje się podejście
+    do reprezentacji danych w wymiarze czasu. Duża część podejść opiera się na restrykcji możliwych
     wartości rytmicznych do ustalonego dyskretnego zbioru \cite{Hadjeres2016DeepBachAS, Wu2017AHR}, 
-    podczas gdy stosowane są również podejścia korzystające bezpośrednio z\,\,taktowania 
+    podczas gdy stosowane są również podejścia korzystające bezpośrednio z taktowania 
     plików midi \cite{Mogren2016CRNNGANCR}.
 
     Kluczowym aspektem wszystkich prac jest dobór modelu uczenia maszynowego.
@@ -108,15 +108,15 @@
       \setlength\itemsep{-0.5em}
       \item modele kontekstowe, takie jak Continuous Bag-of-Words \cite{Agarwala2017MusicCU},
       \item modele generatywno-adwersyjne (Generative Adversial Networks) \cite{Agarwala2017MusicCU, Mogren2016CRNNGANCR}
-      \item modele oparte o\,\,sieci konwolucyjne \cite{Oord2016WaveNetAG, Yang2017MidiNetAC}.
+      \item modele oparte o sieci konwolucyjne \cite{Oord2016WaveNetAG, Yang2017MidiNetAC}.
     \end{itemize}
 
-    Aspektem wartym zwrócenia uwagi, są również poczynione założenia i\,\,nałożone
+    Aspektem wartym zwrócenia uwagi, są również poczynione założenia i nałożone
     ograniczenia. Niektóre metody przytoczone przez autorów prac wymagają:
     \begin{itemize}
       \setlength\itemsep{-0.5em}
       \item pominięcia elementów polifonicznych utworów \cite{Hadjeres2016DeepBachAS, Sturm2015FolkMS},
-      \item ograniczenia zbioru danych do utworów będących w\,\,
+      \item ograniczenia zbioru danych do utworów będących w 
       ustalonej tonacji i/lub ustalonym metrum \cite{Sturm2015FolkMS, Wu2017AHR},
       \item ograniczenia występujących wartości rytmicznych \cite{Hadjeres2016DeepBachAS}.
     \end{itemize}
@@ -124,50 +124,50 @@
 
   \section{Odniesienie do istniejących prac}
   {
-    % Niniejsza praca w\,\,kolejnych rozdziałach prezentuje analizę różnych podejść do kolejnych etapów
+    % Niniejsza praca w kolejnych rozdziałach prezentuje analizę różnych podejść do kolejnych etapów
     % procesu implementacji systemu, którego celem jest generowanie utworów muzycznych. 
 
-    % W\,\,rozdziale trzecim poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
-    % były przeprowadzane eksperymenty. Przedstawiono również potencjalne trudności wiążące się z\,\,wyborem
+    % W rozdziale trzecim poruszono problem wyboru formatu danych, oraz przedstawiono opis zbioru na którym
+    % były przeprowadzane eksperymenty. Przedstawiono również potencjalne trudności wiążące się z wyborem
     % poszczególnych źródeł danych.
 
-    % W\,\,kolejnym rozdziale omówiono różne podejścia do zagadnienia reprezentacji wybranego formatu 
-    % danych w\,\,postaci numerycznej. Rozdział zawiera również opis wad i\,\,zalet każdego z\,\,podejść.
+    % W kolejnym rozdziale omówiono różne podejścia do zagadnienia reprezentacji wybranego formatu 
+    % danych w postaci numerycznej. Rozdział zawiera również opis wad i zalet każdego z podejść.
 
     % Treścią piątego rozdziału jest przestawienie obranego typu modelu uczenia maszynowego oraz 
-    % wybranej architektury, razem z\,\,opisem procesu uczenia.
+    % wybranej architektury, razem z opisem procesu uczenia.
 
     % Rozdział poświęcony generacji próbek zawiera opis przyjętego podejścia oraz sposobów 
     % wymuszania procesu generacji.
 
-    % Dalsze rozdziały poświęcone są analizie wyników, wnioskom i\,\,sugestiom zmian w\,\,procesie mających na celu 
+    % Dalsze rozdziały poświęcone są analizie wyników, wnioskom i sugestiom zmian w procesie mających na celu 
     % poprawienie otrzymywanych rezultatów.
 
-    Niniejsza praca wpisuje się w\,\,kanon prac w\,\,których zdecydowano się korzystać z plików typu midi,
+    Niniejsza praca wpisuje się w kanon prac w których zdecydowano się korzystać z plików typu midi,
     lecz w przeciwieństwie do dużej części dostępnych publikacji zdecydowano się położyć duży nacisk
-    na opis wewnętrznej postaci danych i\,\,procesu ich otrzymywania. 
+    na opis wewnętrznej postaci danych i procesu ich otrzymywania. 
     
-    Podjęcie powyższej decyzji wynika z\,\,trudności znalezienia szczegółowych opisów tego kroku 
-    procesu w artykułach i\,\,źródłach dostępnych online. 
-    Kolejnym powodem motywującym powyższy wybór jest ufność względem poglądu stwierdzającego i\,\,
+    Podjęcie powyższej decyzji wynika z trudności znalezienia szczegółowych opisów tego kroku 
+    procesu w artykułach i źródłach dostępnych online. 
+    Kolejnym powodem motywującym powyższy wybór jest ufność względem poglądu stwierdzającego i 
     podkreślającego istotę kroku przygotowania danych w procesie uczenia maszynowego.
 
   }
 
   \section{Opis narzędzi}
   {
-    Podczas implementacji korzystano z\,\,narzędzi:
+    Podczas implementacji korzystano z narzędzi:
     \begin{itemize}
       \setlength\itemsep{-0.5em}
       \item Google Colab - usługa będąca środowiskiem obliczeniowym przystosowanym 
-      do uruchamiania skryptów w\,\,języku Python, z\,\,dostępem do akceleratorów obliczeniowych
-      w\,\,postaci kart graficznych i\,\,jednostek tensorowych,
+      do uruchamiania skryptów w języku Python, z dostępem do akceleratorów obliczeniowych
+      w postaci kart graficznych i jednostek tensorowych,
       \item Tensorflow - biblioteka języka Python służąca do wydajnych obliczeń, ułatwiająca 
-      tworzenie i\,\,uczenie głębokich sieci neuronowych. Podczas pracy skorzystano z\,\,
-      wysokopoziomowego interfejsu tf.keras, zawierającego predefiniowane architektury i\,\,warstwy sieci,
+      tworzenie i uczenie głębokich sieci neuronowych. Podczas pracy skorzystano z 
+      wysokopoziomowego interfejsu tf.keras, zawierającego predefiniowane architektury i warstwy sieci,
       \item Jupyter notebook - środowisko uruchomieniowe języka Python, umożliwiające przejrzystą
       ilustrację wykonywanych operacji,
-      \item mido - biblioteka ułatwiająca otwieranie i\,\,przetwarzania plików w\,\,formacie midi.
+      \item mido - biblioteka ułatwiająca otwieranie i przetwarzania plików w formacie midi.
     \end{itemize}
   }
 }

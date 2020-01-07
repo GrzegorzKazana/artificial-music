@@ -1,12 +1,12 @@
 \chapter{Wnioski}\label{chap:concl}
 {
-    W\,\,niniejszej pracy przedstawiono jedno z\,\,możliwych podejść do rozwiązania problemu,
+    W niniejszej pracy przedstawiono jedno z możliwych podejść do rozwiązania problemu,
     jakim jest generowanie muzyki za pomocą metod uczenia maszynowego. 
 
     Udało się z powodzeniem spełnić podstawowe cele pracy, do których należał dobór i obróbka danych, 
-    przeprowadzenie procesu uczenia maszynowego i ocena wyników. Pomimo nie osiągnięcia w\,\,pełni satysfakcjonujących rezultatów, cały proces był niezwykle pouczający. 
+    przeprowadzenie procesu uczenia maszynowego i ocena wyników. Pomimo nie osiągnięcia w pełni satysfakcjonujących rezultatów, cały proces był niezwykle pouczający. 
     Liczność oraz daty powstania dostępnych źródeł literaturowych wskazują, że problem jest aktualny 
-    i\,\,wciąż prowadzone są badania na temat zastosowania metod sztucznej inteligencji w\,\,zadaniach, 
+    i wciąż prowadzone są badania na temat zastosowania metod sztucznej inteligencji w zadaniach, 
     które można określić mianem twórczych. Bogata treść studiowanych prac przedstawia szeroką gamę 
     różnych podejść do powyższego problemu.
 
@@ -14,54 +14,54 @@
     rozwoju projektu. Do etapów składających się na finalne efekty pracy należało porównanie odmiennych 
     formatów danych muzycznych, opracowanie numerycznej reprezentacji danych, dobór zbioru treningowego
     oraz samego projektu architektury modelu. 
-    Razem z\,\,opracowywaniem metod przetwarzania danych będących intuicyjnie efektywniejszymi, tworzone również były założenia
-    ograniczające wyniki i\,\,potencjalne zastosowania. Przykładem takiego kompromisu jest automatyczne wykrywanie
+    Razem z opracowywaniem metod przetwarzania danych będących intuicyjnie efektywniejszymi, tworzone również były założenia
+    ograniczające wyniki i potencjalne zastosowania. Przykładem takiego kompromisu jest automatyczne wykrywanie
     najczęstszych wartości rytmicznych, pozwalające na dyskretyzację reprezentacji czasowej bez
     manualnego definiowania zbioru dozwolonych wartości, odbywające się kosztem całkowitej swobody jaką oferuje format midi.
     
     Do ograniczeń opisanego procesu można zaliczyć między innymi niemożliwość reprezentowania utworów wieloinstrumentowych, 
-    ograniczony słownik wielodźwięków oraz stratność przekształcenia plików midi na macierze i\,\,ponownego przetworzenia
+    ograniczony słownik wielodźwięków oraz stratność przekształcenia plików midi na macierze i ponownego przetworzenia
     macierzy na plik midi.
 
-    W\,\,rozdziale dotyczącym uczenia modelu zaprezentowano podstawowe kroki, jakie należy poczynić podchodząc do
-    dowolnego problemu uczenia maszynowego. Do najważniejszych z\,\,nich należy projekt architektury modelu,
-    dobór miar i\,\,funkcji kosztów oraz walidacja modelu. Opisywany etap pracy również pozwolił na zapoznanie 
-    się z\,\,współczesnymi narzędziami ułatwiającymi wszelkie zadania uczenia maszynowego, takimi jak Tensorflow, 
-    TensorBoard i\,\,Google Colab. 
+    W rozdziale dotyczącym uczenia modelu zaprezentowano podstawowe kroki, jakie należy poczynić podchodząc do
+    dowolnego problemu uczenia maszynowego. Do najważniejszych z nich należy projekt architektury modelu,
+    dobór miar i funkcji kosztów oraz walidacja modelu. Opisywany etap pracy również pozwolił na zapoznanie 
+    się z współczesnymi narzędziami ułatwiającymi wszelkie zadania uczenia maszynowego, takimi jak Tensorflow, 
+    TensorBoard i Google Colab. 
 
-    \bigskip
+    % \bigskip
 
-    Otrzymane rezultaty nie spełniły wszystkich oczekiwań, lecz wykazywały conajmniej poprawność i\,\,częściowy
-    sukces obranego podejścia. Jedną z\,\,przyczyn zastrzeżeń mógł być potencjalnie sam zbiór danych, nie 
+    Otrzymane rezultaty nie spełniły wszystkich oczekiwań, lecz wykazywały conajmniej poprawność i częściowy
+    sukces obranego podejścia. Jedną z przyczyn zastrzeżeń mógł być potencjalnie sam zbiór danych, nie 
     zawierający wystarczającej różnorodności pozwalającej na skuteczną generalizację zależności opisujących 
-    powszechnie akceptowalne zasady harmonii i\,\,rytmiki.
+    powszechnie akceptowalne zasady harmonii i rytmiki.
 
-    W\,\,celu osiągnięcia rezultatów spełniających bardziej rygorystyczne oczekiwania, słusznym krokiem byłoby
-    ponowne wybranie zbioru danych treningowych, tym razem składającego się z\,\,większej ilości próbek i\,\,nieobarczonego
-    wadą opisaną w\,\,rozdziale poświęconym procesowi uczenia. 
-    Dodatkowo, słusznym krokiem mogłoby okazać się użycie metod augmentacji danych. W\,\,przypadku muzyki, mogłoby to
+    W celu osiągnięcia rezultatów spełniających bardziej rygorystyczne oczekiwania, słusznym krokiem byłoby
+    ponowne wybranie zbioru danych treningowych, tym razem składającego się z większej ilości próbek i nieobarczonego
+    wadą opisaną w rozdziale poświęconym procesowi uczenia. 
+    Dodatkowo, słusznym krokiem mogłoby okazać się użycie metod augmentacji danych. W przypadku muzyki, mogłoby to
     być transponowanie utworów na inne tonacje, co wymusiłoby na modelu interpretacje zależności między interwałami
-    muzycznymi, a\,\,nie konkretnymi dźwiękami.
-    Wraz ze zmianą danych oraz ich objętości, konieczna byłaby ponowna parametryzacja modelu i\,\,procesu uczenia.
+    muzycznymi, a nie konkretnymi dźwiękami.
+    Wraz ze zmianą danych oraz ich objętości, konieczna byłaby ponowna parametryzacja modelu i procesu uczenia.
 
-    \bigskip
+    % \bigskip
 
     Interesującym kierunkiem, który jest podatny na dalszą eksplorację są inne rodzaje architektur sieci neuronowych.
     Pomimo że problem inherentnie opiera się na analizie sekwencji, co silnie sugeruje wykorzystanie rekurencyjnych 
-    sieci typu Long Short-term Memory, możliwe są konstrukcje modeli odmienne od przytoczonych. Jedną z\,\,nich są modele typu 
-    sequence-to-sequence encode-decoder, na których wyjściu i\,\,wejściu są sieci LSTM, lecz dane pomiędzy nimi są
+    sieci typu Long Short-term Memory, możliwe są konstrukcje modeli odmienne od przytoczonych. Jedną z nich są modele typu 
+    sequence-to-sequence encode-decoder, na których wyjściu i wejściu są sieci LSTM, lecz dane pomiędzy nimi są
     kompresowane do jednowymiarowego tensora, który następnie jest ponownie przekształcany na sekwencję. 
-    Alternatywnym podejściem szeroko stosowanym w\,\,problemach transferu stylu i\,\,generacji obrazów, 
+    Alternatywnym podejściem szeroko stosowanym w problemach transferu stylu i generacji obrazów, 
     są modele generacyjno-adwersyjne (Generative-Adversial Models), składające się sieci uczącej się generowania 
-    próbek i\,\,sieci uczącej się rozróżniać oryginały od falsyfikatów.
+    próbek i sieci uczącej się rozróżniać oryginały od falsyfikatów.
 
     %%%
-    \bigskip
+    % \bigskip
 
-    Generowanie utworów muzycznych jest jednym z\,\,problemów przekraczających granice, które
-    jeszcze w\,\,nieodległej przeszłości wydawały się niemożliwe do przekroczenia. Zadanie to nakierowuje na wiele pytań 
+    Generowanie utworów muzycznych jest jednym z problemów przekraczających granice, które
+    jeszcze w nieodległej przeszłości wydawały się niemożliwe do przekroczenia. Zadanie to nakierowuje na wiele pytań 
     dotyczących definicji inteligencji, kreatywności oraz zdolności sztucznej inteligencji do tworzenia sztuki. 
-    W\,\,niedalekiej przyszłości można spodziewać się stosowania metod uczenia maszynowego na szeroką skalę również w\,\,dziedzinach,
+    W niedalekiej przyszłości można spodziewać się stosowania metod uczenia maszynowego na szeroką skalę również w dziedzinach,
     które obecnie uznaje się za wyłącznie osiągalne przez człowieka. 
 
 }
