@@ -12,12 +12,14 @@
             \item Tensorflow - biblioteka umożliwiająca przeprowadzanie zaplanowanych procesów obliczeń na tensorach, będących fundamentem procesu uczenia sieci neuronowych. Podczas pracy skorzystano z wysokopoziomowego interfejsu tensorflow.keras, zawierającego predefiniowane architektury i warstwy sieci. Za pomocą interfejsu biblioteki możliwe było utworzenie oraz uczenie modelu o architekturze opisanej w rozdziale \ref{chap:main-model}.
             \item numpy - biblioteka rozszerzająca funkcjonalność języka Python o wydajne i łatwe w obsłudze operacje numeryczne na n-wymiarowych tablicach. Zastosowanie biblioteki miało miejsce w procesie opracowania danych. Dodatkowo, przetworzone dane były zapisywane na dysk w formacie natywnym dla biblioteki numpy, ponieważ modele utworzone za pomocą narzędzia Tensorflow przystosowane są do współpracy z takim rodzajem danych.
             \item mido - biblioteka służąca do dekodowania plików w formacie midi. Umożliwia wczytywanie plików z dysku oraz odczyt zdarzeń zapisanych na poszczególnych ścieżkach pliku. Uzyskane zdarzenia posiadają wszystkie niezbędne atrybuty, takie jak: rodzaj wiadomości, wysokość dźwięku oraz ilość jednostek czasu które upłynęły od poprzedniego zdarzenia.
+            \item scipy - biblioteka zawierająca implementację algorytmu k-Means użytego w procesie grupowania wartości rytmicznych dźwięków (\ref{sec:group_rythm}).
+            \item gensim - biblioteka zawierająca implementację modelu Word2Vec wymaganego do wyznaczenia wektorów zanurzonych (\ref{sec:embed}).
         \end{itemize}
     }
 
     \section{Specyfikacja zewnętrzna}
     {
-        Korzystanie z dostępnych metod obróbki danych umożliwiają skrypty znajdujące się w folderze {\textit {{scripts}}}. Z powodu chęci zachowania jak największej elastyczności i możliwości wielokrotnego używania tego samego kroku procesu, wynikiem części skryptów są dane w postaci pośredniej lub metadane konieczne w kolejnych krokach.
+        Korzystanie z dostępnych metod obróbki danych umożliwiają skrypty znajdujące się w folderze {\textit {{scripts}}}. Z powodu chęci zachowania jak największej elastyczności i możliwości wielokrotnego używania tego samego kroku procesu, wynikiem działania części skryptów są dane w postaci pośredniej lub metadane konieczne w innych krokach procesu.
 
         Poniższa lista zawiera opis poszczególnych skryptów oraz ich przypadków użycia:
         \begin{itemize}
@@ -29,17 +31,17 @@
 
         Pełną listę argumentów każdego z skryptów można uzyskać poprzez jego uruchomienie z flagą {\textit {--help}}.
 
-        Ponadto, w przypadku procesów których automatyzacja była kłopotliwa lub istotna była wizualizacja przebiegu zadania, skorzystano z plików {\textit {Jupyter Notebook}}.
+        W przypadku procesów których automatyzacja była kłopotliwa lub istotna była wizualizacja przebiegu zadania, skorzystano z plików {\textit {Jupyter Notebook}}.
 
         Do najistotniejszych należą:
         \begin{itemize}
             \setlength\itemsep{-0.5em}
-            \item {\textbf {{Word2Vec.ipynb}}} - zawiera proces uczenia modelu Word2Vec służącego do wyznaczania wektorów zanurzonych odpowiadających zapisowi M\,\,z\,\,N wielodźwięków. Umożliwia ręczne ustalenie ilości koniecznych powtórzeń uczenia na podstawie postępu treningu. Elementem wyjściowym procesu jest plik zawierający obiekt mapujący konkrente wielodźwięki na wektory zanurzone.
+            \item {\textbf {{Word2Vec.ipynb}}} - zawiera proces uczenia modelu Word2Vec służącego do wyznaczania wektorów zanurzonych odpowiadających zapisowi M\,\,z\,\,N wielodźwięków. Umożliwia ręczne ustalenie ilości koniecznych powtórzeń uczenia na podstawie postępu treningu. Elementem wyjściowym procesu jest plik zawierający mapowanie konkretnych wielodźwięków na wektory zanurzone.
             \item {\textbf {{LSTM\_clustered\_time\_sparse.ipynb}}} - zawiera proces uczenia sieci neuronowej za pomocą danych w postaci kodu M\,\,z\,\,N i grupowanych wartości rytmicznych. W trakcie uczenia oraz po jego zakończeniu możliwe jest zapisanie modelu na dysk.
             \item {\textbf {{LSTM\_clustered\_time\_with\_embedded.ipynb}}} - rozszerza funkcjonalność powyższego procesu o etap konwersji danych wejściowych do postaci w której wysokości dźwięków są w postaci wektorów zanurzonych. Konieczne jest wskazanie pliku wygenerowanego za pomocą procesu {\textit {{Word2Vec.ipynb}}}.
             \item {\textbf {LSTM\_generating\_clustered\_time\_embedded.ipynb}} - zawiera proces generacji i transformacji próbek do postaci plików midi. Wymaga wskazania ścieżki do pliku modelu sieci neuronowej oraz słownika wektorów zanurzonych.
-            \item {\textbf {{Measuring dataset.ipynb}}} - przeprowadza proces wyznaczania miar opisujących zbiór danych treningowych. Miary zostały opisane w rozdziale \ref{sec:measuremnts}.
-            \item {\textbf {{Measuruing generated.ipyng}}} - przeprowadza proces wyznaczania miar dla wygenerowanych próbek za pomocą wskazanego modelu. 
+            \item {\textbf {{MeasuringDataset.ipynb}}} - przeprowadza proces wyznaczania miar opisujących zbiór danych treningowych. Miary zostały opisane w rozdziale \ref{sec:measuremnts}.
+            \item {\textbf {{MeasuringGenerated.ipynb}}} - przeprowadza proces wyznaczania miar dla wygenerowanych próbek za pomocą wskazanego modelu. 
         \end{itemize}
     }
 
@@ -54,6 +56,15 @@
             \item {\textbf {training}}
             \item {\textbf {generating}}
         \end{itemize}
+
+        Strukturę projektu przedstawia rysunek \ref{folder_struct}.
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.7]{folder_struct}
+            \caption{Hierarchia folderów projektu}
+            \label{folder_struct}
+        \end{figure}
 
         \subsection{Moduł data\_processing}
         {
