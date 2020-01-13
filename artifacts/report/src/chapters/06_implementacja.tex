@@ -36,7 +36,7 @@
         Do najistotniejszych należą:
         \begin{itemize}
             \setlength\itemsep{-0.5em}
-            \item {\textbf {{Word2Vec.ipynb}}} - zawiera proces uczenia modelu Word2Vec służącego do wyznaczania wektorów zanurzonych odpowiadających zapisowi M\,\,z\,\,N wielodźwięków. Umożliwia ręczne ustalenie ilości koniecznych powtórzeń uczenia na podstawie postępu treningu. Elementem wyjściowym procesu jest plik zawierający mapowanie konkretnych wielodźwięków na wektory zanurzone.
+            \item {\textbf {{Word2Vec.ipynb}}} - zawiera proces uczenia modelu Word2Vec służącego do wyznaczania wektorów zanurzonych odpowiadających zapisowi M\,\,z\,\,N wielodźwięków. Umożliwia ręczne ustalenie ilości koniecznych powtórzeń uczenia na podstawie postępu treningu. Wynikiem działania procesu jest plik zawierający mapowanie konkretnych wielodźwięków na wektory zanurzone.
             \item {\textbf {{LSTM\_clustered\_time\_sparse.ipynb}}} - zawiera proces uczenia sieci neuronowej za pomocą danych w postaci kodu M\,\,z\,\,N i grupowanych wartości rytmicznych. W trakcie uczenia oraz po jego zakończeniu możliwe jest zapisanie modelu na dysk.
             \item {\textbf {{LSTM\_clustered\_time\_with\_embedded.ipynb}}} - rozszerza funkcjonalność powyższego procesu o etap konwersji danych wejściowych do postaci w której wysokości dźwięków są w postaci wektorów zanurzonych. Konieczne jest wskazanie pliku wygenerowanego za pomocą procesu {\textit {{Word2Vec.ipynb}}}.
             \item {\textbf {LSTM\_generating\_clustered\_time\_embedded.ipynb}} - zawiera proces generacji i transformacji próbek do postaci plików midi. Wymaga wskazania ścieżki do pliku modelu sieci neuronowej oraz słownika wektorów zanurzonych.
@@ -62,7 +62,7 @@
         \begin{figure}
             \centering
             \includegraphics[scale=0.7]{folder_struct}
-            \caption{Hierarchia folderów projektu}
+            \caption{Hierarchia folderów i modułów projektu}
             \label{folder_struct}
         \end{figure}
 
@@ -93,7 +93,7 @@
 
         \subsection{Moduł generating}
         {
-            Zawiera funkcje konieczne do przeprowadzenia procesu generacji próbek będących w postaci danych opracowanych w module {\textbf {data\_processing}}. W pliku {\textit {generating.py}} zawarto implementację głównej idei podejścia do procesu generacji próbek opisanej w rozdziaje \ref{sec:gen_method}. W pozostałych plikach modułu zdefiniowano funkcje ziaren służących do początkowania procesu generowania. Ziarna podzielono ze względu na wewnętrzną postać danych.
+            Zawiera funkcje konieczne do przeprowadzenia procesu generacji próbek będących w postaci danych opracowanych w module {\textbf {data\_processing}}. W pliku {\textit {generating.py}} zawarto implementację głównej idei podejścia do procesu generacji próbek opisanej w rozdziale \ref{sec:gen_method}. W pozostałych plikach modułu zdefiniowano funkcje ziaren służących do początkowania procesu generowania. Ziarna podzielono ze względu na wewnętrzną postać danych.
         }
 
     }
@@ -105,6 +105,8 @@
 
         Do implementacji testów wykorzystano bibliotekę {\textit {unittest}}.
     }
+
+    \pagebreak
 
     \section{Uruchamianie}
     {
