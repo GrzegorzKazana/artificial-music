@@ -1,7 +1,7 @@
 \chapter{Proces uczenia}\label{chap:training}
 {
     Do przetworzenia danych do wybranej postaci zostały wykorzystane modele wymagające uczenia.
-    Ich opis został zawarty w sekcji \ref{chap:models_data_k} i \ref{chap:models_data_v}. Sekcja \ref{chap:main_model} oraz następujące
+    Ich opis został zawarty w sekcji \ref{chap:models_data_k} i \ref{chap:models_data_v}. Sekcja \ref{chap:main-model} oraz następujące
     poświęcone są opisowi procesu uczenia głównego modelu, czyli sieci neuronowej której 
     zadaniem jest ekstrakcja cech utworów treningowych.
 
@@ -38,7 +38,7 @@
         Użycie powyższego modelu pozwoliło przekształcić  wektory kodu  M\,\,z\,\,N, gdzie M to ilość jednocześnie wybrzmiewających dźwięków a N to ilość wsystkich możliwych dźwięków, na wektory wartości ciągłych o wymiarze \(1 \times 20\).
     }
     
-    \section{Architektura modelu sieci neuronowej}\label{chap:main_model}
+    \section{Architektura modelu sieci neuronowej}\label{chap:main-model}
     {
         Otrzymawszy dane w postaci sekwencji par wektorów opisujących dźwięki i ich czas trwania,
         przystąpiono do projektu architektury modelu. Z powodu dwuelementowej postaci danych
@@ -80,7 +80,7 @@
 
     \newpage
 
-    \section{Dobór parametrów}
+    \section{Parametry modelu}
     {
         Podczas procesu uczenia najistotniejszymi parametrami były:
         \begin{itemize}
@@ -164,7 +164,7 @@
     {
         Opierając się na założeniu, że wyuczony model posiada pewną wiedzę możliwe jest przejście do procesu generowania próbek.
 
-        \subsection{Opis podejścia}
+        \subsection{Opis podejścia}\label{sec:gen_method}
         {
             Proces otrzymywania generowanych sekwencji zależny jest od rodzaju modelu.
             W przypadku modeli typu sequence-to-sequence, możliwe byłoby podanie losowego 

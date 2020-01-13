@@ -5,7 +5,7 @@ from mido import MidiFile
 sys.path.append(os.path.join(os.path.dirname(
     __file__), os.pardir))
 
-from helpers import parse_file_paths
+from scripts.helpers.helpers import parse_file_paths
 
 from src.data_processing.common.rw_np_mid import read_numpy_midi, save_numpy_midi
 from src.data_processing.sparse_notes_quantized_time.mid2np import mid2np

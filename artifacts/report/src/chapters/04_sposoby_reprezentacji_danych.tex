@@ -25,7 +25,7 @@
         Z niniejszymi problemami można się mierzyć poprzez stosowanie poniższych podejść.
 
 
-        \subsection{Kody  1\,\,z\,\,N i  M\,\,z\,\,N}
+        \subsection{Kody  1\,\,z\,\,N i  M\,\,z\,\,N}\label{sec:note-codes}
         {
             Klasycznym sposobem na rozwiązanie powyższego problemu jest zastosowanie kodu  1\,\,z\,\,N. W przypadku
             informacji o dźwiękach midi, oznaczałoby to wypełnienie wektora 128 zerami i postawienie jedynki na 
@@ -39,7 +39,7 @@
             co przełoży się na wolniejszy proces uczenia.
         }
 
-        \subsection{Wektory zanurzone}
+        \subsection{Wektory zanurzone}\label{sec:embed}
         {
             Problem dużej wymiarowości i niemożliwości wyrażenia relacji między obiektami nie jest
             charakterystyczny tylko i wyłącznie dla analizy dźwięku. Zagadnienie to  występuje również w dziale
@@ -69,7 +69,7 @@
         dokładnych wartości rytmicznych, a jedynie oscylowanie między wartościami. W takim przypadku generowana muzyka
         mogłaby sprawiać wrażenia arytmicznej, gdyż następujące dźwięki nie tworzyłyby spójnych taktów. 
 
-        \subsection{Próbkowanie}
+        \subsection{Próbkowanie}\label{sec:samle_time}
         {
             Alternatywną metodą wyrażenia upływu czasu jest próbkowanie. Z przyjętą częstotliwością próbkowania, 
             możliwe byłoby tworzenie listy aktualnie wybrzmiewających dźwięków i zapełnienie macierzy o wymiarach \(t \times n\), gdzie n to
@@ -84,7 +84,7 @@
             co powodowały oddalenie następujących po sobie dźwięków w sekwencji i utrudnienie uczenia.
         }
 
-        \subsection{Grupowanie długości dźwięków}
+        \subsection{Grupowanie długości dźwięków}\label{sec:group_rythm}
         {
             Podejściem łączącym zalety obydwu rozwiązań, jest przeprowadzenie grupowania znormalizowanych wartości parametru czasu w
             odniesieniu do ustalonej wartości rytmicznej. W ten sposób możliwe byłoby odzwierciedlenie wartości rytmicznych

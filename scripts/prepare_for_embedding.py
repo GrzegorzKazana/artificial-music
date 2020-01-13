@@ -7,7 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(
 
 from scipy import sparse
 
-from helpers import get_valid_files_in_dir, option_kwargs_to_string
+from scripts.helpers.helpers import get_valid_files_in_dir, option_kwargs_to_string
 from src.data_processing.embedding_sparse_notes.count_notes import create_counters
 from src.data_processing.embedding_sparse_notes.create_dict import create_dict
 from src.data_processing.embedding_sparse_notes.dictify_dataset import dictify_dataset
