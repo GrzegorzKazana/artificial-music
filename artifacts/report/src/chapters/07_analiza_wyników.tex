@@ -56,36 +56,13 @@
         przestawione są wartości miar całego zbioru testowego.
 
         %%% ilustracja tonalnego histogramu i macierzy przejść
-        \begin{figure}[ht!]
-            \centering
-            \includegraphics[scale=0.5]{tonal_hist_transition}
-            \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między kolejnymi dźwiękami utworów zbioru treningowego}
-            \label{tonal_hist_transition}
-        \end{figure}
+        
 
         %%% histogram rytmiczny i macierz przejść
-        \begin{figure}[ht!]
-            \centering
-            \includegraphics[scale=0.5]{rythm_hist_transition}
-            \caption{Histogram występowania poszczególnych długości dźwięków oraz macierz przejść między kolejnymi wartościami rytmicznymi dźwięków należących do utworów zbioru treningowego}
-            \label{rythm_hist_transition}
-        \end{figure}
+        
 
         %%% tabelka z zakresami i kompresją
-        \begin{table}[ht!]
-            \caption{Zakresy i współczynniki kompresji danych} \label{range_and_compression}
-            \begin{center}
-                \begin{tabular}{ |p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}| }
-                \hline
-                 & Zakres & Współczynnik kompresji \\ 
-                \hline
-                Wysokość dźwięków & 69 & 6.932 \\  
-                \hline
-                Długość dźwięków & 23 & 11.364 \\
-                \hline
-                \end{tabular}
-            \end{center}
-        \end{table}
+        
 
         \pagebreak
 
@@ -110,49 +87,9 @@
         Kolejnym krokiem było wygenerowanie próbek i opisanie ich za pomocą wymienionych miar. Zestawienie wartości miar i różnic
         w odniesieniu do zbioru treningowego przedstawiają tabele \ref{tonal_measuremnts_table} i \ref{rythm_measuremnts_table}. Wyniki pogrupowano na podstawie użytego ziarna.
 
-        \begin{table}
-            \caption{Wyniki miar tonalnych próbek generowanych różnymi ziarnami} \label{tonal_measuremnts_table}
-            \begin{center}
-                \begin{tabular}{ |p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}| }
-                \hline
-                Ziarno & Rozpiętość tonalna & Średnia kwadratowa różnicy histogramu tonalnego & Średnia kwadratowa różnicy tonalnej macierzy przejść & Współczynnik kompresji dźwięków \\ 
-                \hline
-                \hline
-                Wartości losowe rozkładu normalnego & 65 & 0.026 & 0.112 & 7.69 \\  
-                \hline
-                Wektory zerowe & 61 & 0.062 & 0.116 & 9.52 \\
-                \hline
-                Pojedynczy dźwięk & 67 & 0.025 & 0.111 & 9.83 \\
-                \hline
-                Sekwencja losowych dźwięków & 69 & 0.023 & 0.120 & 8.84 \\
-                \hline
-                Harmoniczna sekwencja dźwięków & 69 & 0.021 & 0.106  & 8.78 \\
-                \hline
-                \end{tabular}
-            \end{center}
-        \end{table}
         
-        \begin{table}
-            \caption{Wyniki miar rytmicznych próbek generowanych różnymi ziarnami} \label{rythm_measuremnts_table}
-            \begin{center}
-                \begin{tabular}{ |p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}| }
-                \hline
-                Ziarno & Rozpiętość rytmiczna & Średnia kwadratowa różnicy histogramu rytmicznego & Średnia kwadratowa różnicy rytmicznej macierzy przejść & Współczynnik kompresji długości dźwięków \\ 
-                \hline
-                \hline
-                Wartości losowe rozkładu normalnego & 19 & 0.019 & 0.034 & 7.99 \\  
-                \hline
-                Wektory zerowe & 16 & 0.035 & 0.059 & 10.4 \\
-                \hline
-                Pojedynczy dźwięk & 20 & 0.030 & 0.042 & 9.52 \\
-                \hline
-                Sekwencja losowych dźwięków & 21 & 0.028 & 0.042 & 8.19 \\
-                \hline
-                Harmoniczna sekwencja dźwięków & 21 & 0.030 & 0.043 & 7.89 \\
-                \hline
-                \end{tabular}
-            \end{center}
-        \end{table}
+        
+        
 
         Występujące różnice między wynikami nie pozwalają na pewne wskazanie najlepszego ziarna, lecz 
         zachęcają do wysunięcia kilku wniosków.
@@ -172,20 +109,10 @@
 
         %%% wykresiki
         %%% ilustracja tonalnego histogramu i macierzy przejść
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.5]{tonal_hist_transition_1}
-            \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
-            \label{tonal_hist_transition_1}
-        \end{figure}
+        
 
         %%% histogram rytmiczny i macierz przejść
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.5]{rythm_hist_transition_1}
-            \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
-            \label{rythm_hist_transition_1}
-        \end{figure}
+        
     }
 
     \section{Wrażenia subiektywne}
@@ -212,22 +139,12 @@
 
         %%% tutaj wykresiki tego lepszego modelu
         %%% ilustracja tonalnego histogramu i macierzy przejść
-        \begin{figure}[ht!]
-            \centering
-            \includegraphics[scale=0.5]{tonal_hist_transition_2}
-            \caption{Histogram występowania poszczególnych dźwięków oraz macierz przejść między nimi}
-            \label{tonal_hist_transition_2}
-        \end{figure}
+        
 
         Jak można zaobserwować, ograniczenie zbioru danych miało również wpływ na zależności tonalne.
 
         %% histogram rytmiczny i macierz przejść
-        \begin{figure}[ht!]
-            \centering
-            \includegraphics[scale=0.5]{rythm_hist_transition_2}
-            \caption{Histogram występowania poszczególnych długości dźwięków i przejść między nimi}
-            \label{rythm_hist_transition_2}
-        \end{figure}
+        
 
         % \bigskip
 

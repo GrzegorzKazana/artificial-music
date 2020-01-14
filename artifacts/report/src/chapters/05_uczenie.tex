@@ -18,12 +18,7 @@
 
         Przykładowy wynik grupowania przedstawia rysunek \ref{grouping}.
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.65]{grouping_grouped}
-            \caption{Wykres przedstawiający rozkład długości trwania dźwięków oraz wynik grupowania. Dźwięki przydzielone do tej samej klasy są oznaczone tym samym kolorem.}
-            \label{grouping}
-        \end{figure}
+        
     }
 
     \section{Wyznaczanie wektorów zanurzonych \\ - Word2Vec}\label{chap:models_data_v}
@@ -65,12 +60,7 @@
 
         Opracowaną strukturę modelu przedstawia rysunek \ref{model_struct}.
         
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.5]{model_struct}
-            \caption{Diagram przestawiający architekturę modelu.}
-            \label{model_struct}
-        \end{figure}
+        
 
         Z powodu różnego charakteru otrzymywanych wektorów, wyjścia modelu były uczone odzielnymi funkcjami błędu. 
         Wyjście odpowiedzialne za dźwięki uczone jest funkcją błędu odpowiednią do problemu 
@@ -141,19 +131,9 @@
 
         Rysunki \ref{epoch_val_duration_output_categorical_accuracy_} i \ref{epoch_val_notes_output_mean_squared_error_} zawierają wykresy opisujące miary postępu uczenia podczas kroków walidacyjnych. Na wykresy naniesiono krzywe wygładzające wartości pomiarów w celu wyraźniejszego ukazania występujących tendencji.
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.5]{epoch_val_duration_output_categorical_accuracy_}
-            \caption{Wartości miary precyzji predykcji długości trwania dźwięków}
-            \label{epoch_val_duration_output_categorical_accuracy_}
-        \end{figure}
+        
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.5]{epoch_val_notes_output_mean_squared_error_}
-            \caption{Wartości błędu średniokwadratowego predykcji wektora dźwięków}
-            \label{epoch_val_notes_output_mean_squared_error_}
-        \end{figure}
+        
 
         Na rysunkach można dostrzec trafność predykcji klasy długości trwania dźwięku, oraz błąd średniokwadratowy
         predykcji wektorów dźwięków. W pierwszej połowie uczenia na obydwu wykresach można zaobserwować pożądaną tendencję,

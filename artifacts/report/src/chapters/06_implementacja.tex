@@ -59,12 +59,7 @@
 
         Strukturę projektu przedstawia rysunek \ref{folder_struct}.
 
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.7]{folder_struct}
-            \caption{Hierarchia folderów i modułów projektu}
-            \label{folder_struct}
-        \end{figure}
+        
 
         \subsection{Moduł data\_processing}
         {
@@ -112,19 +107,12 @@
     {
         Do uruchomienia narzędzi konieczne jest posiadanie interpretera języka Python, menadżera zależności {\textit {pip}} oraz środowiska {\textit {pipenv}}. Po wykonaniu poniższej komendy w głównym katalogu projektu, powinna zostać uruchomiona konsola w środowisku zawierającym wszystkie wymagane zależności.
 
-        \begin{verbatim}
-            pipenv install && pipenv shell
-        \end{verbatim}
+        
 
         Z uruchomionej konsoli można uruchomić serwer {\textit {Jupyter}}, wykonać skrypt lub uruchomić konsolę interpretera języka Python.
 
 
         Poniżej przedstawiono przykładowe użycie skryptu \\{\textit {create\_sparse\_clustered\_time.py}}:
-        \begin{verbatim}
-            python scripts/create_sparse_clustered_time.py 
-                --mode=mid2np 
-                --src=./path/to/midi 
-                --dst=./output
-        \end{verbatim}
+        
     }
 }
